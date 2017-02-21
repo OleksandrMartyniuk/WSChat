@@ -52,8 +52,12 @@
   <ItemGroup>
     <Compile Include="API\History\HistoryDataprovider.cs" />
     <Compile Include="API\Networking\Client.cs" />
+    <Compile Include="API\Networking\ClientTCP.cs" />
     <Compile Include="API\Controller\RequestManager.cs" />
     <Compile Include="API\Controller\ResponseHandler.cs" />
+    <Compile Include="API\Networking\IClient.cs" />
+    <Compile Include="API\Networking\Protocol.cs" />
+    <Compile Include="API\Networking\WSClient.cs" />
     <Compile Include="API\RoomManagement\RoomManager.cs" />
     <Compile Include="API\RoomManagement\RoomObjExt.cs" />
     <Compile Include="GUI\AdminForm.cs">

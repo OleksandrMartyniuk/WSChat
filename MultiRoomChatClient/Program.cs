@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiRoomChatClient.API.Networking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace MultiRoomChatClient
         [STAThread]
         static void Main()
         {
+            Protocol.type = ProtocolTypes.WebSocket;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());

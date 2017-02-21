@@ -16,6 +16,7 @@ namespace WSChat.ChatAPI
     {
         WebSocket socket { get; set; }
         LinkedList<string> queue = new LinkedList<string>();
+
         public WebSocketClient(WebSocket socket)
         {
             this.socket = socket;
@@ -47,7 +48,7 @@ namespace WSChat.ChatAPI
 
         private async Task ProcessWSChat()
         {
-            var buffer = WebSocket.CreateServerBuffer(1024);
+            var buffer = WebSocket.CreateClientBuffer(1024, 1024);
             StringBuilder recieved = new StringBuilder();
             while (socket.State == WebSocketState.Open)
             {
