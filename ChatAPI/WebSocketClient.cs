@@ -29,6 +29,7 @@ namespace WSChat.ChatAPI
         public override void SendMessage(string message)
         {
             Task t = Send(message);
+            t.Wait();
         }
 
         private async Task Send(string message)
@@ -39,10 +40,10 @@ namespace WSChat.ChatAPI
 
         public override void Start()
         {
-            
             Task t = ProcessWSChat();
-            Manager.Clients.AddLast(this);
-            //t.Wait();
+            t.Wait();
+          //  
+            
         }
 
         private async Task ProcessWSChat()
@@ -51,10 +52,13 @@ namespace WSChat.ChatAPI
             {
                 ArraySegment<byte> buffer = new ArraySegment<byte>(new byte[1024]);
                 WebSocketReceiveResult result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+              
                 if (socket.State == WebSocketState.Open)
                 {
+                   // Manager.Clients.AddLast(this);
                     string userMessage = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
                     RaiseMessageReceived(this, userMessage);
+                    
                     //userMessage = "You sent: " + userMessage + " at " + DateTime.Now.ToLongTimeString();
                     //buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(userMessage));
                     //await socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
