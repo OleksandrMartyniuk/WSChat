@@ -1,4 +1,5 @@
 ﻿using ChatServer;
+using ChatServer.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace WSChat.ChatAPI
         public WebSocketClient(WebSocket socket)
         {
             this.socket = socket;
-            Manager.Clients.AddLast(this);
-            Start();
+            this.Role = new UnknownUser(this);
         }
+
         public override void Close()
         {
             socket.Abort();
@@ -38,7 +39,9 @@ namespace WSChat.ChatAPI
 
         public override void Start()
         {
+            
             Task t = ProcessWSChat();
+            Manager.Clients.AddLast(this);
             //t.Wait();
         }
 
@@ -46,7 +49,6 @@ namespace WSChat.ChatAPI
         {
             while (true)
             {
-                
                 ArraySegment<byte> buffer = new ArraySegment<byte>(new byte[1024]);
                 WebSocketReceiveResult result = await socket.ReceiveAsync(buffer, CancellationToken.None);
                 if (socket.State == WebSocketState.Open)

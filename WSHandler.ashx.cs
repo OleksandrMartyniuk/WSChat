@@ -29,7 +29,11 @@ namespace WSChat
 
         private async Task ProcessWSChat(AspNetWebSocketContext context)
         {
-            new WebSocketClient(context.WebSocket);
+            await Task.Run(() =>
+            {
+                var client = new WebSocketClient(context.WebSocket);
+                client.Start();
+            });
         }
     }
 }
