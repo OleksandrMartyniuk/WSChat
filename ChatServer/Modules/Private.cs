@@ -10,14 +10,14 @@ namespace ChatServer
 {
     public class Private : IHandlerModule
     {
-        public bool Handle(ClientObject client, RequestObject request)
+        public bool Handle(IClientObject client, RequestObject request)
         {
             if (request.Module != "private")
             {
                 return false;
             }
 
-            ClientObject recipient = Manager.FindClient(request.Cmd);
+            IClientObject recipient = Manager.FindClient(request.Cmd);
             if(recipient != null)
             {
                 recipient.SendMessage(JsonConvert.SerializeObject(new RequestObject("private", null, request.args)));

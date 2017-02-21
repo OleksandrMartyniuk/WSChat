@@ -10,26 +10,21 @@ using Newtonsoft.Json;
 
 namespace ChatServer
 {
-    public class ClientObject
+    public class ClientObject: IClientObject
     {
-        public string Username { get; set; }
-        public RoleBase Role { get; set; }
         private TcpClient Client;
         private NetworkStream Stream;
         private Thread WorkerThread;
-
-        public delegate void handler(ClientObject sender, string message);
-        public event handler MessageRecieved;
 
         public ClientObject(TcpClient tcpClient)
         {
             this.Client = tcpClient;
             Stream = tcpClient.GetStream();
             this.Role = new UnknownUser(this);
-            this.MessageRecieved += Role.Handle;
+            MessageRecieved += Role.Handle;
         }
 
-        public void Start()
+        public override void Start()
         {
             WorkerThread = new Thread(new ThreadStart(Process));
             WorkerThread.Start();
@@ -49,7 +44,7 @@ namespace ChatServer
                         if (message != null && message.Length > 0)
                         {
                             Console.WriteLine(message);
-                            MessageRecieved(this, message);
+                            RaiseMessageReceived(this, message);
                         }
                         Thread.Sleep(10);
                     }
@@ -73,7 +68,7 @@ namespace ChatServer
             }
         }
 
-        public void SendMessage(string message)
+        public override void SendMessage(string message)
         {
             if (Stream == null)
             {
@@ -90,7 +85,7 @@ namespace ChatServer
             Console.WriteLine(this.Username + ": " + message);
         }
 
-        public void Close()
+        public override void Close()
         {
             Manager.UserDisconnect(Username);
             //WorkerThread?.Abort();

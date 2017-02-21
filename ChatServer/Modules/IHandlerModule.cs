@@ -9,6 +9,6 @@ namespace ChatServer
 {
     public interface IHandlerModule
     {
-        bool Handle(ClientObject client, RequestObject request);
+        bool Handle(IClientObject client, RequestObject request);
     }
 }

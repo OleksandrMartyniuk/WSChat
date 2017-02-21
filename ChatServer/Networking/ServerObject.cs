@@ -24,11 +24,11 @@ namespace ChatServer
 
                 while (true)
                 {
-                    TcpClient tcpClient = tcpListener.AcceptTcpClient();
+                    //TcpClient tcpClient = tcpListener.AcceptTcpClient();
 
-                    ClientObject clientObject = new ClientObject(tcpClient);
-                    Manager.Clients.AddLast(clientObject);
-                    clientObject.Start();
+                    //IClientObject clientObject = new IClientObject();
+                    //Manager.Clients.AddLast(clientObject);
+                    //clientObject.Start();
                     
                     Console.WriteLine("Connected");//////////////////
                 }

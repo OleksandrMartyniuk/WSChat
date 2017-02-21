@@ -10,7 +10,7 @@ namespace ChatServer
 {
     public class Info : IHandlerModule
     {
-        public bool Handle(ClientObject client, RequestObject request)
+        public bool Handle(IClientObject client, RequestObject request)
         {
             if(request.Module != "info")
             {

@@ -12,7 +12,7 @@ namespace ChatServer
     {
         public static RoomObject Host { get; set; }
         public static LinkedList<RoomObject> Rooms = new LinkedList<RoomObject>();
-        public static LinkedList<ClientObject> Clients = new LinkedList<ClientObject>();
+        public static LinkedList<IClientObject> Clients = new LinkedList<IClientObject>();
 
         static Manager()
         {
@@ -20,9 +20,9 @@ namespace ChatServer
             Host = Rooms.First.Value;
         }
 
-        public static ClientObject FindClient(string Name)
+        public static IClientObject FindClient(string Name)
         {
-            foreach (ClientObject client in Clients)
+            foreach (IClientObject client in Clients)
             {
                 if (client.Username == Name)
                 {
@@ -76,7 +76,7 @@ namespace ChatServer
 
         public static void BroadcastAll(string message)
         {
-            foreach (ClientObject client in Clients)
+            foreach (IClientObject client in Clients)
             {
                  client.SendMessage(message); // remove admin - message  //////////
             }
@@ -87,13 +87,13 @@ namespace ChatServer
             BroadcastAll(ResponseConstructor.GetUserEnteredNotification(room, username));
         }
 
-        internal static void UserDisconnect(string username)
+        public static void UserDisconnect(string username)
         {
             foreach(RoomObject r in Rooms)
             {
                 r.RemoveListener(username);
             }
-            foreach(ClientObject client in Clients)
+            foreach(IClientObject client in Clients)
             {
                 if(client.Username == username)
                 {

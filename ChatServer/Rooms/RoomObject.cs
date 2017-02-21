@@ -103,7 +103,7 @@ namespace ChatServer
             }
         }
 
-        public void Broadcast(ClientObject excl, ChatMessage msg)
+        public void Broadcast(IClientObject excl, ChatMessage msg)
         {
             foreach (RoomObserverBase observer in Clients)
             {

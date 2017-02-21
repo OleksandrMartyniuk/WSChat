@@ -11,7 +11,7 @@ namespace ChatServer
 {
     public class AdminModule : IHandlerModule
     {
-        public bool Handle(ClientObject client, RequestObject request)
+        public bool Handle(IClientObject client, RequestObject request)
         {
             if (request.Module != "admin")
             {
@@ -36,7 +36,7 @@ namespace ChatServer
         {
             BlackListProvider.AppendRecord(username, duration);
 
-            ClientObject user = Manager.FindClient(username);
+            IClientObject user = Manager.FindClient(username);
             if (user == null || user.ToString() == "")  //user not found
                 return;
 
@@ -48,7 +48,7 @@ namespace ChatServer
         {
             BlackListProvider.RemoveRecord(username);
 
-            ClientObject user = Manager.FindClient(username);
+            IClientObject user = Manager.FindClient(username);
             if (user == null || user.ToString() == "")
                 return;
 

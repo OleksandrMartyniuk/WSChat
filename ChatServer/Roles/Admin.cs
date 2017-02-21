@@ -8,7 +8,7 @@ namespace ChatServer.Roles
 {
     public class Admin : RoleBase
     {
-        public Admin(ClientObject clnt): base(clnt)
+        public Admin(IClientObject clnt): base(clnt)
         {
             RoomObserver ro = new RoomObserver();
             ro.client = clnt;

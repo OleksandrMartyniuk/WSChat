@@ -10,7 +10,7 @@ namespace ChatServer
 {
     public abstract class RoomObserverBase: IHandlerModule
     {
-        public ClientObject client;
+        public IClientObject client;
         //protected RoomObject Active;
 
 
@@ -36,7 +36,7 @@ namespace ChatServer
             client.SendMessage(msg);
         }
 
-        public virtual bool Handle(ClientObject client, RequestObject request)
+        public virtual bool Handle(IClientObject client, RequestObject request)
         {
             if(request.Module != "msg")
             {
@@ -60,7 +60,7 @@ namespace ChatServer
         }
 
 
-        protected virtual void HandleMessage(ClientObject client, RequestObject request)
+        protected virtual void HandleMessage(IClientObject client, RequestObject request)
         {
             object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
             string rstr = args[0] as string;
@@ -69,7 +69,7 @@ namespace ChatServer
             r?.Broadcast(client, msg);
         }
 
-        protected virtual void HandleActive(ClientObject client, RequestObject request)
+        protected virtual void HandleActive(IClientObject client, RequestObject request)
         {
             RoomObject room = null;
             object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
@@ -92,7 +92,7 @@ namespace ChatServer
             }
         }
 
-        protected virtual void HandleLeave(ClientObject client, RequestObject request)
+        protected virtual void HandleLeave(IClientObject client, RequestObject request)
         {
             RoomObject room = Manager.FindRoom((string)request.args);
             //if (room != null)

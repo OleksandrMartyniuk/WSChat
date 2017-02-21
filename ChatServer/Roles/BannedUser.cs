@@ -9,7 +9,7 @@ namespace ChatServer.Roles
     public class BannedUser : RoleBase
     {
 
-        public BannedUser(ClientObject client): base(client)
+        public BannedUser(IClientObject client): base(client)
         {
             MessageReadonly ro = new MessageReadonly();
             ro.client = this.client;
@@ -34,7 +34,7 @@ namespace ChatServer.Roles
             await Task.Delay(taskRunTime);
             
             BlackListProvider.RemoveRecord(username);
-            ClientObject user = Manager.FindClient(username);
+            IClientObject user = Manager.FindClient(username);
             
             string tmp = ResponseConstructor.GetUnBannedNotification(username);
             user.SendMessage(tmp);

@@ -8,7 +8,7 @@ namespace ChatServer.Roles
 {
     public class UnknownUser : RoleBase
     {
-        public UnknownUser(ClientObject clnt): base(clnt)
+        public UnknownUser(IClientObject clnt): base(clnt)
         {
             Handlers = new IHandlerModule[] { new Login() };
         }

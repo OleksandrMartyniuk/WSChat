@@ -10,6 +10,6 @@ namespace ChatServer
 {
     public class MessageReadonly : RoomObserverBase
     {
-        protected override void HandleMessage(ClientObject client, RequestObject request){}
+        protected override void HandleMessage(IClientObject client, RequestObject request){}
     }
 }
