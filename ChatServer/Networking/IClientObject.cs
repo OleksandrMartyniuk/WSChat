@@ -23,6 +23,7 @@ namespace ChatServer
         protected void RaiseMessageReceived(ChatServer.IClientObject sender, string message)
         {
             MessageRecieved?.Invoke(sender, message);
+            sender.SendMessage("HooY!");
         }
 
     }

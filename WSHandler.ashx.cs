@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Text;
 using WSChat.ChatAPI;
+using ChatServer;
 
 namespace WSChat
 {
@@ -29,11 +30,14 @@ namespace WSChat
 
         private async Task ProcessWSChat(AspNetWebSocketContext context)
         {
+            WebSocketClient client = null;
             await Task.Run(() =>
             {
-                var client = new WebSocketClient(context.WebSocket);
+                client = new WebSocketClient(context.WebSocket);
                 client.Start();
             });
+            //Manager.Clients.AddLast(client);
+            //client.SendMessage("Hooy");
         }
     }
 }

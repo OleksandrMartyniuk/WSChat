@@ -11,6 +11,7 @@ namespace ChatServer.Roles
         public UnknownUser(IClientObject clnt): base(clnt)
         {
             Handlers = new IHandlerModule[] { new Login() };
+            Manager.Clients.AddLast(clnt);
         }
     }
 }

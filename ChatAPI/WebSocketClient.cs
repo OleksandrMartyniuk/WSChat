@@ -15,6 +15,7 @@ namespace WSChat.ChatAPI
     public class WebSocketClient : ChatServer.IClientObject
     {
         WebSocket socket { get; set; }
+        LinkedList<string> queue = new LinkedList<string>();
         public WebSocketClient(WebSocket socket)
         {
             this.socket = socket;
@@ -24,12 +25,12 @@ namespace WSChat.ChatAPI
         public override void Close()
         {
             socket.Abort();
+            Manager.UserDisconnect(Username);
         }
 
         public override void SendMessage(string message)
         {
-            Task t = Send(message);
-            t.Wait();
+            Send(message);
         }
 
         private async Task Send(string message)
@@ -42,33 +43,32 @@ namespace WSChat.ChatAPI
         {
             Task t = ProcessWSChat();
             t.Wait();
-          //  
-            
         }
 
         private async Task ProcessWSChat()
         {
-            while (true)
+            var buffer = WebSocket.CreateServerBuffer(1024);
+            StringBuilder recieved = new StringBuilder();
+            while (socket.State == WebSocketState.Open)
             {
-                ArraySegment<byte> buffer = new ArraySegment<byte>(new byte[1024]);
                 WebSocketReceiveResult result = await socket.ReceiveAsync(buffer, CancellationToken.None);
-              
-                if (socket.State == WebSocketState.Open)
+
+                if (result.MessageType == WebSocketMessageType.Close)
                 {
-                   // Manager.Clients.AddLast(this);
-                    string userMessage = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
-                    RaiseMessageReceived(this, userMessage);
-                    
-                    //userMessage = "You sent: " + userMessage + " at " + DateTime.Now.ToLongTimeString();
-                    //buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(userMessage));
-                    //await socket.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
+                    await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
                 }
-                else
+                else 
                 {
-                    Manager.UserDisconnect(Username);
-                    break;
+                    recieved.Append(Encoding.UTF8.GetString(buffer.ToArray(), 0, result.Count));
+                    if (result.EndOfMessage)
+                    {
+                        RaiseMessageReceived(this, recieved.ToString());
+                        recieved.Clear();
+                    }
                 }
+                Thread.Sleep(20);
             }
+            Close();
         }
     }
 }
