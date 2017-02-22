@@ -9,8 +9,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ChatServer
-{
-    public class ClientObject: IClientObject
+{/*
+    public class ClientObject//: IClientObject
     {
         private TcpClient Client;
         private NetworkStream Stream;
@@ -92,7 +92,7 @@ namespace ChatServer
            /* if (Stream != null)
                 Stream.Close();
             if (Client != null)
-                Client.Close();*/
+                Client.Close();
         }
-    }
+    }*/
 }

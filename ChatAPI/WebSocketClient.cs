@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 
 namespace WSChat.ChatAPI
-{
+{/*
     public class WebSocketClient : ChatServer.IClientObject
     {
         WebSocket socket { get; set; }
@@ -20,7 +20,9 @@ namespace WSChat.ChatAPI
         public WebSocketClient(WebSocket socket)
         {
             this.socket = socket;
+            GC.KeepAlive(socket);
             this.Role = new UnknownUser(this);
+            MessageRecieved += Role.Handle;
         }
 
         public override void Close()
@@ -42,8 +44,21 @@ namespace WSChat.ChatAPI
 
         public override void Start()
         {
-            Task t = ProcessWSChat();
-            t.Wait();
+            Thread worker = new Thread(() =>
+            {
+                try
+                {
+                    Task t = ProcessWSChat();
+                    t.Wait();
+                }
+                catch (Exception ex)
+                {
+
+                    var d = ex.Data;
+                }
+            });
+            
+            worker.Start();
         }
 
         private async Task ProcessWSChat()
@@ -68,8 +83,9 @@ namespace WSChat.ChatAPI
                     }
                 }
                 Thread.Sleep(20);
+                await Send(ResponseConstructor.GetLoginResultNotification("User", "Vasja"));
             }
             Close();
         }
-    }
+    }*/
 }

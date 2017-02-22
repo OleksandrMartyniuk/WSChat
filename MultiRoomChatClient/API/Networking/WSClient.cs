@@ -23,8 +23,20 @@ namespace MultiRoomChatClient.API.Networking
 
         public void StartClient()
         {
-            Task t = ProcessWSChat();
-            t.Wait();
+            Thread worker = new Thread(() =>
+            {
+                try
+                {
+                    Task t = ProcessWSChat();
+                    t.Wait();
+                }
+                catch (Exception ex)
+                {
+
+                    var d = ex.Data;
+                }
+            });
+            worker.Start();
         }
 
         private async Task ProcessWSChat()
@@ -64,7 +76,7 @@ namespace MultiRoomChatClient.API.Networking
 
         public void AddRequest(string message)
         {
-            messageQue.AddLast(message + Environment.NewLine);
+            Send(message);
         }
 
         public void Disconnect()
