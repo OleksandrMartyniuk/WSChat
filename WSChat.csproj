@@ -104,7 +104,31 @@
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatAPI\MyWebSocketClient.cs" />
+    <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
+    <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
+    <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />
+    <Compile Include="ChatAPI\Logging\HistoryDataprovider.cs" />
+    <Compile Include="ChatAPI\Modules\AdminModule.cs" />
+    <Compile Include="ChatAPI\Modules\IHandlerModule.cs" />
+    <Compile Include="ChatAPI\Modules\Info.cs" />
+    <Compile Include="ChatAPI\Modules\Login.cs" />
+    <Compile Include="ChatAPI\Modules\Logout.cs" />
+    <Compile Include="ChatAPI\Modules\Private.cs" />
+    <Compile Include="ChatAPI\Modules\Room.cs" />
+    <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserver.cs" />
+    <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserverBase.cs" />
+    <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserverReadonly.cs" />
+    <Compile Include="ChatAPI\Networking\ClientObject.cs" />
+    <Compile Include="ChatAPI\Networking\IClientObject.cs" />
+    <Compile Include="ChatAPI\Networking\Protocol\ResponseConstructor.cs" />
+    <Compile Include="ChatAPI\Networking\ServerObject.cs" />
+    <Compile Include="ChatAPI\Roles\Admin.cs" />
+    <Compile Include="ChatAPI\Roles\BannedUser.cs" />
+    <Compile Include="ChatAPI\Roles\RoleBase.cs" />
+    <Compile Include="ChatAPI\Roles\UnknownUser.cs" />
+    <Compile Include="ChatAPI\Roles\User.cs" />
+    <Compile Include="ChatAPI\Rooms\Manager.cs" />
+    <Compile Include="ChatAPI\Rooms\RoomObject.cs" />
     <Compile Include="MyWebSocketHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WSHandler.ashx.cs">
@@ -120,12 +144,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ChatServer\ChatServer.csproj">
-      <Project>{8f175694-6853-46a1-92a4-41693d1e211f}</Project>
-      <Name>ChatServer</Name>
+    <ProjectReference Include="Core\Core.csproj">
+      <Project>{ddff7148-70a8-419b-9b6f-45092ac5690d}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\Auth\" />
+    <Folder Include="App_Data\Log\" />
+    <Folder Include="App_Data\Msg\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

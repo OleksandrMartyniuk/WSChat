@@ -57,7 +57,7 @@
     <Compile Include="Modules\Info.cs" />
     <Compile Include="Modules\Logout.cs" />
     <Compile Include="Networking\IClientObject.cs" />
-    <Compile Include="ResponseConstructor.cs" />
+    <Compile Include="Networking\Protocol\ResponseConstructor.cs" />
     <Compile Include="Modules\RoomObservers\RoomObserverBase.cs" />
     <Compile Include="Modules\RoomObservers\RoomObserverReadonly.cs" />
     <Compile Include="Modules\RoomObservers\RoomObserver.cs" />
