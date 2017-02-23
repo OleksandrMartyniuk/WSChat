@@ -26,13 +26,13 @@ namespace ChatServer
         public RoomObject(string name)
         {
             Name = name;
-            //var history = HistoryDataprovider.GetHistory(name);
+            var history = HistoryDataprovider.GetHistory(name);
 
-            //if (history != null) 
-            //foreach(ChatMessage msg in history)
-            //{
-           //     Messages.AddLast(msg);
-           // }
+            if (history != null)
+                foreach (ChatMessage msg in history)
+                {
+                    Messages.AddLast(msg);
+                }
         }
 
         public RoomObj GetRoomObj()

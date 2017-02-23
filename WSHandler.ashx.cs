@@ -7,8 +7,8 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Text;
-using WSChat.ChatAPI;
 using ChatServer;
+using Microsoft.Web.WebSockets;
 
 namespace WSChat
 {
@@ -17,29 +17,15 @@ namespace WSChat
     /// </summary>
     public class WSHandler : IHttpHandler
     {
+
         public void ProcessRequest(HttpContext context)
         {
-            if (context.IsWebSocketRequest || context.IsWebSocketRequestUpgrading)
+            if (context.IsWebSocketRequest || context.IsWebSocketRequestUpgrading) //Проверка на веб сокет соединение!
             {
-                //context.AcceptWebSocketRequest(new MyWebSocket());
+                context.AcceptWebSocketRequest(new MyWebSocket());          //Передача управления в обработчик клиента
             }
         }
-        //public void ProcessRequest(HttpContext context)
-        //{
-        //    if (context.IsWebSocketRequest)
-        //    {
-        //        context.AcceptWebSocketRequest(ProcessWSChat);
-        //    }
-        //}
 
-        public bool IsReusable { get { return true; } }
-
-        //private async Task ProcessWSChat(AspNetWebSocketContext context)
-        //{
-        //    MyWebSocket ws =  new MyWebSocket(1024);
-        //    ws.Start();
-        //    await ws.Send("Hooy!");
-           
-        //}
+        public bool IsReusable => false;
     }
 }

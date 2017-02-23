@@ -61,6 +61,10 @@
       <HintPath>packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.WebSockets, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.WebSockets.0.2.3.1\lib\net45\Microsoft.WebSockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -88,7 +92,6 @@
   <ItemGroup>
     <Content Include="default.html" />
     <Content Include="packages.config" />
-    <Content Include="MyWebSocketHandler.ashx" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
     <Content Include="Scripts\jquery-2.0.2.min.js" />
@@ -101,11 +104,8 @@
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChatAPI\MyWebSocket.cs" />
-    <Compile Include="ChatAPI\WebSocketClient.cs" />
-    <Compile Include="MyWebSocketHandler.ashx.cs">
-      <DependentUpon>MyWebSocketHandler.ashx</DependentUpon>
-    </Compile>
+    <Compile Include="ChatAPI\MyWebSocketClient.cs" />
+    <Compile Include="MyWebSocketHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WSHandler.ashx.cs">
       <DependentUpon>WSHandler.ashx</DependentUpon>

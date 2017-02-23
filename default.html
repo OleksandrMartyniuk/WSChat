@@ -8,7 +8,7 @@
         $().ready(function () {
             $("#btnConnect").click(function () {
                 $("#spanStatus").text("connecting");
-                ws = new WebSocket("ws://" + window.location.hostname + "/WSChat/MyWebSocket.ashx");
+                ws = new WebSocket("ws://" + window.location.hostname +"/WSChat/WSHandler.ashx");
                 ws.onopen = function () {
                     $("#spanStatus").text("connected");
                 };

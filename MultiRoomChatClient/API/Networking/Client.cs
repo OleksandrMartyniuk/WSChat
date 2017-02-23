@@ -3,6 +3,7 @@ using MultiRoomChatClient;
 using MultiRoomChatClient.API.Networking;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -25,13 +26,15 @@ namespace MultiRoomChatClient
 
         static Client()
         {
-            switch (Protocol.type)
+            string protocol = ConfigurationManager.AppSettings["protocol"];
+            switch (protocol)
             {
-                case ProtocolTypes.TCP:
+                case "tcp":
                     ConnectionClient = new ClientTCP();
                     break;
-                case ProtocolTypes.WebSocket:
-                    ConnectionClient = new WSClient();
+                case "ws":
+                    string uri = ConfigurationManager.AppSettings["wsuri"];
+                    ConnectionClient = new WSClient(uri);
                     break;
                 default: break;
             }
