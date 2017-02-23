@@ -27,8 +27,8 @@ namespace WSChat
 
         public MyWebSocketClient(WebSocketHandler socket)
         {
-            this.socket = socket;
             Start();
+            this.socket = socket;
         }
 
         internal void RaiseMessageReceived(string message)
