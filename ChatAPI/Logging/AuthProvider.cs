@@ -11,8 +11,8 @@ namespace ChatServer
 {
     public static class AuthProvider
     {
-        private static string AuthForlder = "Authentication/";
-        private static string List = "/PersonList";
+        private static string AuthForlder = @"/App_Data/Auth/";
+        private static string List = "PersonList";
 
         static AuthProvider()
         {

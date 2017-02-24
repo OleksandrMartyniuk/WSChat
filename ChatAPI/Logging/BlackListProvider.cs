@@ -11,8 +11,8 @@ namespace ChatServer
 {
     public static class BlackListProvider
     {
-        private static string Folder = "Authorization";
-        private static string BlackList ="/BlackList";
+        private static string Folder = @"/App_Data/Auth/";
+        private static string BlackList ="BlackList";
 
         static BlackListProvider()
         {

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="RequestManager.js"></script>
+</head>
+<body onload="Connect();">
+    <div id="MainDiv">
+        <div id="MsgDiv" style="float:left;">
+            <div id="TopDiv" style="width:600px; margin-bottom:10px;">
+                <span id="RoomName"> Host </span>
+                <span id="TopButtons" style="float:right;">
+                    <input type="button" name="logout" value="Logout" />
+                    <input type="button" name="profile" value="Profile" />
+                </span>
+            </div>
+            <span>
+                <textarea id="messagesTextArea" readonly style="font-size:12pt; border:1px solid black; width:600px; height:280px; background:WhiteSmoke;"></textarea>
+            </span>
+            <br><span>
+                <input type="text" id="message" style="width:500px;">
+            </span>
+            <span>
+                <input type="button" id="send" value="Send" style="width:98px;" onclick="ProcessRequest('gg');">
+            </span>
+            <div style="margin-top:10px;"> Private messages </div>
+            <div style="margin-top:10px;">
+                <textarea id="privateMessagesTextArea" readonly style="font-size:12pt; border:1px solid black; width:600px; height:147px; background:WhiteSmoke;"></textarea>
+            </div>
+            <div id="Status">
+
+            </div>
+        </div>
+        <div id="ListDiv">
+            <div style="float:left;">
+                <span> Комнаты </span>
+                <div style="margin-top:10px;">
+                    <select id="rooms" style="width:200px;" size="25">
+                        <option> Host </option>
+                        <option> Room1 </option>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" id="roomname" style="width:196px; margin-top:3px;">
+                </div>
+                <div>
+                    <input type="button" id="createroom" value="Create room" style="width:200px; margin-top:3px;">
+                </div>
+                <div>
+                    <input type="button" id="exitroom" value="Exit room" style="width:200px; margin-top:3px;">
+                </div>
+            </div>
+            <div>
+                <span> Участники </span>
+                <div style="margin-top:10px;">
+                    <select id="users" style="width:200px;" size="25">
+                        <option> Vasya </option>
+                        <option> Pupkin </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

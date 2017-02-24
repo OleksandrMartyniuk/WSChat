@@ -104,9 +104,14 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-2.0.2.min.map" />
+    <Content Include="WebClient\Main.html" />
+    <Content Include="WebClient\RequestManager.js" />
+    <Content Include="WebClient\ResponseHandler.js" />
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatAPI\Logging\CrashReportProvider.cs" />
+    <Compile Include="ChatAPI\Logging\LogProvider.cs" />
     <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
     <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
     <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />

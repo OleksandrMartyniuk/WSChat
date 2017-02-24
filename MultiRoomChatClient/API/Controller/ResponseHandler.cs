@@ -15,9 +15,14 @@ namespace MultiRoomChatClient
             Client.responseReceived += ProcessResponse;
         }
 
+        public static bool active = true;
+
         public static void ProcessResponse(string Json)
         {
-            
+            if (!active)
+            {
+                return;
+            }
             //Console.WriteLine(Json); 
             RequestObject req = JsonConvert.DeserializeObject<RequestObject>(Json);
 
@@ -137,5 +142,6 @@ namespace MultiRoomChatClient
         public static event roomDelegate roomCreated;
         public static event roomDelegate roomRemoved;
         public static event roomDelegate roomError;
+
     }
 }

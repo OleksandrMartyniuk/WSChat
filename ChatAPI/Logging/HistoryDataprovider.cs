@@ -11,19 +11,11 @@ namespace ChatServer
 {
     public static class HistoryDataprovider
     {
-        private static string Folder =@"C:\Users\sanyok\Source\Repos\WSChat\App_Data\Msg\";
+        private static string Folder =@"/App_Data/Msg/";
 
         static HistoryDataprovider()
         {
-            try
-            {
-                Directory.CreateDirectory(Folder);
-            }
-            catch (Exception e)
-            {
-
-            }
-            
+            Directory.CreateDirectory(Folder);
         }
 
         public static void AppendMessage(string roomName, ChatMessage message)

@@ -38,8 +38,8 @@ namespace MultiRoomChatClient
                     break;
                 default: break;
             }
-            ConnectionClient.NewErrorMessage += (x) => NewErrorMessage.Invoke(x);
-            ConnectionClient.responseReceived += (x) => responseReceived.Invoke(x);
+            ConnectionClient.NewErrorMessage += (x) => NewErrorMessage?.Invoke(x);
+            ConnectionClient.responseReceived += (x) => responseReceived?.Invoke(x);
         }
 
         public static void StartClient()
