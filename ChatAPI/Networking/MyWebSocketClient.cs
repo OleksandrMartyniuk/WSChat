@@ -52,7 +52,7 @@ namespace WSChat
         {
             this.Role = new UnknownUser(this);
             MessageRecieved += Role.Handle;
-            Manager.Clients.AddLast(this);
+            //Manager.Clients.AddLast(this);
         }
 
     }

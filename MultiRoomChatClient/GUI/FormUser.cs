@@ -202,11 +202,11 @@ namespace MultiRoomChatClient
             tabbedMessageList1.CloseAllRooms();
             RequestManager.Logout(Client.Username.ToString());
 
-            //Manager.RoomDataUpdated -= () => Invoke(new Action(onRoomDataUpdated));
-            //ResponseHandler.privateMessageReceived -= (x) => Invoke(new Action<ChatMessage>(HandleMessage), x);
-            //ResponseHandler.roomError -= (x) => Invoke(new Action<string>(OnRoomError), x);
-            //ResponseHandler.Banned -= () => Invoke(new Action(Ban));
-            //ResponseHandler.Unbanned -= () => Invoke(new Action(unBan));
+            Manager.RoomDataUpdated -= () => Invoke(new Action(onRoomDataUpdated));
+            ResponseHandler.privateMessageReceived -= (x) => Invoke(new Action<ChatMessage>(HandleMessage), x);
+            ResponseHandler.roomError -= (x) => Invoke(new Action<string>(OnRoomError), x);
+            ResponseHandler.Banned -= () => Invoke(new Action(Ban));
+            ResponseHandler.Unbanned -= () => Invoke(new Action(unBan));
 
             Client.Disconnect();
         }
