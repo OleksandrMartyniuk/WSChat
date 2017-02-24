@@ -15,8 +15,9 @@ namespace ChatServer
             {
                 return false;
             }
-        
+
             client.Close();
+            LogProvider.AppendRecord(string.Format("{0} [{1}]: left chat", DateTime.Now.ToString(), client.Username));
             
             return true;
         }

@@ -40,6 +40,7 @@ namespace WSChat
         {
             socket.Close();
             Manager.UserDisconnect(Username);
+            LogProvider.AppendRecord(string.Format("{0} [{1}]: disconnected", DateTime.Now.ToString(), Username));
         }
 
         public void SendMessage(string message)
@@ -52,7 +53,6 @@ namespace WSChat
         {
             this.Role = new UnknownUser(this);
             MessageRecieved += Role.Handle;
-            //Manager.Clients.AddLast(this);
         }
 
     }

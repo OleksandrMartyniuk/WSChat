@@ -29,6 +29,7 @@ namespace WSChat
         public override void OnClose()
         {
             client.Close();
+
             base.OnClose();
         }
     }

@@ -67,6 +67,7 @@ namespace ChatServer
             ChatMessage msg = JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString());
             RoomObject r = Manager.FindRoom(rstr);
             r?.Broadcast(client, msg);
+            LogProvider.AppendRecord(string.Format("{0} [{1}]: Sent a message" + msg.ToString(), DateTime.Now.ToString(), client.Username));
         }
 
         protected virtual void HandleActive(IClientObject client, RequestObject request)
@@ -82,6 +83,7 @@ namespace ChatServer
             if (room != null)
             {
                 room.AddListener(this);
+                LogProvider.AppendRecord(string.Format("{0} [{1}]: entered room {2}", DateTime.Now.ToString(), client.Username, room.Name));
                 //Active = room;
                 ChatMessage[] msgs = room.GetMessageHistorySince(since);
                 if (msgs.Length > 0)
@@ -98,6 +100,7 @@ namespace ChatServer
             //if (room != null)
             //{
             room.RemoveListener(this);
+            LogProvider.AppendRecord(string.Format("{0} [{1}]: left room {2}", DateTime.Now.ToString(), client.Username, room.Name));
             // if (Active == room)
             //{
             //     Active = Manager.Host;
