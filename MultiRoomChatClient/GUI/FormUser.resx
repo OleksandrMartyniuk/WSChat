@@ -4124,6 +4124,9 @@
         wAMAAMADAADgBwAA+D8AAPgfAAD4PwAA+B8AAA==
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>SuperDuperChat</value>
   </data>

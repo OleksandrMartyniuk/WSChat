@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ChatServer
 {
@@ -16,6 +17,7 @@ namespace ChatServer
 
         static AuthProvider()
         {
+            AuthForlder = HttpContext.Current.Server.MapPath(@"/App_Data/Auth/");
             Directory.CreateDirectory(AuthForlder);
         }
         public static void AppendRecord(string username, string password)

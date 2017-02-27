@@ -30,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,7 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <PublishDatabases>false</PublishDatabases>
     <IncludeIisSettings>true</IncludeIisSettings>
-    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -112,6 +113,7 @@
   <ItemGroup>
     <Compile Include="ChatAPI\Logging\CrashReportProvider.cs" />
     <Compile Include="ChatAPI\Logging\LogProvider.cs" />
+    <Compile Include="ChatAPI\Modules\HistoryModule.cs" />
     <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
     <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
     <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />

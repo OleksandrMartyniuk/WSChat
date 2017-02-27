@@ -32,6 +32,10 @@ namespace ChatServer
             return null;
         }
 
+        public static void AddClient(IClientObject client)
+        {
+            Clients.AddLast(client);
+        }
         
         public static RoomObject FindRoom(string name)
         {

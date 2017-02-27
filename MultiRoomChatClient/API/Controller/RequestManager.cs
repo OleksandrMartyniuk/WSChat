@@ -57,15 +57,17 @@ namespace MultiRoomChatClient
             Client.AddRequest(JsonConvert.SerializeObject(msg));
         }
 
-        //public static void RequestMessageList(ChatMessage last = null)
-        //{
-        //    RequestObject msg = new RequestObject("room", "msg", null);
-        //    if(last!= null)
-        //    {
-        //        msg.args = last.TimeStamp;
-        //    }
-        //    Client.AddRequest(JsonConvert.SerializeObject(msg));
-        //}
+        public static void RequestMessageList(string room, DateTime last = default(DateTime))
+        {
+            RequestObject msg = new RequestObject("history", "room", new object[] { room, last });
+            Client.AddRequest(JsonConvert.SerializeObject(msg));
+        }
+
+        public static void RequestPrivateMessageList(string room, DateTime last = default(DateTime))
+        {
+            RequestObject msg = new RequestObject("history", "private", new object[] { room, last });
+            Client.AddRequest(JsonConvert.SerializeObject(msg));
+        }
 
         public static void SendPrivateMessage(string userName, ChatMessage msg)
         {

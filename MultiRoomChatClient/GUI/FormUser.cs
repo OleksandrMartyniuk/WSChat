@@ -203,11 +203,6 @@ namespace MultiRoomChatClient
 
             Manager = null;
             ResponseHandler.active = false;
-            //Manager.RoomDataUpdated -= () => Invoke(new Action(onRoomDataUpdated));
-            //ResponseHandler.privateMessageReceived -= (x) => Invoke(new Action<ChatMessage>(HandleMessage), x);
-            //ResponseHandler.roomError -= (x) => Invoke(new Action<string>(OnRoomError), x);
-            //ResponseHandler.Banned -= () => Invoke(new Action(Ban));
-            //ResponseHandler.Unbanned -= () => Invoke(new Action(unBan));
 
             Client.Disconnect();
         }

@@ -75,17 +75,17 @@ namespace ChatServer
             RoomObject room = null;
             object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
             room = Manager.FindRoom((string)args[0]);
-            DateTime since = default(DateTime);
-            if (args[1] != null)
-            {
-                since = (DateTime)args[1];
-            }
+            //////DateTime first = default(DateTime);
+            //////if (args[1] != null)
+            //////{
+            //////    since = (DateTime)args[1];
+            //////}
             if (room != null)
             {
                 room.AddListener(this);
                 LogProvider.AppendRecord(string.Format("{0} [{1}]: entered room {2}", DateTime.Now.ToString(), client.Username, room.Name));
                 //Active = room;
-                ChatMessage[] msgs = room.GetMessageHistorySince(since);
+                ChatMessage[] msgs = room.GetMessageHistoryTo(DateTime.Now);
                 if (msgs.Length > 0)
                 {
                     RequestObject req = new RequestObject("msg", "active", new object[] { room.Name, msgs });

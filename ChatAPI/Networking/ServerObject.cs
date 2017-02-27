@@ -35,6 +35,7 @@ namespace ChatServer
             }
             catch (Exception ex)
             {
+                var data = ex.Data;
               //  Console.WriteLine(ex.Message);
                 //    Console.WriteLine(ex.Message);
                 Disconnect();

@@ -1,4 +1,5 @@
-﻿using ChatServer.Roles;
+﻿
+using ChatServer.Roles;
 using Core;
 using Newtonsoft.Json;
 using System;
@@ -60,7 +61,8 @@ namespace ChatServer
                 client.SendMessage(ResponseConstructor.GetLoginResultNotification("ok", username));
                 LogProvider.AppendRecord(string.Format("{0} [{1}]: logged in", DateTime.Now.ToString(), username));
             }
-            Manager.Clients.AddLast(client);
+            Manager.AddClient(client);
+            //Manager.Clients.AddLast(client);
             return true;
         }
 

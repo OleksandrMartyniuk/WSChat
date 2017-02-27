@@ -23,18 +23,18 @@ namespace MultiRoomChatClient
             Messages = new List<ChatMessage>();
             Recipient = username;
             Text = username;
-            var h = Client.PrivateHistory.GetHistory(Client.Username + @"-" + Recipient);
-            if(h!= null)
-            {
-                Messages.AddRange(h);
-            }
+            //////var h = Client.PrivateHistory.GetHistory(Client.Username + @"-" + Recipient);
+            ////////if(h!= null)
+            ////////{
+            ////////    Messages.AddRange(h);
+            ////////}
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         public void AppendMessage(ChatMessage msg)
         {
             list_msg.Items.Add(msg);
-            Client.PrivateHistory.AppendMessage(Client.Username + @"-" + Recipient, msg);
+            //Client.PrivateHistory.AppendMessage(Client.Username + @"-" + Recipient, msg);
             ScrollDown();
         }
 
@@ -42,6 +42,16 @@ namespace MultiRoomChatClient
         {
             int visibleItems = list_msg.ClientSize.Height / list_msg.ItemHeight;
             list_msg.TopIndex = Math.Max(list_msg.Items.Count - visibleItems + 1, 0);
+        }
+
+        private void OnMessageHistoryReceived(string to, ChatMessage[] messages)
+        {
+            if(to != this.Recipient)
+            {
+                return;
+            }
+
+            
         }
 
         private void btn_send_Click(object sender, EventArgs e)

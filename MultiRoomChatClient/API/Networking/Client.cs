@@ -18,8 +18,8 @@ namespace MultiRoomChatClient
         public static string Username { get; set; }
         static IClient ConnectionClient = null;
         
-        public static HistoryDataprovider RoomHistory = new HistoryDataprovider("Msg");
-        public static HistoryDataprovider PrivateHistory = new HistoryDataprovider("Private");
+        //public static HistoryDataprovider RoomHistory = new HistoryDataprovider("Msg");
+        //public static HistoryDataprovider PrivateHistory = new HistoryDataprovider("Private");
 
         public static event responseHandler responseReceived;
         public static event errorMessage NewErrorMessage;

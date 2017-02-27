@@ -49,14 +49,28 @@ namespace ChatServer
             return res;
         }
 
-        public ChatMessage[] GetMessageHistorySince(DateTime time)
+        public ChatMessage[] GetMessageHistoryTo(DateTime time)
         {
+
             LinkedList<ChatMessage> msgs = new LinkedList<ChatMessage>();
 
-            LinkedListNode<ChatMessage> current = Messages.Last;
-            while (current != null && current.Value.TimeStamp != time)
+            LinkedListNode<ChatMessage> next = Messages.Last;
+            while(next.Value.TimeStamp >= time || next != Messages.First)
             {
-                msgs.AddFirst(current.Value);
+                next = next.Previous;
+            }
+
+            LinkedListNode<ChatMessage> current = next.Previous;
+            for (int i = 0; i <= 10; i++)
+            {
+                if (current != null)
+                {
+                    msgs.AddLast(current);
+                }
+                else
+                {
+                    break;
+                }
                 current = current.Previous;
             }
 

@@ -4,41 +4,47 @@
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
     p1:id="@+id/linearLayout1">
+  <EditText
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/et_id"
+        p1:hint="id"
+        />
     <EditText
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/editText1"
+        p1:id="@+id/et_FName"
         p1:hint="FirstName"
         />
     <EditText
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/editText2"
+        p1:id="@+id/et_LName"
         p1:hint="LName" />
     <EditText
         p1:inputType="number"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/editText3"
+        p1:id="@+id/et_Age"
          p1:hint="Age" />
     <Button
         p1:text="Create"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/button1" />
+        p1:id="@+id/btn_create" />
     <Button
         p1:text="Read"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/button2" />
+        p1:id="@+id/btn_read" />
     <Button
         p1:text="Update"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/button3" />
+        p1:id="@+id/btn_update" />
     <Button
         p1:text="Delete"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
-        p1:id="@+id/button4" />
+        p1:id="@+id/btn_delete" />
 </LinearLayout>

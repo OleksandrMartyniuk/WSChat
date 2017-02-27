@@ -21,14 +21,14 @@ namespace MultiRoomChatClient
         {
             this.Name = r.Name;
             this.clients = r.clients;
-            ChatMessage[] msgs = Client.RoomHistory.GetHistory(Name);
-            if(msgs!= null)
-            {
-                foreach(ChatMessage msg in msgs)
-                {
-                    Messages.Add(msg);
-                }
-            }
+            //ChatMessage[] msgs = Client.RoomHistory.GetHistory(Name);
+            //if(msgs!= null)
+            //{
+            //    foreach(ChatMessage msg in msgs)
+            //    {
+            //        Messages.Add(msg);
+            //    }
+            //}
         }
 
         public void SendMessage(string message)
@@ -37,7 +37,6 @@ namespace MultiRoomChatClient
             
             RequestManager.SendMessage(message, this.Name);
             Messages.Add(msg);
-            Client.RoomHistory.AppendMessage(Name, msg);
             if (active)
             {
                 MessageReceived?.Invoke(msg);
@@ -52,7 +51,7 @@ namespace MultiRoomChatClient
                 return;
             }
             Messages.Add(msg);
-            Client.RoomHistory.AppendMessage(Name, msg);
+            //Client.RoomHistory.AppendMessage(Name, msg);
  
             MessageReceived?.Invoke(msg);
         }
@@ -97,8 +96,15 @@ namespace MultiRoomChatClient
 
         public void OnDataReceived(ChatMessage[] msg)
         {
+            foreach(ChatMessage m in msg)
+            {
+                if(m.Sender == Client.Username)
+                {
+                    m.Sender = Client.Username;
+                }
+            }
             Messages.AddRange(msg);
-            Client.RoomHistory.AppendSequence(Name, msg);
+            //Client.RoomHistory.AppendSequence(Name, msg);
         }
 
         internal void SetBg()

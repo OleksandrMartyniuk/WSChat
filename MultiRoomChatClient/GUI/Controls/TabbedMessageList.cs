@@ -47,6 +47,8 @@ namespace MultiRoomChatClient
             lb.Dock = DockStyle.Fill;
             lb.HorizontalScrollbar = true;
             lb.DataSource = room.Messages;
+
+
            
             tabControl1.SelectedTab = tp;
             tp.Controls.Add(lb);

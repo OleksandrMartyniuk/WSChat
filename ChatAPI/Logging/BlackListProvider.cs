@@ -6,16 +6,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ChatServer
 {
     public static class BlackListProvider
     {
-        private static string Folder = @"/App_Data/Auth/";
+        private static string Folder;
         private static string BlackList ="BlackList";
 
         static BlackListProvider()
         {
+            Folder = HttpContext.Current.Server.MapPath(@"/App_Data/Auth/");
             Directory.CreateDirectory(Folder);
         }
 
