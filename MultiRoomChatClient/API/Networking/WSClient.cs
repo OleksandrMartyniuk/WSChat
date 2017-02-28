@@ -26,10 +26,22 @@ namespace MultiRoomChatClient.API.Networking
         {
             socket = new WebSocket(wsURI);            //Инициализация веб сокет клиента 
             socket.Open();                                //Открытие соединения
-            socket.MessageReceived += (sender, args) => 
-            responseReceived?.Invoke(args.Message);
+            socket.MessageReceived += InvokeMessageReceived;
+
+            socket.Closed += (sender, args) => ACHTUNG();
 
             socket.Error += (sender, args) => NewErrorMessage?.Invoke(args.Exception.Message);
+        }
+
+        private void ACHTUNG()
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void InvokeMessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            string message = e.Message;
+            responseReceived(message);
         }
 
         public void AddRequest(string message)

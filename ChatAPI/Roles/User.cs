@@ -14,6 +14,7 @@ namespace ChatServer.Roles
             messageModule.client = clnt;
 
             Handlers = new IHandlerModule[] {
+                new HistoryModule(),
                 messageModule,
                 new Logout(),
                 new Info(),

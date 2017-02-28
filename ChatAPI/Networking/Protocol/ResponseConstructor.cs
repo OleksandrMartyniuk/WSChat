@@ -58,5 +58,15 @@ namespace ChatServer
         {
             return JsonConvert.SerializeObject(new RequestObject(module, "error", text));
         }
+
+        internal static string GetRoomHistoryResponse(string room, ChatMessage[] history)
+        {
+            return JsonConvert.SerializeObject(new RequestObject("history", "room", new object[] { room, history }));
+        }
+
+        internal static string GetPrivateHistoryResponse(string user, ChatMessage[] history)
+        {
+            return JsonConvert.SerializeObject(new RequestObject("history", "room", new object[] { user, history }));
+        }
     }
 }

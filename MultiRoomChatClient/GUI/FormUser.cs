@@ -197,14 +197,28 @@ namespace MultiRoomChatClient
 
         private void SuperDuperChat_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Manager = null;
+            ResponseHandler.active = false;
+
             Client.NewErrorMessage -= ShowConnectionError;
             tabbedMessageList1.CloseAllRooms();
             RequestManager.Logout(Client.Username.ToString());
 
-            Manager = null;
-            ResponseHandler.active = false;
-
             Client.Disconnect();
+        }
+
+        private void UploadHistory_Click(object sender, EventArgs e)
+        {
+            var room = ((RoomObjExt)tabbedMessageList1.selectedTab.Tag);
+            string active = room.Name;
+            if(room.Messages.Count == 0)
+            {
+                RequestManager.RequestMessageList(active);
+            }
+            else
+            {
+                RequestManager.RequestMessageList(active, room.Messages[0].TimeStamp);
+            }
         }
     }
 }

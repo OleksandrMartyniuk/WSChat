@@ -12,7 +12,7 @@ namespace ChatServer
     {
         public static RoomObject Host { get; set; }
         public static LinkedList<RoomObject> Rooms = new LinkedList<RoomObject>();
-        public static LinkedList<IClientObject> Clients = new LinkedList<IClientObject>();
+        public static LinkedList<object> Clients = new LinkedList<object>();
 
         static Manager()
         {

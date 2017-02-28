@@ -63,9 +63,9 @@ namespace MultiRoomChatClient
             Client.AddRequest(JsonConvert.SerializeObject(msg));
         }
 
-        public static void RequestPrivateMessageList(string room, DateTime last = default(DateTime))
+        public static void RequestPrivateMessageList(string username, DateTime last = default(DateTime))
         {
-            RequestObject msg = new RequestObject("history", "private", new object[] { room, last });
+            RequestObject msg = new RequestObject("history", "private", new object[] { Client.Username, username, last });
             Client.AddRequest(JsonConvert.SerializeObject(msg));
         }
 

@@ -50,8 +50,6 @@ namespace MultiRoomChatClient
             {
                 return;
             }
-
-            
         }
 
         private void btn_send_Click(object sender, EventArgs e)
@@ -69,6 +67,17 @@ namespace MultiRoomChatClient
         private void PrivateMessageForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Parent.PMFormRemove(this);
+        }
+
+        public void PrependHistory(string user, ChatMessage[] history)
+        {
+            if (user != this.Recipient)
+            {
+                return;
+            }
+            List<ChatMessage> hist = this.Messages;
+            Messages = new List<ChatMessage>(history);
+            Messages.AddRange(hist);
         }
     }
 }

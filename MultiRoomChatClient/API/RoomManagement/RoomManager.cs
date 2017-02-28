@@ -25,6 +25,7 @@ namespace MultiRoomChatClient
             RequestManager.RequestData();
             ResponseHandler.roomCreated += (x) => AddRoom(new RoomObj(x));
             ResponseHandler.roomRemoved += (x) => RemoveRoom(new RoomObj(x));
+            ResponseHandler.RoomHistoryReceived += PrependHistory;
         }
 
         private void RemoveUser(string room, string username)
@@ -92,5 +93,14 @@ namespace MultiRoomChatClient
             RoomDataUpdated?.Invoke();
         }
 
+        public void PrependHistory(string room, ChatMessage[] history)
+        {
+            var r = FindRoom(room);
+            if(r == null)
+            {
+                return;
+            }
+            r.PrependMessages(history);
+        }
     }
 }

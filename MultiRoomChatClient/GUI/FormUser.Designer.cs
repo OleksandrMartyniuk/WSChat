@@ -36,6 +36,7 @@
             this.tb_newRoom = new System.Windows.Forms.TextBox();
             this.btn_closeRoom = new System.Windows.Forms.Button();
             this.tabbedMessageList1 = new MultiRoomChatClient.TabbedMessageList();
+            this.btn_HistoryUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tree_Room
@@ -84,11 +85,19 @@
             resources.ApplyResources(this.tabbedMessageList1, "tabbedMessageList1");
             this.tabbedMessageList1.Name = "tabbedMessageList1";
             // 
+            // btn_HistoryUpdate
+            // 
+            resources.ApplyResources(this.btn_HistoryUpdate, "btn_HistoryUpdate");
+            this.btn_HistoryUpdate.Name = "btn_HistoryUpdate";
+            this.btn_HistoryUpdate.UseVisualStyleBackColor = true;
+            this.btn_HistoryUpdate.Click += new System.EventHandler(this.UploadHistory_Click);
+            // 
             // SuperDuperChat
             // 
             this.AcceptButton = this.btn_send;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_HistoryUpdate);
             this.Controls.Add(this.tabbedMessageList1);
             this.Controls.Add(this.btn_closeRoom);
             this.Controls.Add(this.tb_newRoom);
@@ -114,6 +123,7 @@
         private System.Windows.Forms.Button btn_closeRoom;
         private TabbedMessageList tabbedMessageList1;
         private System.Windows.Forms.Button btn_send;
+        private System.Windows.Forms.Button btn_HistoryUpdate;
     }
 }
 

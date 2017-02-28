@@ -39,7 +39,7 @@ namespace ChatServer
             IClientObject user = Manager.FindClient(username);
             if (user == null || user.ToString() == "")  //user not found
                 return;
-            LogProvider.AppendRecord(string.Format("{0} [{1}]: banned user {2}", DateTime.Now.ToString(), username));
+            LogProvider.AppendRecord(string.Format("[{0}]: banned user {1}", user.Username , username));
             user.SendMessage(ResponseConstructor.GetBannedNotification(duration));
             //user.Role = new BannedUser(user);
         }
@@ -53,9 +53,9 @@ namespace ChatServer
                 return;
 
             user.SendMessage(ResponseConstructor.GetUnBannedNotification(username));
-            LogProvider.AppendRecord(string.Format("{0} [{1}]: unbanned user {2}", DateTime.Now.ToString(), username));
+            LogProvider.AppendRecord(string.Format("[{0}]: unbanned user {1}", user.Username, username));
 
-            //   user.Role = new User(user);
+            user.Role = new User(user);
         }
     }
 }

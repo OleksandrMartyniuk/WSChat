@@ -14,7 +14,7 @@ namespace MultiRoomChatClient
     {
         public delegate void  roomname(string name);
         public event roomname roomName;
-        private TabPage selectedTab { get; set; }
+        public TabPage selectedTab { get; set; }
         public TabbedMessageList()
         {
             InitializeComponent();
@@ -68,7 +68,6 @@ namespace MultiRoomChatClient
                     lb.DataSource = room.Messages;
                     int visibleItems = lb.ClientSize.Height / lb.ItemHeight;
                     lb.TopIndex = Math.Max(lb.Items.Count - visibleItems + 1, 0);
-
                 }));
             };
             room.NotificationUpdated += (x) =>

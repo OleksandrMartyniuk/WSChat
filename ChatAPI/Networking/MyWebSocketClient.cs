@@ -40,7 +40,7 @@ namespace WSChat
         {
             socket.Close();
             Manager.UserDisconnect(Username);
-            LogProvider.AppendRecord(string.Format("{0} [{1}]: disconnected", DateTime.Now.ToString(), Username));
+            LogProvider.AppendRecord(string.Format("[{0}] disconnected", Username));
         }
 
         public void SendMessage(string message)

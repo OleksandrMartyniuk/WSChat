@@ -19,7 +19,7 @@ namespace ChatServer
             var arg = Manager.GetAllInfo();
             RequestObject robj = new RequestObject("info", "all", arg);
             client.SendMessage(JsonConvert.SerializeObject(robj));
-            LogProvider.AppendRecord(string.Format("{0} [{1}]: requested info {2}", DateTime.Now.ToString(), client.Username));
+            LogProvider.AppendRecord(string.Format("[{0}]: requested info", client.Username));
             return true;
         }
     }

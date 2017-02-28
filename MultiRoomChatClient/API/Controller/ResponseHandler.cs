@@ -108,6 +108,24 @@ namespace MultiRoomChatClient
                             break;
                     }
                     break;
+                case "history":
+                    switch (req.Cmd)
+                    {
+                        case "room":
+                            object[] args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
+                            ChatMessage[] history = JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString());
+                            RoomHistoryReceived?.Invoke((string)args[0], history);
+                            break;
+                        case "private":
+                            args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
+                            string user = (string)args[1] == Client.Username ? (string)args[1] : (string)args[0];
+                            history = JsonConvert.DeserializeObject<ChatMessage[]>(args[2].ToString());
+                            RoomHistoryReceived?.Invoke(user, history);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
             }
         }
 
@@ -143,5 +161,9 @@ namespace MultiRoomChatClient
         public static event roomDelegate roomRemoved;
         public static event roomDelegate roomError;
 
+        public delegate void RoomHistoryDelegate(string room, ChatMessage[] msgs);
+        public delegate void PrivateHistoryDelegate(string user, ChatMessage[] msgs);
+        public static event RoomHistoryDelegate RoomHistoryReceived;
+        public static event PrivateHistoryDelegate PrivateHistoryReceived;
     }
 }

@@ -33,7 +33,7 @@ namespace ChatServer
             if (answer == "false")
             {
                 AuthProvider.AppendRecord(username, password);
-                LogProvider.AppendRecord(string.Format("{0} registered new user [{1}]", DateTime.Now.ToString(), username));
+                LogProvider.AppendRecord(string.Format("{0} registered new user [{1}]", client.Username, username));
 
             }
             else if (answer == "login")
@@ -47,19 +47,19 @@ namespace ChatServer
             {
                 client.Role = new Admin(client);
                 client.SendMessage(ResponseConstructor.GetLoginResultNotification("admin", username));
-                LogProvider.AppendRecord(string.Format("{0} [{1}]: Logged in as admin", DateTime.Now.ToString(), username));
+                LogProvider.AppendRecord(string.Format("[{0}]: Logged in as admin", username));
             }
             else if (IsInBlackList(username))
             {
                 client.Role = new BannedUser(client);
                 client.SendMessage(ResponseConstructor.GetLoginResultNotification("banned", username));
-                LogProvider.AppendRecord(string.Format("{0} [{1}]: logged as banned user", DateTime.Now.ToString(), username));
+                LogProvider.AppendRecord(string.Format("[{0}]: logged as banned user", username));
             }
             else
             {
                 client.Role = new User(client);
                 client.SendMessage(ResponseConstructor.GetLoginResultNotification("ok", username));
-                LogProvider.AppendRecord(string.Format("{0} [{1}]: logged in", DateTime.Now.ToString(), username));
+                LogProvider.AppendRecord(string.Format("[{0}]: logged in", username));
             }
             Manager.AddClient(client);
             //Manager.Clients.AddLast(client);

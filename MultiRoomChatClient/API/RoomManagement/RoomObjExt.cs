@@ -21,6 +21,7 @@ namespace MultiRoomChatClient
         {
             this.Name = r.Name;
             this.clients = r.clients;
+
             //ChatMessage[] msgs = Client.RoomHistory.GetHistory(Name);
             //if(msgs!= null)
             //{
@@ -117,6 +118,14 @@ namespace MultiRoomChatClient
         {
             Notifications++;
             NotificationUpdated?.Invoke(Notifications);
+        }
+
+        public void PrependMessages(IEnumerable<ChatMessage> history)
+        {
+            List<ChatMessage> hist = Messages;
+            Messages = new List<ChatMessage>(history);
+            Messages.AddRange(hist);
+            MessageReceived?.Invoke(null);
         }
 
         public RoomObjExt(string Name): base(Name){}
