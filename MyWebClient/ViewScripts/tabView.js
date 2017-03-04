@@ -197,6 +197,21 @@ Messages.onPrivateMessageReceived = function(message) {
     list.appendChild(item);
 }
 
+Messages.incrementNotification = function(roomName, isPrivate){
+    var wrapperId = 'roomPanel';
+    if (isPrivate) {
+        wrapperId = 'privatePanel';
+    }
+    var link = $('#' + wrapperId + ' > div.tab > a[name="' + roomName + '"]')[0];
+    if (!link.hasClass('active')) {
+        var notificator = 
+    }
+}
+
+Messages.removeNotification = function(roomName, isPrivate){
+
+}
+
 Messages.getMessageList = function(wrapperId, roomName) {
     wrapper = document.getElementById(wrapperId);
     var el = $("div[name='" + roomName + "']", wrapper)[0];
