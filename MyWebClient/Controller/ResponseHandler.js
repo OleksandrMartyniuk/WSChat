@@ -1,30 +1,141 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Core;
+﻿function ResponseHandler() {
 
-namespace MultiRoomChatClient
-{
-    public static class ResponseHandler
+}
+
+ResponseHandler.Handle = function (msg) {
+
+    var req = new RequestObject(msg["Module"], msg["Cmd"], msg["args"]);
+
+    switch (req.Module)
     {
-        static ResponseHandler()
-        {
-            Client.responseReceived += ProcessResponse;
-        }
-
-        public static bool active = true;
-
-        public static void ProcessResponse(string Json)
-        {
-            if (!active)
+        case "admin":
+            switch (req.Cmd)
             {
-                return;
+                case "ban":
+                    UI.Ban();
+                    break;
+                case "unban":
+                    UI.Unban();
+                    break;
             }
-            //Console.WriteLine(Json); 
-            RequestObject req = JsonConvert.DeserializeObject<RequestObject>(Json);
+            break;
+        case "info":
+            if (req.Cmd == "all")
+            {
+                if (req.args.length == 0)
+                {
+                    return;
+                }
+                var roomList = new [];
+                var a = req.args;
+                for(var i=0; i< a.length; i++){
+                    var robj = new roomObj();
+                    robj.Name = (a[i])['Name'];
+                    robj.clients = (a[i])['clients'];
+                    roomList.push(robj);
+                }
+            }
+            break;
+        case "login":
+            switch (req.Cmd)
+            {
+                case "ok":
+                    loginSuccessfull?.Invoke((string)req.args);
+                    break;
+                case "admin":
+                    loggedAsAdmin?.Invoke((string)req.args);
+                    break;
+                case "banned":
+                    loggedBanned?.Invoke((string)req.args);
+                    break;
+                default:
+                    loginFail?.Invoke((string)req.args);
+                    break;
+            }
+            break;
+        case "msg":
+            switch (req.Cmd)
+            {
+                case "msg":
+                    Messages.onRoomMessageReceived( req.args[0], new ChatMessage( req.args[1]));
+                    break;
+                case "active":
+                    var roomName = req.args[0];
+                    var msgList = req.args[1];
+                    for(var i=0; i<msgList.length; i++){
+                        msgList[i] = new ChatMessage([msgList[i]]);
+                        if(msgList[i].Sender == sessionStorage['username']){
+                            msgList[i].Sender = 'Me';
+                        }
+                    }
+                    Messages.OnHistoryReceived(roomName, msgList);
+                    break;
+                case "notify":
+                    //
+                    break;
+                case "entered":
+                    Rooms.userEntered(req.args[0], req.args[1]);
+                    break;
+                case "left":
+                    Rooms.userLeft(req.args[0], req.args[1]);
+                    break;
+            }
+            break;
+        case "private":
+            onPrivateMessageReceived(new ChatMessage(req.args));
+            break;
+        case "room":
+            switch (req.Cmd)
+            {
+                case "created":
+                    Rooms.addRoomToMenu(req.args);////////
+                    break;
+                case "removed":
+                    Rooms.RemoveRoom(req.args);
+                    break;
+                default:
+                    alert(req.args);
+                    break;
+            }
+            break;
+        case "history":
+            switch (req.Cmd)
+            {
+                case "room":
+                    var roomName = req.args[0];
+                    var msgList = req.args[1];
+                    for(var i=0; i<msgList.length; i++){
+                        msgList[i] = new ChatMessage([msgList[i]]);
+                        if(msgList[i].Sender == sessionStorage['username']){
+                            msgList[i].Sender = 'Me';
+                        }
+                    }
+                    Messages.OnHistoryReceived(roomName, msgList);
+                    break;
+                case "private":
+                    var userName = req.args[0] == sessionStorage['username']? req.args[1]: req.args[0];
+                    var msgList = req.args[2];
+                    for(var i=0; i<msgList.length; i++){
+                        msgList[i] = new ChatMessage([msgList[i]]);
+                        if(msgList[i].Sender == sessionStorage['username']){
+                            msgList[i].Sender = 'Me';
+                        }
+                    }
+                    Messages.OnHistoryReceived(userName, msgList, 'true');
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
+}
+
+
+
+
+
+/*
+RequestObject req = JsonConvert.DeserializeObject<RequestObject>(Json);
 
             switch (req.Module)
             {
@@ -76,8 +187,7 @@ namespace MultiRoomChatClient
                             break;
                         case "active":
                             args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
-
-                            RoomHistoryReceived?.Invoke((string)args[0], JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString()));
+                            msgDataReceived?.Invoke((string)args[0], JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString()));
                             break;
                         case "notify":
                             notificationReceived?.Invoke((string)req.args);
@@ -130,41 +240,4 @@ namespace MultiRoomChatClient
             }
         }
 
-        public delegate void adminDelegate();
-        public static event adminDelegate Banned;
-        public static event adminDelegate Unbanned;
-
-        public delegate void roomDataDelegate(RoomObj[] rooms);
-        public static event roomDataDelegate roomDataReceived;
-
-        public delegate void loginDelegate(string username);
-        public static event loginDelegate loginSuccessfull;
-        public static event loginDelegate loggedAsAdmin;
-        public static event loginDelegate loggedBanned;
-        public static event loginDelegate loginFail;
-
-        public delegate void messageDelegate(string room, ChatMessage msg);
-        public delegate void notificationDelegate(string room);
-        public delegate void dataDelegate(string room, ChatMessage[] msg);
-        public delegate void userMovedDelegate(string username, string room);
-
-        public static event messageDelegate messageRecieived;
-        public static event notificationDelegate notificationReceived;
-        public static event dataDelegate msgDataReceived;
-        public static event userMovedDelegate UserEntered;
-        public static event userMovedDelegate UserLeft;
-
-        public delegate void pmDelegate(ChatMessage msg);
-        public static event pmDelegate privateMessageReceived;
-
-        public delegate void roomDelegate(string roomName);
-        public static event roomDelegate roomCreated;
-        public static event roomDelegate roomRemoved;
-        public static event roomDelegate roomError;
-
-        public delegate void RoomHistoryDelegate(string room, ChatMessage[] msgs);
-        public delegate void PrivateHistoryDelegate(string user, ChatMessage[] msgs);
-        public static event RoomHistoryDelegate RoomHistoryReceived;
-        public static event PrivateHistoryDelegate PrivateHistoryReceived;
-    }
-}
+*/

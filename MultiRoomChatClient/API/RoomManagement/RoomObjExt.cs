@@ -52,20 +52,13 @@ namespace MultiRoomChatClient
                 return;
             }
             Messages.Add(msg);
-            //Client.RoomHistory.AppendMessage(Name, msg);
  
             MessageReceived?.Invoke(msg);
         }
 
         public void SetActive()
         {
-            object d = null;
-            if(Messages.Count > 0)
-            {
-                d = Messages.Last().TimeStamp;
-            }
-            object[] args = new object[] { Name, d };
-            RequestManager.SetActiveRoom(Name, args);
+            RequestManager.SetActiveRoom(Name);
             active = true;
             Notifications = 0;
             NotificationUpdated?.Invoke(Notifications);

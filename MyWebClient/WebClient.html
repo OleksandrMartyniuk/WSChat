@@ -2,14 +2,21 @@
 <html>
 <head>
     <script src="ViewScripts/tabView.js"></script>
+    <link href="reset.css" rel="stylesheet" />
     <link href="styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="Model/ChatMessage.js"></script>
+    <script src="Model/RoomObj.js"></script>
+    <script src="Controller/RequestConstructor.js"></script>
+    <script src="Model/RequestObject.js"></script>
+    <script src="Controller/ResponseHandler.js"></script>
 </head>
 <body>
     <div id="wrapper">
-        <div style="height:30px; "><span>Hello,</span> <button type="button" class="btn" id="btnCreateRoom" style="float:right; display:inline; padding:2px;">Log Out</button></div>
+        <div style="height:30px; "><span>Hello,</span> <button type="button" class="btn" id="btnLogOut" style="float:right; display:inline; padding:2px;">Log Out</button></div>
         <div id="roomPanel" class="block">
             <div class="tab">
                 
@@ -18,7 +25,7 @@
                 
             </div>
             <span>
-                <input type="text" class="form-control" id="message" style="width:80%; display:inline;">
+                <input type="text" class="form-control" id="inputMessage" style="width:80%; display:inline;">
                 <button type="button" class="btn btn-primary btn-md" id="btn_sendMessage" style="width:19%; display:inline;">Send</button>
             </span>
         </div>
@@ -47,8 +54,8 @@
 
                         </div>
                         <span>
-                            <input type="text" class="form-control" id="message" style="width:80%; display:inline;">
-                            <button type="button" class="btn btn-primary btn-md" id="btn_sendMessage" style="width:19%; display:inline;">Send</button>
+                            <input type="text" class="form-control" id="privateInput" style="width:80%; display:inline;">
+                            <button type="button" class="btn btn-primary btn-md" id="btn_sendPrivate" style="width:19%; display:inline;">Send</button>
                         </span>
                     </div>
                 </div>
@@ -56,9 +63,10 @@
         </div>
     </div>
     <script>
-        addRoomToMenu({ 'Name': 'Host', 'clients': ['vasya', 'petya'] });
-        addRoomToMenu({ 'Name': 'v1', 'clients': ['1', '2'] });
-        addRoomToMenu({ 'Name': 'v2', 'clients': ['3', '4'] });
+        Rooms.addRoomToMenu({ 'Name': 'Host', 'clients': ['vasya', 'petya'] });
+        Rooms.addRoomToMenu({ 'Name': 'v1', 'clients': ['1', '2'] });
+        Rooms.addRoomToMenu({ 'Name': 'v2', 'clients': ['3', '4'] });
+        sessionStorage['username'] = "vasja";
     </script>
 
 </body>

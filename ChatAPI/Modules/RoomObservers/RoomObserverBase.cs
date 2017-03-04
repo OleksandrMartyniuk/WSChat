@@ -73,8 +73,7 @@ namespace ChatServer
         protected virtual void HandleActive(IClientObject client, RequestObject request)
         {
             RoomObject room = null;
-            object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
-            room = Manager.FindRoom((string)args[0]);
+            room = Manager.FindRoom(request.args.ToString());
 
             if (room != null)
             {

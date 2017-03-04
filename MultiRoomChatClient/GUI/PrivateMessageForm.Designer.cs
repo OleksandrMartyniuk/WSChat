@@ -31,6 +31,7 @@
             this.list_msg = new System.Windows.Forms.ListBox();
             this.text_msg = new System.Windows.Forms.TextBox();
             this.btn_send = new System.Windows.Forms.Button();
+            this.btn_updHistory = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // list_msg
@@ -58,12 +59,23 @@
             this.btn_send.UseVisualStyleBackColor = true;
             this.btn_send.Click += new System.EventHandler(this.btn_send_Click);
             // 
+            // btn_updHistory
+            // 
+            this.btn_updHistory.Location = new System.Drawing.Point(363, 12);
+            this.btn_updHistory.Name = "btn_updHistory";
+            this.btn_updHistory.Size = new System.Drawing.Size(75, 23);
+            this.btn_updHistory.TabIndex = 3;
+            this.btn_updHistory.Text = "GetMessages";
+            this.btn_updHistory.UseVisualStyleBackColor = true;
+            this.btn_updHistory.Click += new System.EventHandler(this.btn_updHistory_Click);
+            // 
             // PrivateMessageForm
             // 
             this.AcceptButton = this.btn_send;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 225);
+            this.Controls.Add(this.btn_updHistory);
             this.Controls.Add(this.btn_send);
             this.Controls.Add(this.text_msg);
             this.Controls.Add(this.list_msg);
@@ -81,5 +93,6 @@
         private System.Windows.Forms.ListBox list_msg;
         private System.Windows.Forms.TextBox text_msg;
         private System.Windows.Forms.Button btn_send;
+        private System.Windows.Forms.Button btn_updHistory;
     }
 }

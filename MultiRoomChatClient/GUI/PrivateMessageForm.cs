@@ -14,27 +14,22 @@ namespace MultiRoomChatClient
     public partial class  PrivateMessageForm : Form
     {
         public string Recipient;
-        private List<ChatMessage> Messages;
-        public SuperDuperChat Parent;
+        SuperDuperChat Parent;
+
         public PrivateMessageForm(string username, SuperDuperChat p)
         {
             InitializeComponent();
             this.Parent = p;
-            Messages = new List<ChatMessage>();
             Recipient = username;
             Text = username;
-            //////var h = Client.PrivateHistory.GetHistory(Client.Username + @"-" + Recipient);
-            ////////if(h!= null)
-            ////////{
-            ////////    Messages.AddRange(h);
-            ////////}
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            ResponseHandler.PrivateHistoryReceived += PrependHistory;
         }
 
         public void AppendMessage(ChatMessage msg)
         {
             list_msg.Items.Add(msg);
-            //Client.PrivateHistory.AppendMessage(Client.Username + @"-" + Recipient, msg);
             ScrollDown();
         }
 
@@ -42,14 +37,6 @@ namespace MultiRoomChatClient
         {
             int visibleItems = list_msg.ClientSize.Height / list_msg.ItemHeight;
             list_msg.TopIndex = Math.Max(list_msg.Items.Count - visibleItems + 1, 0);
-        }
-
-        private void OnMessageHistoryReceived(string to, ChatMessage[] messages)
-        {
-            if(to != this.Recipient)
-            {
-                return;
-            }
         }
 
         private void btn_send_Click(object sender, EventArgs e)
@@ -75,9 +62,15 @@ namespace MultiRoomChatClient
             {
                 return;
             }
-            List<ChatMessage> hist = this.Messages;
-            Messages = new List<ChatMessage>(history);
-            Messages.AddRange(hist);
+            var msgs = list_msg.Items.Cast<ChatMessage>().ToList();
+            list_msg.Items.Clear();
+            List<ChatMessage> refreshed = new List<ChatMessage>(history);
+            refreshed.AddRange(refreshed);
+        }
+
+        private void btn_updHistory_Click(object sender, EventArgs e)
+        {
+            RequestManager.RequestPrivateMessageList(this.Recipient, (list_msg.Items[0] as ChatMessage).TimeStamp);
         }
     }
 }

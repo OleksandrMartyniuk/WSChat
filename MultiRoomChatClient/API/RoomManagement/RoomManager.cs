@@ -59,7 +59,6 @@ namespace MultiRoomChatClient
             RoomObjExt r = new RoomObjExt(room);
             AddRoom(r);
             RequestManager.CreateRoom(room);
-            //r.OnDataReceived(Client.RoomHistory.GetHistory(room));
             MessageListUpdated?.Invoke();
             RoomDataUpdated?.Invoke();
         }

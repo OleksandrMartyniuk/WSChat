@@ -27,9 +27,9 @@ namespace MultiRoomChatClient
             Client.AddRequest(JsonConvert.SerializeObject(reqObj));
         }
 
-        public static void SetActiveRoom(string room, object args)
+        public static void SetActiveRoom(string room)
         {
-            RequestObject reqObj = new RequestObject("msg", "active", args);
+            RequestObject reqObj = new RequestObject("msg", "active", room);
             Client.AddRequest(JsonConvert.SerializeObject(reqObj));
         }
 

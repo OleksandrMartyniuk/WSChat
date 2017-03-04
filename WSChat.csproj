@@ -95,8 +95,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />
-    <Content Include="MyWebClient\Model\chatMessage.js" />
+    <Content Include="MyWebClient\Controller\RequestConstructor.js" />
+    <Content Include="MyWebClient\Model\RequestObject.js" />
+    <Content Include="MyWebClient\Controller\ResponseHandler.js" />
+    <Content Include="MyWebClient\Model\connection.js" />
+    <Content Include="MyWebClient\Model\ChatMessage.js" />
     <Content Include="MyWebClient\Model\roomObj.js" />
+    <Content Include="MyWebClient\reset.css" />
     <Content Include="MyWebClient\styles.css" />
     <Content Include="MyWebClient\ViewScripts\tabView.js" />
     <Content Include="MyWebClient\WebClient.html" />

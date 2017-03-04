@@ -7,6 +7,7 @@
             overflow: hidden;
             border: 1px solid #ccc;
             background-color: #f1f1f1;
+            height: 32px;
         }
 
         /* Style the links inside the tab */
@@ -42,6 +43,7 @@
         .tabPage{
              height: 300px;
              border: 1px solid #ccc;
+             overflow: scroll;
         }
 
         #roomPanel {
@@ -60,4 +62,9 @@
 
         .glyphicon-remove{
             font-size:12px;
+        }
+
+        .msgList{
+            list-style-type: none;
+            padding-left: 0;
         }
