@@ -23,6 +23,7 @@ UI.openRoom = function(evt, roomName, wrapperId) {
 
     var el = $("div[name='" + roomName + "']", wrapper)[0];
     el.style.display = "block";
+    Messages.removeNotification(roomName, wrapperId == 'privatePanel');
 
     tablinkss = wrapper.getElementsByClassName("tablinks");
     for (i = 0; i < tablinkss.length; i++) {
@@ -66,7 +67,7 @@ UI.addRoomToTabList = function(roomName, wrapperId) {
 
     var refreshIcon = document.createElement('span');
     refreshIcon.setAttribute('class', 'glyphicon glyphicon-refresh');
-    refreshIcon.setAttribute('onclick', 'Messages.RequestHistory("' + roomName + '", "'+ wrapperId == 'privateTab' + '")');
+    refreshIcon.setAttribute('onclick', 'Messages.RequestHistory("' + roomName + '", "'+ (wrapperId == 'privateTab') + '")');
     
     var msgs = (document).createElement('ul');
     msgs.setAttribute('class', 'msgList');
@@ -74,6 +75,7 @@ UI.addRoomToTabList = function(roomName, wrapperId) {
     tabpage.appendChild(msgs);
 
     tabPageContainer.appendChild(tabpage);
+    Rooms.userEntered(roomName, '<<Me>>');
 }
 
 UI.Ban = function () {
@@ -88,6 +90,37 @@ UI.UnBan = function () {
     $('#btn_sendMessage').prop("disabled", false);
     $('#creteRoomName').prop("disabled", false);
     $('#btnCreateRoom').prop("disabled", false);
+}
+
+UI.SendMessage = function () {
+    var msg = $('#inputMessage').val();
+    if (msg.length == 0) {
+        return;
+    }
+    Messages.sendRoomMessage(msg);
+
+    $('#inputMessage').val('');
+}
+
+UI.SendPrivate = function () {
+    var msg = $('#privateInput').val();
+    if (msg.length == 0) {
+        return;
+    }
+    Messages.sendPrivateMessage(msg);
+
+    $('#privateInput').val('');
+}
+
+UI.CreateRoom = function () {
+    var roomName = $('#creteRoomName').val();
+    if (roomName.length < 4) {
+        return;
+    }
+    RequestManager.CreateRoom(roomName);
+    Rooms.addRoomToMenu(new roomObj(roomName, []));
+
+    $('#creteRoomName').val('');
 }
 
 Rooms.closeRoom = function(roomName, wrapper) {
@@ -106,6 +139,7 @@ Rooms.closeRoom = function(roomName, wrapper) {
             links[i].remove();
         }
     }
+    Rooms.userLeft(roomName, '<<Me>>');
 }
 
 Rooms.addRoomToMenu = function(room) {
@@ -174,7 +208,7 @@ Rooms.userLeft = function(roomName, username) {
 Messages.onRoomMessageReceived = function(roomName, message) {
    
     var list = Messages.getMessageList('roomPanel', roomName);
-
+    Messages.incrementNotification(roomName);
     var item = (document).createElement('li');
 
     var msg = new ChatMessage(message);
@@ -188,6 +222,7 @@ Messages.onPrivateMessageReceived = function(message) {
     var msg = new ChatMessage(message);
 
     UI.addRoomToTabList(msg.Sender, 'privatePanel');
+    Messages.incrementNotification(msg.Sender, 'true');
 
     var list = Messages.getMessageList('privatePanel', msg.Sender);
     var item = (document).createElement('li');
@@ -203,13 +238,30 @@ Messages.incrementNotification = function(roomName, isPrivate){
         wrapperId = 'privatePanel';
     }
     var link = $('#' + wrapperId + ' > div.tab > a[name="' + roomName + '"]')[0];
-    if (!link.hasClass('active')) {
-        var notificator = 
+    if (!$(link).hasClass('active')) {
+        var notificator = $('.label-info', link)[0];
+        if (notificator != undefined) {
+            notificator.innerHTML = parseInt(notificator.innerHTML) + 1;
+        }
+        else {
+            notificator = (document).createElement('span');
+            notificator.setAttribute('class', 'label label-info');
+            notificator.innerHTML = '1';
+            $(notificator).insertBefore($('span', link)[0]);
+        }
     }
 }
 
 Messages.removeNotification = function(roomName, isPrivate){
-
+    var wrapperId = 'roomPanel';
+    if (isPrivate) {
+        wrapperId = 'privatePanel';
+    }
+    var link = $('#' + wrapperId + ' > div.tab > a[name="' + roomName + '"]')[0];
+    var notificator = $('.label-info', link)[0];
+    if (notificator != undefined) {
+        notificator.remove();
+    }
 }
 
 Messages.getMessageList = function(wrapperId, roomName) {
@@ -227,7 +279,7 @@ Messages.sendRoomMessage = function(message) {
     msg.Text = message;
     msg.TimeStamp = new Date();
 
-    onMessageReceived(room, msg);
+    Messages.onRoomMessageReceived(room, msg);
     RequestManager.SendMessage(message, room);
 }
 
@@ -255,10 +307,14 @@ Messages.sendPrivateMessage = function(message) {
 }
 
 Messages.RequestHistory = function (roomName, isPrivate) {
-    datetime = datetime ? datetime : new Date();
-    isPrivate = isPrivate != 'undefined' ? isPrivate : false;
+    
+    isPrivate = isPrivate != undefined ? isPrivate : false;
+    var wrapperId = isPrivate ? 'roomPanel' : 'privatePanel';
 
-    if (isPrivate) {
+    var lastMsg = Messages.getMessageList(wrapperId, roomName).children[0];
+    datetime = lastMsg != undefined ? datetime : new Date();
+
+    if (isPrivate == 'false') {
         RequestManager.RequestPrivateMessageList(roomName, datetime);
     }
     else {
@@ -277,4 +333,3 @@ Messages.OnHistoryReceived = function (roomName, messageList, isPrivate) {
         $(list).prepend(msg);
     }
 }
-//<span class="label label-info">5</span>

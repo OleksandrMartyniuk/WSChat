@@ -1,4 +1,4 @@
-﻿function roomObj() {
-    this.Name;
-    this.clients;
+﻿function roomObj(Name, clients) {
+    this.Name = Name;
+    this.clients = clients;
 }

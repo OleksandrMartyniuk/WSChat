@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />
-    <Content Include="MyWebClient\Controller\RequestConstructor.js" />
+    <Content Include="MyWebClient\Controller\RequestManager.js" />
     <Content Include="MyWebClient\Model\RequestObject.js" />
     <Content Include="MyWebClient\Controller\ResponseHandler.js" />
     <Content Include="MyWebClient\Model\connection.js" />

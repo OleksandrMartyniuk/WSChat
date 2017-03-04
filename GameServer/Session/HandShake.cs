@@ -1,4 +1,5 @@
 ﻿using AuthServer;
+using Core;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -64,14 +65,14 @@ namespace GameServer
                 return;
             }
             clientinvited.isBusy = true;
-            Logging.LogToFile(string.Format("{0} invited client [{1}] vs game [{2}]", 
+            LogProvider.AppendRecord(string.Format("{0} invited client [{1}] vs game [{2}]", 
                 DateTime.Now.ToString(), clientcreator.name,gameName));
 
             clientinvited.Write(new RequestObject("HandShake", "Invited", 
                 new object[] { clientcreator.name, gameName }));
 
 
-            Logging.LogToFile(string.Format("{0} Wait [{1}]", DateTime.Now.ToString(), clientcreator.name));
+            LogProvider.AppendRecord(string.Format("{0} Wait [{1}]", DateTime.Now.ToString(), clientcreator.name));
             clientcreator.Write(new RequestObject("HandShake", "Wait", null));
         }
 
@@ -86,7 +87,7 @@ namespace GameServer
 
             for(int i=0; i<tmpclients.Count; i++)
             {
-                Logging.LogToFile(string.Format("{0} Start [{1}]", DateTime.Now.ToString(), tmpclients[i].name));
+                LogProvider.AppendRecord(string.Format("{0} Start [{1}]", DateTime.Now.ToString(), tmpclients[i].name));
                 tmpclients[i].Write(new RequestObject("Game", "Start", 
                     new object[] { rooms.rooms.Count - 1, gameName }));
             }
@@ -96,7 +97,7 @@ namespace GameServer
             Client creator = clients.clientsList.Find(c => c.name == creatorName);
             creator.isBusy = false;
             invitedClient.isBusy = false;
-            Logging.LogToFile(string.Format("{0} handShake Cancle [{1}]", DateTime.Now.ToString(), creatorName));
+            LogProvider.AppendRecord(string.Format("{0} handShake Cancle [{1}]", DateTime.Now.ToString(), creatorName));
             creator.Write(new RequestObject("HandShake", "Cancle", null));
         }
     }
