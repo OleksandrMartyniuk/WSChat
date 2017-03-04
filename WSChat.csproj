@@ -95,6 +95,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.html" />
+    <Content Include="MyWebClient\Model\chatMessage.js" />
+    <Content Include="MyWebClient\Model\roomObj.js" />
+    <Content Include="MyWebClient\styles.css" />
+    <Content Include="MyWebClient\ViewScripts\tabView.js" />
+    <Content Include="MyWebClient\WebClient.html" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
@@ -105,9 +110,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-2.0.2.min.map" />
+    <Content Include="WebClient\scripts\Connection.js" />
+    <Content Include="WebClient\scripts\Handler.js" />
     <Content Include="WebClient\Main.html" />
-    <Content Include="WebClient\RequestManager.js" />
-    <Content Include="WebClient\ResponseHandler.js" />
+    <Content Include="WebClient\scripts\RequestManager.js" />
+    <Content Include="WebClient\scripts\ResponseHandler.js" />
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>

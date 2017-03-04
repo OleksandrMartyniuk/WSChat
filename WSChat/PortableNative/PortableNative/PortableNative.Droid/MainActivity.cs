@@ -25,7 +25,7 @@ namespace PortableNative.Droid
         EditText lname;
         EditText age;
 
-        PersonDAO dao;
+        IPersonDAO dao;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -47,11 +47,23 @@ namespace PortableNative.Droid
 
             create.Click += (sender, args) => OnCreateClick();
             read.Click += (sender, args) => OnReadClick();
+            update.Click += (sender, args) => OnUpdateClick();
+            delete.Click += (sender, args) => OnDeleteClick();
+        }
+
+        private void OnDeleteClick()
+        {
+            dao.Delete(int.Parse(id.Text));
+        }
+
+        private void OnUpdateClick()
+        {
+            dao.Update(new Person(int.Parse(id.Text), fname.Text, lname.Text, int.Parse(age.Text)));
         }
 
         private void OnReadClick()
         {
-            var p = dao.GetPersonById(int.Parse(id.Text));
+            var p = dao.Read(int.Parse(id.Text));
             fname.Text = p.FirstName;
             lname.Text = p.LastName;
             age.Text = p.Age.ToString();
@@ -64,7 +76,7 @@ namespace PortableNative.Droid
 
         protected void OnCreateClick()
         {
-            dao.AddPerson(new Person(int.Parse(id.Text), fname.Text, lname.Text, int.Parse(age.Text)));
+            dao.Create(new Person(int.Parse(id.Text), fname.Text, lname.Text, int.Parse(age.Text)));
             id.Text = "";
             fname.Text = "";
             lname.Text = "";

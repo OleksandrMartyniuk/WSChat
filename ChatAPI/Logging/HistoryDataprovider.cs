@@ -50,6 +50,10 @@ namespace ChatServer
 
         public static ChatMessage[] GetPrivateHistory(string user1, string user2, DateTime last)
         {
+            if(last == default(DateTime))
+            {
+                last = DateTime.Now;
+            }
             ChatMessage[] msgs = GetHistoryFromFile(FindPrivateHistory(user1, user2));
             if(msgs.Length == 0)
             {

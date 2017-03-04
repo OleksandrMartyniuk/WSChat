@@ -1,26 +1,13 @@
-﻿var ws;
+﻿var clients;
+var Rooms;
 
-function Connect() {
-    ws = new WebSocket("ws://localhost/WSChat/WSHandler.ashx");
-    ws.onopen = function () {
-        document.getElementById("Status").innerHTML = "Connected";
-    };
-    ws.onmessage = function (evt) {
-        ProcessRequest(evt.data);
-    };
-    ws.onerror = function (evt) {
-    };
-    ws.onclose = function () {
-        document.getElementById("Status").innerHTML = "Disconnected";
-    };
-}
-
-function ProcessResponse(request) {
-    var req = JSON.parse(request);
-    switch (req.module) {
+function Listen(response) {
+    var req = JSON.parse(response);
+    switch (req.Module) {
         case 'login':
-            switch (req.cmd) {
+            switch (req.Cmd) {
                 case 'ok':
+                    OnLoginSuccessfull(req.args);
                     break;
                 case 'admin':
                     break;
@@ -31,7 +18,7 @@ function ProcessResponse(request) {
             }
             break;
         case 'msg':
-            switch (req.cmd) {
+            switch (req.Cmd) {
                 case 'msg':
                     break;
                 case 'active':
@@ -45,7 +32,7 @@ function ProcessResponse(request) {
             }
             break;
         case 'admin':
-            switch (req.cmd) {
+            switch (req.Cmd) {
                 case 'ban':
                     break;
                 case 'unban':
@@ -74,4 +61,16 @@ function ProcessResponse(request) {
     }
 }
 
+function OnLog(username) {
+    sessionStorage['username'] = username;
+    document.getElementById("AuthDiv").style.display = "none";
+    document.getElementById("MainDiv").style.display = "block";
+    Rooms = {};
+    Rooms['Host'] = new Array("Vasya", "Karina", "Arnold", "Omar", "Sasha");
+    Rooms['Room1'] = new Array("Igor", "Kristina");
+    CreateRoomList(Rooms);
+}
 
+function OnLoginSuccessfull(username) {   
+    OnLog(username);
+}

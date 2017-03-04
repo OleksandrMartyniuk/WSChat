@@ -14,9 +14,9 @@ using Realms;
 
 namespace PortableNative.Droid.Controller
 {
-    public class PersonDAO
+    public class PersonDAO: IPersonDAO
     {
-        public void AddPerson(Person p)
+        public void Create(Person p)
         {
             Realm realm = Realm.GetInstance();
             realm.Write(() =>
@@ -25,7 +25,7 @@ namespace PortableNative.Droid.Controller
             });
         }
 
-        public void DeletePersonById(int Id)
+        public void Delete(int Id)
         {
             Realm realm = Realm.GetInstance();
             realm.Write(() =>
@@ -45,18 +45,30 @@ namespace PortableNative.Droid.Controller
             });
         }
 
-        public Person GetPersonById(int id)
+        public Person Read(int id)
         {
             Realm realm = Realm.GetInstance();
             var p = realm.All<Person>().Where(d => d.id == id).First<Person>();
             return p;
         }
 
-        public Person[] GetAllPersons()
+        public List<Person> Read()
         {
             Realm realm = Realm.GetInstance();
-            var p = realm.All<Person>().ToArray<Person>();
+            var p = realm.All<Person>().ToList<Person>(); //ToArray<Person>();
             return p;
+        }
+
+        public void Update(Person pers)
+        {
+            Realm realm = Realm.GetInstance();
+            realm.Write(() =>
+            {
+                var p = realm.All<Person>().Where(d => d.id == pers.id).First<Person>();
+                p.FirstName = pers.FirstName;
+                p.LastName = pers.LastName;
+                p.Age = pers.Age;
+            });
         }
     }
 }
