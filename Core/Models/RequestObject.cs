@@ -12,15 +12,15 @@ namespace Core
         {
 
         }
-        public RequestObject(string module, string cmd, object args)
+        public RequestObject(string Module, string Cmd, object Args)
         {
-            this.Module = module;
-            this.Cmd = cmd;
-            this.args = args;
+            this.Module = Module;
+            this.Cmd = Cmd;
+            this.Args = Args;
         }
 
         public string Module { get; set; }
         public string Cmd { get; set; }
-        public object args { get; set; }
+        public object Args { get; set; }
     }
 }

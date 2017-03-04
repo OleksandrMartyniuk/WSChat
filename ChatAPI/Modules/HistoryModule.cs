@@ -16,7 +16,7 @@ namespace ChatServer
             {
                 return false;
             }
-            object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
+            object[] args = JsonConvert.DeserializeObject<object[]>(request.Args.ToString());
             DateTime last;
             switch (request.Cmd)
             {

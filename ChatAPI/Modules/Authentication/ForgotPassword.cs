@@ -16,7 +16,7 @@ namespace ChatServer
             {
                 return false;
             }
-            bool flag =  new ApiAuth().api.ForgotPassword(request.args.ToString());
+            bool flag =  new ApiAuth().api.ForgotPassword(request.Args.ToString());
             if (flag == true)
             {
                 client.SendMessage(ResponseConstructor.GetErrorNotification("Success", "login"));

@@ -20,7 +20,7 @@ namespace ChatServer
                 return false;
             }
 
-            object[] arg = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
+            object[] arg = JsonConvert.DeserializeObject<object[]>(request.Args.ToString());
             Person user = new Person(arg[0].ToString(), arg[1].ToString(), null);
 
             string flag = new ApiAuth().api.LogIn(user);

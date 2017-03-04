@@ -63,7 +63,7 @@ namespace ChatServer
 
         protected virtual void HandleMessage(IClientObject client, RequestObject request)
         {
-            object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
+            object[] args = JsonConvert.DeserializeObject<object[]>(request.Args.ToString());
             string rstr = args[0] as string;
             ChatMessage msg = JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString());
             RoomObject r = Manager.FindRoom(rstr);
@@ -74,7 +74,7 @@ namespace ChatServer
         protected virtual void HandleActive(IClientObject client, RequestObject request)
         {
             RoomObject room = null;
-            room = Manager.FindRoom(request.args.ToString());
+            room = Manager.FindRoom(request.Args.ToString());
 
             if (room != null)
             {
@@ -92,7 +92,7 @@ namespace ChatServer
 
         protected virtual void HandleLeave(IClientObject client, RequestObject request)
         {
-            RoomObject room = Manager.FindRoom((string)request.args);
+            RoomObject room = Manager.FindRoom((string)request.Args);
             //if (room != null)
             //{
             room.RemoveListener(this);

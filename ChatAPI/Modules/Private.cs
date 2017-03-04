@@ -20,7 +20,7 @@ namespace ChatServer
             IClientObject recipient = Manager.FindClient(request.Cmd);
             if(recipient != null)
             {
-                recipient.SendMessage(JsonConvert.SerializeObject(new RequestObject("private", null, request.args)));
+                recipient.SendMessage(JsonConvert.SerializeObject(new RequestObject("private", null, request.Args)));
             }
             return true;
         }

@@ -15,7 +15,7 @@ namespace ChatServer
             {
                 return false;
             }
-            string name = request.args.ToString();
+            string name = request.Args.ToString();
 
             LogProvider.AppendRecord(string.Format("{0} loggin gmail user [{1}]", DateTime.Now.ToString(), name));
             client.Username = name;

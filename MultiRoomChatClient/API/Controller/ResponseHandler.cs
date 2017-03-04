@@ -23,7 +23,6 @@ namespace MultiRoomChatClient
             {
                 return;
             }
-            //Console.WriteLine(Json); 
             RequestObject req = JsonConvert.DeserializeObject<RequestObject>(Json);
 
             switch (req.Module)
@@ -42,10 +41,10 @@ namespace MultiRoomChatClient
                 case "info":
                     if (req.Cmd == "all")
                     {
-                        RoomObj[] rooms = JsonConvert.DeserializeObject<RoomObj[]>(req.args.ToString());
+                        RoomObj[] rooms = JsonConvert.DeserializeObject<RoomObj[]>(req.Args.ToString());
                         if (rooms.Length > 0)
                         {
-                            roomDataReceived(rooms);//JsonConvert.DeserializeObject<RoomObj[]>((string)req.args));
+                            roomDataReceived(rooms);
                         }
                     }
                     break;
@@ -53,16 +52,16 @@ namespace MultiRoomChatClient
                     switch (req.Cmd)
                     {
                         case "ok":
-                            loginSuccessfull?.Invoke((string)req.args);
+                            loginSuccessfull?.Invoke((string)req.Args);
                             break;
                         case "admin":
-                            loggedAsAdmin?.Invoke((string)req.args);
+                            loggedAsAdmin?.Invoke((string)req.Args);
                             break;
                         case "banned":
-                            loggedBanned?.Invoke((string)req.args);
+                            loggedBanned?.Invoke((string)req.Args);
                             break;
                         default:
-                            loginFail?.Invoke((string)req.args);
+                            loginFail?.Invoke((string)req.Args);
                             break;
                     }
                     break;
@@ -70,42 +69,42 @@ namespace MultiRoomChatClient
                     switch (req.Cmd)
                     {
                         case "msg":
-                            object[] args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
+                            object[] args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
                             messageRecieived?.Invoke((string)args[0], JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString()));
                             //messageRecieived?.Invoke(JsonConvert.DeserializeObject<ChatMessage>(req.args.ToString()));
                             break;
                         case "active":
-                            args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
+                            args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
 
                             RoomHistoryReceived?.Invoke((string)args[0], JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString()));
                             break;
                         case "notify":
-                            notificationReceived?.Invoke((string)req.args);
+                            notificationReceived?.Invoke((string)req.Args);
                             break;
                         case "entered":
-                            args = JsonConvert.DeserializeObject<string[]>(req.args.ToString());
+                            args = JsonConvert.DeserializeObject<string[]>(req.Args.ToString());
                             UserEntered?.Invoke((string)args[0], (string)args[1]);
                             break;
                         case "left":
-                            args = JsonConvert.DeserializeObject<string[]>(req.args.ToString());
+                            args = JsonConvert.DeserializeObject<string[]>(req.Args.ToString());
                             UserLeft?.Invoke((string)args[0], (string)args[1]);
                             break;
                     }
                     break;
                 case "private":
-                    privateMessageReceived?.Invoke(JsonConvert.DeserializeObject<ChatMessage>(req.args.ToString()));
+                    privateMessageReceived?.Invoke(JsonConvert.DeserializeObject<ChatMessage>(req.Args.ToString()));
                     break;
                 case "room":
                     switch (req.Cmd)
                     {
                         case "created":
-                            roomCreated?.Invoke((string)req.args);
+                            roomCreated?.Invoke((string)req.Args);
                             break;
                         case "removed":
-                            roomRemoved?.Invoke((string)req.args);
+                            roomRemoved?.Invoke((string)req.Args);
                             break;
                         default:
-                            roomError?.Invoke((string)req.args);
+                            roomError?.Invoke((string)req.Args);
                             break;
                     }
                     break;
@@ -113,12 +112,12 @@ namespace MultiRoomChatClient
                     switch (req.Cmd)
                     {
                         case "room":
-                            object[] args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
+                            object[] args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
                             ChatMessage[] history = JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString());
                             RoomHistoryReceived?.Invoke((string)args[0], history);
                             break;
                         case "private":
-                            args = JsonConvert.DeserializeObject<object[]>(req.args.ToString());
+                            args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
                             string user = (string)args[1] == Client.Username ? (string)args[1] : (string)args[0];
                             history = JsonConvert.DeserializeObject<ChatMessage[]>(args[2].ToString());
                             RoomHistoryReceived?.Invoke(user, history);

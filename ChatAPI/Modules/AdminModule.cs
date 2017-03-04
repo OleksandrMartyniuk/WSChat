@@ -22,11 +22,11 @@ namespace ChatServer
             switch (request.Cmd)
             {
                 case "ban":
-                    object[] args = JsonConvert.DeserializeObject<object[]>(request.args.ToString());
+                    object[] args = JsonConvert.DeserializeObject<object[]>(request.Args.ToString());
                     BanUser((string)args[0], (DateTime)args[1]); //[0] -username
                     break;
                 case "unban":
-                    UnBanUser((string)request.args);
+                    UnBanUser((string)request.Args);
                     break;
                 default: break;
             }

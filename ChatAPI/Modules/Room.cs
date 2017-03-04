@@ -16,7 +16,7 @@ namespace ChatServer
             {
                 return false;
             }
-            string roomName = (string)request.args;
+            string roomName = (string)request.Args;
             var room = Manager.FindRoom(roomName);
             if (request.Cmd == "create")
             { 
@@ -40,7 +40,7 @@ namespace ChatServer
                 }
                 else
                 {
-                    Manager.CloseRoom((string)request.args);
+                    Manager.CloseRoom((string)request.Args);
                     LogProvider.AppendRecord(string.Format("[{0}]: closed room {1}", client.Username, roomName));
                 }
             }

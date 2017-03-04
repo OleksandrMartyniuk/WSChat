@@ -1,6 +1,6 @@
 ﻿namespace MultiRoomChatClient
 {
-    partial class LoginForm
+    partial class RegForm
     {
         /// <summary>
         /// Required designer variable.
@@ -101,7 +101,7 @@
             this.AcceptButton = this.btn_connect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 147);
+            this.ClientSize = new System.Drawing.Size(344, 172);
             this.Controls.Add(this.password_box);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_exit);
