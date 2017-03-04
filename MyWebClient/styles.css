@@ -64,7 +64,17 @@
             font-size:12px;
         }
 
+        .glyphicon-refresh{
+            cursor: pointer;
+        }
+
         .msgList{
             list-style-type: none;
             padding-left: 0;
+        }
+
+        #username{
+            font-size: 17px;
+            color: cornflowerblue;
+
         }

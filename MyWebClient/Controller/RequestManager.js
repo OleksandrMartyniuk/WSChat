@@ -1,7 +1,7 @@
-﻿function requestManager() {
+﻿function RequestManager() {
 };
 
-requestManager.SendMessage = function (message, roomName) {
+RequestManager.SendMessage = function (message, roomName) {
 
     var msg = new ChatMessage();
     msg.Sender = sessionStorage['username'];
@@ -11,37 +11,37 @@ requestManager.SendMessage = function (message, roomName) {
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.SetActiveRoom = function (roomName) {
+RequestManager.SetActiveRoom = function (roomName) {
 
     var reqObj = new RequestObject("msg", "active", roomName);
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.LeaveRoom = function (roomName) {
+RequestManager.LeaveRoom = function (roomName) {
 
     var reqObj = new RequestObject("msg", "leave", roomName);
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.CreateRoom = function (roomName) {
+RequestManager.CreateRoom = function (roomName) {
 
     var reqObj = new RequestObject("room", "create", roomName);
-    ws.SendMessage(JSON.stringify(reqObj));
+    //ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.CloseRoom = function (roomName) {
+RequestManager.CloseRoom = function (roomName) {
 
     var reqObj = new RequestObject("room", "close", roomName);
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.RequestData = function () {
+RequestManager.RequestData = function () {
 
     var reqObj = new RequestObject("info", "get", null);
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.RequestMessageList = function (room, timestamp) {
+RequestManager.RequestMessageList = function (room, timestamp) {
     if (!timestamp) {
         timestamp = new Date();
     }
@@ -49,7 +49,7 @@ requestManager.RequestMessageList = function (room, timestamp) {
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.RequestPrivateMessageList = function (username, timestamp) {
+RequestManager.RequestPrivateMessageList = function (username, timestamp) {
     if (!timestamp) {
         timestamp = new Date();
     }
@@ -57,19 +57,19 @@ requestManager.RequestPrivateMessageList = function (username, timestamp) {
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.SendPrivateMessage = function (username, msg) {
+RequestManager.SendPrivateMessage = function (username, msg) {
 
     var reqObj = new RequestObject("private", username, msg);
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.AdminBan = function (username, exp) {
+RequestManager.AdminBan = function (username, exp) {
 
     var reqObj = new RequestObject("admin", "ban", [username, exp]);
     ws.SendMessage(JSON.stringify(reqObj));
 }
 
-requestManager.AdminBanPermanent = function (username, msg) {
+RequestManager.AdminBanPermanent = function (username, msg) {
 
     var reqObj = new RequestObject("admin", "ban", username);
     ws.SendMessage(JSON.stringify(reqObj));

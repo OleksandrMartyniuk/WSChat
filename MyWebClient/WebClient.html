@@ -10,13 +10,13 @@
 
     <script src="Model/ChatMessage.js"></script>
     <script src="Model/RoomObj.js"></script>
-    <script src="Controller/RequestConstructor.js"></script>
+    <script src="Controller/RequestManager.js"></script>
     <script src="Model/RequestObject.js"></script>
     <script src="Controller/ResponseHandler.js"></script>
 </head>
 <body>
     <div id="wrapper">
-        <div style="height:30px; "><span>Hello,</span> <button type="button" class="btn" id="btnLogOut" style="float:right; display:inline; padding:2px;">Log Out</button></div>
+        <div style="height:30px; "><span>Hello, <span id="username"></span></span> <button type="button" class="btn" id="btnLogOut" style="float:right; display:inline; padding:2px;">Log Out</button></div>
         <div id="roomPanel" class="block">
             <div class="tab">
                 
@@ -26,7 +26,7 @@
             </div>
             <span>
                 <input type="text" class="form-control" id="inputMessage" style="width:80%; display:inline;">
-                <button type="button" class="btn btn-primary btn-md" id="btn_sendMessage" style="width:19%; display:inline;">Send</button>
+                <button type="button" class="btn btn-primary btn-md" id="btn_sendMessage" style="width:19%; display:inline;" onclick="UI.SendMessage()">Send</button>
             </span>
         </div>
         <div  class="block">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <input type="text" class="form-control" id="creteRoomName">
-            <button type="button" class="btn btn-primary btn-block" id="btnCreateRoom">Create Room</button>
+            <button type="button" class="btn btn-primary btn-block" id="btnCreateRoom" onclick="UI.CreateRoom()">Create Room</button>
         </div>
 
         <div class="panel-group">
@@ -55,7 +55,7 @@
                         </div>
                         <span>
                             <input type="text" class="form-control" id="privateInput" style="width:80%; display:inline;">
-                            <button type="button" class="btn btn-primary btn-md" id="btn_sendPrivate" style="width:19%; display:inline;">Send</button>
+                            <button type="button" class="btn btn-primary btn-md" id="btn_sendPrivate" style="width:19%; display:inline;" onclick="UI.SendPrivate()">Send</button>
                         </span>
                     </div>
                 </div>
@@ -67,6 +67,7 @@
         Rooms.addRoomToMenu({ 'Name': 'v1', 'clients': ['1', '2'] });
         Rooms.addRoomToMenu({ 'Name': 'v2', 'clients': ['3', '4'] });
         sessionStorage['username'] = "vasja";
+        (document).getElementById('username').innerHTML = sessionStorage['username'];
     </script>
 
 </body>
