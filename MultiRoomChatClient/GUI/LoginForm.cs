@@ -17,37 +17,44 @@ namespace MultiRoomChatClient
         {
             InitializeComponent();
             ResponseHandler.loginSuccessfull += (x) => Invoke(new Action<string>(On_LoginSuccessfull), x);
-            ResponseHandler.loggedAsAdmin    += (x) => Invoke(new Action<string>(On_LoginAdmin), x);
-            ResponseHandler.loggedBanned     += (x) => Invoke(new Action<string>(On_LoginBanned), x);
-            ResponseHandler.loginFail        += (x) => Invoke(new Action<string>(On_LoginFailed), x);
+            ResponseHandler.loggedAsAdmin += (x) => Invoke(new Action<string>(On_LoginAdmin), x);
+            ResponseHandler.loggedBanned += (x) => Invoke(new Action<string>(On_LoginBanned), x);
+            ResponseHandler.loginFail += (x) => Invoke(new Action<string>(On_LoginFailed), x);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
-
+     
         public LinkedList<PrivateMessageForm> PmForms = new LinkedList<PrivateMessageForm>();
 
-        private void btn_connect_Click(object sender, EventArgs e)
+        private bool IsValid()
         {
             if (login_box.Text == null || login_box.Text == "")
             {
                 MessageBox.Show("Enter name");
                 login_box.Focus();
-                return;
+                return false;
             }
             else if (password_box.Text == null || password_box.Text == "")
             {
                 MessageBox.Show("Enter password");
                 password_box.Focus();
-                return;
+                return false;
             }
-            try
+            return true;
+        }
+        private void btn_connect_Click(object sender, EventArgs e)
+        {
+            if (IsValid() == true)
             {
-                Client.StartClient();
+                try
+                {
+                    Client.StartClient();
+                }
+                catch
+                {
+                    MessageBox.Show("Server Disconnect");
+                }
+                RequestManager.Login(login_box.Text.ToString(), password_box.Text.ToString());
             }
-            catch
-            {
-                MessageBox.Show("Server Disconnect");
-            }
-            RequestManager.Login(login_box.Text,password_box.Text);
         }
         private void On_LoginFailed(string error)
         {
@@ -74,8 +81,6 @@ namespace MultiRoomChatClient
 
         private void On_LoginBanned(string Username)
         {
-            //var chat = On_Log(Username);
-            //chat.Ban();
             On_Log(Username);
         }
         
@@ -111,5 +116,63 @@ namespace MultiRoomChatClient
         {
             Dispose();
         }
+
+        private void btn_gmail_Click(object sender, EventArgs e)
+        {
+            ApiAuth auth = new ApiAuth();
+            string info = auth.Google_Auth();
+            string name = auth.Tr(info);
+            if (name != "")
+            {
+                RequestManager.LoginGmail(name);
+            }
+            //cm.ConnectAuth(name, info[1], this, "g+_auth");
+            //rl.set_parameter(name, cm.get_netStream());
+            //rl.Show();
+        }
+
+        private void btn_facebook_Click(object sender, EventArgs e)
+        {
+            ApiAuth auth = new ApiAuth();
+            string info = auth.Facebook_Auth();
+            string name = auth.Tr(info);
+            if (name != "")
+            {
+                RequestManager.LoginFacebook(name);
+            }
+        }
+        private bool IsValidEmail(string email)
+        {
+            bool f = new ApiAuth().IsValidEmail(email);
+            if (f == false)
+            {
+                MessageBox.Show("Validation email");
+                login_box.Focus();
+                return false;
+            }
+
+            return true;
+        }
+        private void btnReg_Click(object sender, EventArgs e)
+        {
+            if (IsValid() == true)
+            {
+                string email=  email_box.Text.ToString();
+                if (IsValidEmail(email) == true)
+                {
+                    RequestManager.LoginReg(email, login_box.Text.ToString(), password_box.Text.ToString());
+                }
+            }
+        }
+
+        private void btn_Forgot_Click(object sender, EventArgs e)
+        {
+            string email = email_box.Text.ToString();
+            if (IsValidEmail(email) == true)
+            {
+                RequestManager.LoginForgot(email);
+            }
+        }
+
     }
 }

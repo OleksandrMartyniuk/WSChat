@@ -13,92 +13,91 @@ namespace MultiRoomChatClient
         
         public static void Login(string name,string password)
         {
-            Client.AddRequest(JsonConvert.SerializeObject(new RequestObject("login", "in", new object[] { name, password })));
+            Client.AddRequest(new RequestObject("login", "in", new object[] { name, password }));
         }
-
+        public static void LoginGmail(string name)
+        {
+            Client.AddRequest(new RequestObject("login", "Gmail",  name ));
+        }
+        public static void LoginFacebook(string name)
+        {
+            Client.AddRequest(new RequestObject("login", "Facebook", name));
+        }
+        public static void LoginReg(string name, string password, string email)
+        {
+            Client.AddRequest(new RequestObject("login", "Registration", new object[] { name, password, email }));
+        }
+        public static void LoginForgot(string name)
+        {
+            Client.AddRequest(new RequestObject("login", "Forgot", name));
+        }
+        
         public static void Logout(string name)
         {
-            Client.AddRequest(JsonConvert.SerializeObject(new RequestObject("logout", null, name)));
+            Client.AddRequest(new RequestObject("logout", null, name));
         }
 
         public static void SendMessage(string msg, string room)
         {
-            RequestObject reqObj = new RequestObject("msg", "msg", new object[] { room, new ChatMessage(Client.Username, msg, DateTime.Now) });
-            Client.AddRequest(JsonConvert.SerializeObject(reqObj));
+            Client.AddRequest(new RequestObject("msg", "msg", 
+                new object[] { room, new ChatMessage(Client.Username, msg, DateTime.Now) }));
         }
 
         public static void SetActiveRoom(string room)
         {
-            RequestObject reqObj = new RequestObject("msg", "active", room);
-            Client.AddRequest(JsonConvert.SerializeObject(reqObj));
+            Client.AddRequest(new RequestObject("msg", "active", room));
         }
 
         public static void LeaveRoom(string room)
         {
-            RequestObject reqObj = new RequestObject("msg", "leave", room);
-            Client.AddRequest(JsonConvert.SerializeObject(reqObj));
+            Client.AddRequest(new RequestObject("msg", "leave", room));
         }
 
         public static void CreateRoom(string roomName)
         {
-            RequestObject reqObj = new RequestObject("room", "create", roomName);
-            Client.AddRequest(JsonConvert.SerializeObject(reqObj));
+            Client.AddRequest(new RequestObject("room", "create", roomName));
         }
 
         public static void CloseRoom(string roomName)
         {
-            RequestObject reqObj = new RequestObject("room", "close", roomName);
-            Client.AddRequest(JsonConvert.SerializeObject(reqObj));
+            Client.AddRequest(new RequestObject("room", "close", roomName));
         }
 
         public static void RequestData()
         {
-            RequestObject msg = new RequestObject("info","get",null);           
-            Client.AddRequest(JsonConvert.SerializeObject(msg));
+                 
+            Client.AddRequest(new RequestObject("info", "get", "null"));
         }
 
         public static void RequestMessageList(string room, DateTime last = default(DateTime))
         {
-            RequestObject msg = new RequestObject("history", "room", new object[] { room, last });
-            Client.AddRequest(JsonConvert.SerializeObject(msg));
+            Client.AddRequest(new RequestObject("history", "room", new object[] { room, last }));
         }
 
         public static void RequestPrivateMessageList(string username, DateTime last = default(DateTime))
         {
-            RequestObject msg = new RequestObject("history", "private", new object[] { Client.Username, username, last });
-            Client.AddRequest(JsonConvert.SerializeObject(msg));
+            Client.AddRequest(new RequestObject("history", "private", 
+                new object[] { Client.Username, username, last }));
         }
 
         public static void SendPrivateMessage(string userName, ChatMessage msg)
         {
-            RequestObject message = new RequestObject("private", userName, msg);
-            Client.AddRequest(JsonConvert.SerializeObject(message));
+            Client.AddRequest(new RequestObject("private", userName, msg));
         }
 
         public static void AdminBan(string userName, DateTime exp)
-        {
-            if (userName == null || userName == "")
-                return;
-
-            RequestObject message = new RequestObject("admin", "ban", new object[] { userName, exp });
-            Client.AddRequest(JsonConvert.SerializeObject(message));
+        {         
+            Client.AddRequest(new RequestObject("admin", "ban", new object[] { userName, exp }));
         }
 
         public static void AdminBanEternal(string userName)
         {
-            if (userName == null || userName == "")
-                return;
-
-            RequestObject message = new RequestObject("admin", "ban", new object[] { userName, DateTime.MaxValue });
-            Client.AddRequest(JsonConvert.SerializeObject(message));
+            Client.AddRequest(new RequestObject("admin", "ban", 
+               new object[] { userName, DateTime.MaxValue }));
         }
         public static void AdminUnban(string userName)
         {
-            if (userName == null || userName == "")
-                return;
-
-            RequestObject message = new RequestObject("admin", "unban", userName);
-            Client.AddRequest(JsonConvert.SerializeObject(message));
+            Client.AddRequest(new RequestObject("admin", "unban", userName));
         }
     }
 }

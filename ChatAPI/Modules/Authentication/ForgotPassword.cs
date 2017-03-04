@@ -12,7 +12,7 @@ namespace ChatServer
     {
         public bool Handle(IClientObject client, RequestObject request)
         {
-            if (request.Module != "Forget")
+            if (request.Module != "Forgot")
             {
                 return false;
             }
