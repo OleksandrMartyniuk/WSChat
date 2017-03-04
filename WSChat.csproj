@@ -11,10 +11,10 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WSChat</RootNamespace>
+    <RootNamespace>ChatServer</RootNamespace>
     <AssemblyName>WSChat</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -125,7 +125,13 @@
   <ItemGroup>
     <Compile Include="ChatAPI\Logging\CrashReportProvider.cs" />
     <Compile Include="ChatAPI\Logging\LogProvider.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\ALogIn.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\Facebook.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\ForgotPassword.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\Gmail.cs" />
     <Compile Include="ChatAPI\Modules\HistoryModule.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\Registration.cs" />
+    <Compile Include="ChatAPI\Networking\ABaseClientObject.cs" />
     <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
     <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
     <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />
@@ -133,8 +139,8 @@
     <Compile Include="ChatAPI\Modules\AdminModule.cs" />
     <Compile Include="ChatAPI\Modules\IHandlerModule.cs" />
     <Compile Include="ChatAPI\Modules\Info.cs" />
-    <Compile Include="ChatAPI\Modules\Login.cs" />
-    <Compile Include="ChatAPI\Modules\Logout.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\Login.cs" />
+    <Compile Include="ChatAPI\Modules\Authentication\Logout.cs" />
     <Compile Include="ChatAPI\Modules\Private.cs" />
     <Compile Include="ChatAPI\Modules\Room.cs" />
     <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserver.cs" />
@@ -166,6 +172,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AuthServer\AuthServer.csproj">
+      <Project>{c24cf4b5-8ab1-4f41-86e4-412baba9c244}</Project>
+      <Name>AuthServer</Name>
+    </ProjectReference>
     <ProjectReference Include="Core\Core.csproj">
       <Project>{ddff7148-70a8-419b-9b6f-45092ac5690d}</Project>
       <Name>Core</Name>

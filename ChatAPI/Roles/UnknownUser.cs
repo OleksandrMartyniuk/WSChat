@@ -10,8 +10,13 @@ namespace ChatServer.Roles
     {
         public UnknownUser(IClientObject clnt): base(clnt)
         {
-            Handlers = new IHandlerModule[] { new Login() };
-            
+            Handlers = new IHandlerModule[] {
+                new Login(),
+                new Gmail(),
+                new Facebook(),
+                new ForgotPassword(),
+                new Registration(),
+            };
         }
     }
 }
