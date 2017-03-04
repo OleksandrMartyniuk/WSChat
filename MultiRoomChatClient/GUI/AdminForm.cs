@@ -26,17 +26,27 @@ namespace MultiRoomChatClient
         }
         private void btn_banForever_Click(object sender, EventArgs e)
         {
-            RequestManager.AdminBanEternal(tb_selectedUser.Text.ToString());
+            string userName = tb_selectedUser.Text.ToString();
+            if (userName == null || userName == "")
+                return;
+            RequestManager.AdminBanEternal(userName);
         }
 
         private void Unban_Click(object sender, EventArgs e)
         {
-            RequestManager.AdminUnban(tb_selectedUser.Text.ToString());
-        }
+            string userName = tb_selectedUser.Text.ToString();
+            if (userName == null || userName == "")
+                return;
 
+            RequestManager.AdminUnban(userName);
+        }
         private void Ban_Till_Click(object sender, EventArgs e)
         {
-            RequestManager.AdminBan(tb_selectedUser.Text.ToString(), dateTime.Value);
+            string userName = tb_selectedUser.Text.ToString();
+            if (userName == null || userName == "")
+                return;
+
+            RequestManager.AdminBan(userName, dateTime.Value);
         }
     }
 }

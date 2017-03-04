@@ -1,6 +1,7 @@
 ﻿using Core;
 using MultiRoomChatClient;
 using MultiRoomChatClient.API.Networking;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -47,9 +48,9 @@ namespace MultiRoomChatClient
             ConnectionClient.StartClient();
         }
 
-        public static void AddRequest(string message)
+        public static void AddRequest(RequestObject message)
         {
-            ConnectionClient.AddRequest(message);
+            ConnectionClient.AddRequest(JsonConvert.SerializeObject(message));
         }
 
         public static void Disconnect()

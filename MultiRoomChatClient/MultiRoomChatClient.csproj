@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nemiro.OAuth, Version=1.12.452.2615, Culture=neutral, PublicKeyToken=cb06320e362d440b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nemiro.OAuth.1.12\lib\net452\Nemiro.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nemiro.OAuth.LoginForms, Version=1.6.0.2705, Culture=neutral, PublicKeyToken=2656cfe28099e3f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nemiro.OAuth.LoginForms.1.6\lib\net452\Nemiro.OAuth.LoginForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -55,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiAuth.cs" />
     <Compile Include="API\History\HistoryDataprovider.cs" />
     <Compile Include="API\Networking\Client.cs" />
     <Compile Include="API\Networking\ClientTCP.cs" />
@@ -75,12 +84,6 @@
     </Compile>
     <Compile Include="GUI\FormUser.Designer.cs">
       <DependentUpon>FormUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\RegForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\RegForm.Designer.cs">
-      <DependentUpon>RegForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\LoginForm.cs">
       <SubType>Form</SubType>
@@ -110,9 +113,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\RegForm.resx">
-      <DependentUpon>RegForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

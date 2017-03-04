@@ -80,13 +80,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth\IAuth.cs" />
-    <Compile Include="Auth\Authentication.cs" />
-    <Compile Include="Report\CrashReport.cs" />
-    <Compile Include="ApiAuth.cs" />
-    <Compile Include="database\Idatabase.cs" />
-    <Compile Include="database\Filedb.cs" />
-    <Compile Include="Report\Logging.cs" />
+    <Compile Include="API\Auth\IAuth.cs" />
+    <Compile Include="API\Auth\Authentication.cs" />
+    <Compile Include="API\Report\CrashReport.cs" />
+    <Compile Include="API\ApiAuth.cs" />
+    <Compile Include="API\database\Idatabase.cs" />
+    <Compile Include="API\database\Filedb.cs" />
+    <Compile Include="API\Report\Logging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +98,9 @@
       <Project>{0ee8b9a2-7341-4c15-9d4d-8c249e204ad2}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
