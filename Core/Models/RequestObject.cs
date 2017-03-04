@@ -16,11 +16,11 @@ namespace Core
         {
             this.Module = module;
             this.Cmd = cmd;
-            this.args = args;
+            this.Args = args;
         }
 
         public string Module { get; set; }
         public string Cmd { get; set; }
-        public object args { get; set; }
+        public object Args { get; set; }
     }
 }

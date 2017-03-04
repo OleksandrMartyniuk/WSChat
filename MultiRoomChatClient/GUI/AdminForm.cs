@@ -15,6 +15,7 @@ namespace MultiRoomChatClient
         public AdminForm() :base()
         {
             InitializeComponent();
+
             this.MaximizeBox = false;
             this.treename += (x) =>
                 tb_selectedUser.Invoke(new Action(() =>
