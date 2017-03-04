@@ -1,4 +1,5 @@
-﻿using ChatServer.Roles;
+﻿using AuthServer;
+using ChatServer.Roles;
 using Core;
 using Newtonsoft.Json;
 using System;

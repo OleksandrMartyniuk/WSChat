@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Core;
+using AuthServer;
+
+namespace ChatServer
+{
+    public class Gmail : ALogIn
+    {
+        public override bool Handle(IClientObject client, RequestObject request)
+        {
+            if (request.Module != "Gmail")
+            {
+                return false;
+            }
+            string name = request.args.ToString();
+
+            LogProvider.AppendRecord(string.Format("{0} loggin gmail user [{1}]", DateTime.Now.ToString(), name));
+            client.Username = name;
+            status(client);
+            return true;
+        }
+    }
+}
