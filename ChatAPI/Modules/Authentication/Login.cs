@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ChatServer
 {
-    public class Login : ALogIn
+    public class Login : LogInBase
     {
         public override bool Handle(IClientObject client, RequestObject request)
         {

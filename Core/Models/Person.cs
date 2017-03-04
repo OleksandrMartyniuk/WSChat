@@ -11,6 +11,12 @@ namespace Core
         public string name;
         public string password;
         public string email;
+       // public string status;
+
+        public Person()
+        {
+
+        }
 
         public Person(string name, string password, string email)
         {
@@ -19,5 +25,9 @@ namespace Core
             this.email = email;
         }
 
+        //public Person(string name, string password, string email, string status): this(name, password, email)
+        //{
+        //    this.status = status;
+        //}
     }
 }

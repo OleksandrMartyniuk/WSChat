@@ -7,7 +7,7 @@ using AuthServer;
 
 namespace ChatServer
 {
-    public class Gmail : ALogIn
+    public class Gmail : LogInBase
     {
         public override bool Handle(IClientObject client, RequestObject request)
         {

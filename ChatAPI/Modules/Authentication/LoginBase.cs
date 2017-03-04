@@ -8,7 +8,7 @@ using AuthServer;
 
 namespace ChatServer
 {
-    public abstract class ALogIn : IHandlerModule
+    public abstract class LogInBase : IHandlerModule
     {
         abstract public bool Handle(IClientObject client, RequestObject request);
 

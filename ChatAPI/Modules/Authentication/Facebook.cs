@@ -7,7 +7,7 @@ using AuthServer;
 
 namespace ChatServer
 {
-    public class Facebook : ALogIn
+    public class Facebook : LogInBase
     {
         public override bool Handle(IClientObject client, RequestObject request)
         {
