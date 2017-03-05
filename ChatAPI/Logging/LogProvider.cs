@@ -10,7 +10,7 @@ using System.Web;
 
 namespace ChatServer
 {
-  /*  public static class LogProvider
+    public static class LogProvider
     {
         private static string LogFolder;
 
@@ -27,7 +27,7 @@ namespace ChatServer
             {
                 File.Create(path);
             }
-            File.AppendAllLines(path , new string[] { DateTime.Now.ToShortTimeString() + record });
+            File.AppendAllLines(path, new string[] { DateTime.Now.ToShortTimeString() + record });
         }
-    }*/
+    }
 }
