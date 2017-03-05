@@ -1,45 +1,129 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-    <title>WebSocket Chat</title>
-    <script type="text/javascript" src="Scripts/jquery-2.0.2.js"></script>
-    <script type="text/javascript">
-        var ws;
-        $().ready(function () {
-            $("#btnConnect").click(function () {
-                $("#spanStatus").text("connecting");
-                ws = new WebSocket("ws://" + window.location.hostname +"/WSChat/WSHandler.ashx");
-                ws.onopen = function () {
-                    $("#spanStatus").text("connected");
-                };
-                ws.onmessage = function (evt) {
-                    $("#spanStatus").text(evt.data);
-                };
-                ws.onerror = function (evt) {
-                    $("#spanStatus").text(evt.message);
-                };
-                ws.onclose = function () {
-                    $("#spanStatus").text("disconnected");
-                };
-            });
-            $("#btnSend").click(function () {
-                if (ws.readyState == WebSocket.OPEN) {
-                    ws.send($("#textInput").val());
-                }
-                else {
-                    $("#spanStatus").text("Connection is closed");
-                }
-            });
-            $("#btnDisconnect").click(function () {
-                ws.close();
-            });
-        });
-    </script>
+   
+    <link href="html/style/reset.css" rel="stylesheet" />
+    <link href="html/style/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
 </head>
 <body>
-    <input type="button" value="Connect" id="btnConnect" /><input type="button" value="Disconnect" id="btnDisconnect" /><br />
-    <input type="text" id="textInput" />
-    <input type="button" value="Send" id="btnSend" /><br />
-    <span id="spanStatus">(display)</span>
+    <div class="auth" id="auth">
+        <div class="wrapper">
+            <table>
+                <tr>
+                    <td>
+                        <label>Login</label>
+                    </td>
+                    <td>
+                        <input type="text" id="textLogin" maxlength="50" />
+                    </td>
+                    <td>
+                        <input type="button" value="Log in" id="btnLogIn" onclick="login()" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Password</label>
+                    </td>
+                    <td>
+                        <input type="password" size="20" maxlength="50" id="textPassword" />
+                    </td>
+                    <td>
+                        <input type="button" value="Registration" id="btnReg" onclick="registr()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email</label>
+                    </td>
+                    <td>
+                        <input type="text" size="20" maxlength="50" id="textEmail" />
+                    </td>
+                    <td>
+                        <input type="button" value="Forget Password?" id="btnForget" onclick="forget(textLogin.value)" />
+                    </td>
+                </tr>
+            </table>
+            <div id="fb-root"></div>
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
+        </div>
+    </div>
+
+    <div class="lobby" id="lobby">
+        <div id="wrapper">
+            <div style="height:30px; "><span>Hello, <span id="username"></span></span> <button type="button" class="btn" id="btnLogOut" style="float:right; display:inline; padding:2px;">Log Out</button></div>
+            <div id="roomPanel" class="block">
+                <div class="tab">
+
+                </div>
+                <div class="tabPage">
+
+                </div>
+                <span>
+                    <input type="text" class="form-control" id="inputMessage" style="width:80%; display:inline;">
+                    <button type="button" class="btn btn-primary btn-md" id="btn_sendMessage" style="width:19%; display:inline;" onclick="UI.SendMessage()">Send</button>
+                </span>
+            </div>
+            <div class="block">
+                <div id="menu" style="height:300px; overflow:scroll;">
+                    <div class="panel list-group">
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="creteRoomName">
+                <button type="button" class="btn btn-primary btn-block" id="btnCreateRoom" onclick="UI.CreateRoom()">Create Room</button>
+            </div>
+
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Private Messages</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div id="privatePanel" class="panel-body block">
+                            <div class="tab">
+
+                            </div>
+                            <div class="tabPage">
+
+                            </div>
+                            <span>
+                                <input type="text" class="form-control" id="privateInput" style="width:80%; display:inline;">
+                                <button type="button" class="btn btn-primary btn-md" id="btn_sendPrivate" style="width:19%; display:inline;" onclick="UI.SendPrivate()">Send</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="html/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="html/js/lib/sdk.js"></script>
+    <script src="html/js/ViewScripts/tabView.js"></script>
+ 
+    <script src="html/js/Model/connection.js"></script>
+    <script src="html/js/Model/ChatMessage.js"></script>
+    <script src="html/js/Model/RoomObj.js"></script>
+    <script src="html/js/Model/RequestObject.js"></script>
+    <script src="html/js/Model/ShowModules.js"></script>
+    <script src="html/js/Controller/RequestManager.js"></script>
+    
+    <script src="html/js/auth/facebook.js"></script>
+    <script src="html/js/auth/authorization.js"></script>
+    <!--script src="Controller/ResponseHandler.js"></!--script-->
+
+    <script>
+        Rooms.addRoomToMenu({ 'Name': 'Host', 'clients': ['vasya', 'petya'] });
+        Rooms.addRoomToMenu({ 'Name': 'v1', 'clients': ['1', '2'] });
+        Rooms.addRoomToMenu({ 'Name': 'v2', 'clients': ['3', '4'] });
+        sessionStorage['username'] = "vasja";
+        (document).getElementById('username').innerHTML = sessionStorage['username'];
+    </script>
+
 </body>
-</html>
+</html> 
