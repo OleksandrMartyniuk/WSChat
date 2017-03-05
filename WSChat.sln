@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "GameServer\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClient", "GameClient\GameClient\GameClient.csproj", "{6F25B384-E232-4E9F-959C-0EA204986B49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTest", "..\NunitTest\NunitTest.csproj", "{4E5208FB-F801-462B-9DF6-014227ACC57C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTest", "NunitTest\NunitTest.csproj", "{4E5208FB-F801-462B-9DF6-014227ACC57C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
