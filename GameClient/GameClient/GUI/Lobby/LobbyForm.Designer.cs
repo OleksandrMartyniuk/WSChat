@@ -1,6 +1,6 @@
 ﻿namespace GameClient
 {
-    partial class MainForm
+    partial class LobbyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,11 +33,12 @@
             this.btn_invite = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Text_name = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_log_out
             // 
-            this.btn_log_out.Location = new System.Drawing.Point(10, 12);
+            this.btn_log_out.Location = new System.Drawing.Point(138, 275);
             this.btn_log_out.Name = "btn_log_out";
             this.btn_log_out.Size = new System.Drawing.Size(121, 23);
             this.btn_log_out.TabIndex = 4;
@@ -48,17 +49,15 @@
             // 
             // lst_clients
             // 
-            this.lst_clients.Enabled = false;
             this.lst_clients.FormattingEnabled = true;
-            this.lst_clients.Location = new System.Drawing.Point(12, 41);
+            this.lst_clients.Location = new System.Drawing.Point(12, 12);
             this.lst_clients.Name = "lst_clients";
             this.lst_clients.Size = new System.Drawing.Size(247, 199);
             this.lst_clients.TabIndex = 5;
             // 
             // btn_invite
             // 
-            this.btn_invite.Enabled = false;
-            this.btn_invite.Location = new System.Drawing.Point(139, 275);
+            this.btn_invite.Location = new System.Drawing.Point(139, 246);
             this.btn_invite.Name = "btn_invite";
             this.btn_invite.Size = new System.Drawing.Size(120, 23);
             this.btn_invite.TabIndex = 6;
@@ -68,8 +67,7 @@
             // 
             // btn_refresh
             // 
-            this.btn_refresh.Enabled = false;
-            this.btn_refresh.Location = new System.Drawing.Point(12, 246);
+            this.btn_refresh.Location = new System.Drawing.Point(12, 217);
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(119, 23);
             this.btn_refresh.TabIndex = 7;
@@ -78,30 +76,39 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "XO"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 248);
+            this.comboBox1.Location = new System.Drawing.Point(138, 219);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 14;
             // 
-            // MainForm
+            // Text_name
+            // 
+            this.Text_name.AutoSize = true;
+            this.Text_name.Location = new System.Drawing.Point(13, 247);
+            this.Text_name.Name = "Text_name";
+            this.Text_name.Size = new System.Drawing.Size(0, 13);
+            this.Text_name.TabIndex = 15;
+            // 
+            // LobbyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 311);
+            this.ClientSize = new System.Drawing.Size(275, 308);
+            this.Controls.Add(this.Text_name);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_invite);
             this.Controls.Add(this.lst_clients);
             this.Controls.Add(this.btn_log_out);
-            this.Name = "MainForm";
+            this.Name = "LobbyForm";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -111,6 +118,7 @@
         public System.Windows.Forms.Button btn_invite;
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label Text_name;
     }
 }
 

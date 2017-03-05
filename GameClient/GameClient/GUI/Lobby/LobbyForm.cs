@@ -12,31 +12,30 @@ using System.Windows.Forms;
 
 namespace GameClient
 {
-    public partial class MainForm : Form
+    public partial class LobbyForm : Form
     {
         Listener listener;
         delegate void InvokeDelegate();
-        public MainForm(Listener listener)
+        public LobbyForm(Listener listener,object sender)
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             this.listener = listener;
-           
+            Text_name.Text = "name: " + sender.ToString();
 
             listener.lobby.RefreshClients += RefreshClientsHandler;
             listener.lobby.Notification   += ShowNotificationHandler;
 
-            ///lobby.handShake.Answer += AnswerFormHandler;
+           // lobby.handShake.Answer += AnswerFormHandler;
             //lobby.handShake.Cancle += CancleHandler;
             //lobby.handShake.Wait += WaitHandler;
 
             listener.game.Close += WaitFormClose;
             listener.game.roomdialog.FormClosed += CloseFormHandler;
             listener.game.Enabled += EnabledHandler;
-
-         
-            
         }
+     
+    
       
      
         public void RefreshClientsHandler(object sender, EventArgs e)
@@ -48,10 +47,10 @@ namespace GameClient
 
         void ShowNotificationHandler(object sender, EventArgs e)
         {
-            this.Enabled = false;
+          //  this.Enabled = false;
             
-            MessageBox.Show(sender as string);
-            this.Enabled = true;
+        //    MessageBox.Show(sender as string);
+          //  this.Enabled = true;
         }
         private void btn_invite_Click(object sender, EventArgs e)
         {
@@ -77,7 +76,7 @@ namespace GameClient
 
         private void AnswerFormHandler(object sender, EventArgs e)
         {
-            this.Enabled = false;
+          //  this.Enabled = false;
             
             AnswerForm answerForm = new AnswerForm(listener.handShake, sender);
             answerForm.FormClosed += CloseFormHandler;
@@ -120,8 +119,13 @@ namespace GameClient
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            listener.lobby.RefreshClients -= RefreshClientsHandler;
+            listener.lobby.Notification -= ShowNotificationHandler;
+            listener.game.Close -= WaitFormClose;
+            listener.game.roomdialog.FormClosed -= CloseFormHandler;
+            listener.game.Enabled -= EnabledHandler;
             this.Close();
-            Dispose();
+            this.Dispose();
         }
     }
 }

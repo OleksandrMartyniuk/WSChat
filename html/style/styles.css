@@ -84,7 +84,7 @@ div.panel > a.list-group-item {
 }
 
 .lobby{
-  
+   display:none;
 }
 
 .auth {

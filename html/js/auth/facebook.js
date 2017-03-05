@@ -37,7 +37,7 @@ function testAPI() {
     FB.api('/me?fields=id,first_name,email', 'get',
         function (response) {
             var req = new Request("Auth", "Facebook", response['first_name']);
-            ws.sendMessage(req);
+            ws.SendMessage(req);
 
         });
 }

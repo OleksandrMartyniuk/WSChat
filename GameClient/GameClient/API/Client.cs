@@ -22,6 +22,7 @@ namespace GameClient
                 client = new TcpClient();
                 client.Connect("192.168.0.98", 9898);
                 netstream = client.GetStream();
+                SendMessage(null);
             } catch (Exception e)
             {
 
@@ -44,8 +45,17 @@ namespace GameClient
         }
         public static RequestObject OutStreamRead()
         {
-            StreamReader reader = new StreamReader(netstream);
-            return JsonConvert.DeserializeObject<RequestObject>(reader.ReadLine());
+            RequestObject req = new RequestObject();
+            try
+            {
+                StreamReader reader = new StreamReader(netstream);
+                req = JsonConvert.DeserializeObject<RequestObject>(reader.ReadLine());
+            }
+            catch(Exception e)
+            {
+
+            }
+            return req;
         }
     }
 }

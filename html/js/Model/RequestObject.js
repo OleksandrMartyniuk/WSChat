@@ -1,5 +1,5 @@
-﻿function RequestObject(module, cmd, args) {
-    this.Module = module;
-    this.Cmd = cmd;
-    this.Args = args;
+﻿function RequestObject(Module, Cmd, Args) {
+    this.Module = Module;
+    this.Cmd = Cmd;
+    this.Args = Args;
 }

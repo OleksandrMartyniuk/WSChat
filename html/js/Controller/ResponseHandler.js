@@ -3,9 +3,8 @@
 }
 
 ResponseHandler.Handle = function (msg) {
-
-    var req = new RequestObject(msg["Module"], msg["Cmd"], msg["args"]);
-
+    var req = JSON.parse(msg);
+    
     switch (req.Module)
     {
         case "admin":
@@ -36,16 +35,31 @@ ResponseHandler.Handle = function (msg) {
             switch (req.Cmd)
             {
                 case "ok":
-                    loginSuccessfull?.Invoke((string)req.args);
-                    break;
+                    if (response.Args !== undefined) {
+                        sessionStorage['username'] = response.Args;
+                        sessionStorage['status'] = 'loggin';
+                    }
+                    ShowLobby();
+                break;
+               
                 case "admin":
-                    loggedAsAdmin?.Invoke((string)req.args);
+                   // loggedAsAdmin?.Invoke((string)req.args);
                     break;
                 case "banned":
-                    loggedBanned?.Invoke((string)req.args);
+                 //   loggedBanned?.Invoke((string)req.args);
+                    break;
+                case "Forgot":
+                    switch (response.Args) {
+                        case "Success":
+                            alert("password sent by email")
+                            break;
+                        case "Error":
+                            alert("No such user exists. Please make sure that you entered your login");
+                            break;
+                    }
                     break;
                 default:
-                    loginFail?.Invoke((string)req.args);
+                 //   loginFail?.Invoke((string)req.args);
                     break;
             }
             break;

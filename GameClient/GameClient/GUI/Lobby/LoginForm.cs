@@ -32,13 +32,13 @@ namespace GameClient
                 MessageBox.Show("Server Disconnect...");
             }
             listener.auth.LogIn += LogIn;
-
-          
         }
         private void LogIn(object sender, EventArgs e)
         {
-            new MainForm(listener);
-            //this.Close();
+            this.Hide();
+            this.Close();
+            new LobbyForm(listener,sender).ShowDialog();
+           
         }
 
         private bool IsValid(string login,string password)
@@ -101,7 +101,8 @@ namespace GameClient
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-           // Dispose();
+            listener.auth.LogIn -= LogIn;
+            this.Dispose();
         }
 
         private void btn_gmail_Click(object sender, EventArgs e)

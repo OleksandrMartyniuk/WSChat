@@ -37,8 +37,15 @@ namespace GameClient
         {
             while(true)
             {
-                RequestObject info = Client.OutStreamRead();
+                RequestObject info=null;
+                try
+                {
+                    info = Client.OutStreamRead();
+                }
+                catch (Exception e)
+                {
 
+                }
                 switch (info.Module)
                 {
                     case "Auth":       auth.Dispacher(info);        break;
