@@ -1,5 +1,5 @@
 ﻿function ShowAuth() {
-    document.getElementById("auth").style.display = 'table';
+    document.getElementById("auth").style.display = 'flex';
     document.getElementById("lobby").style.display = 'none';
 }
 function ShowLobby() {

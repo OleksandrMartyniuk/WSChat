@@ -15,23 +15,41 @@ namespace GameClient
 {
     public partial class LoginForm : Form
     {
+        Listener listener;
         public LoginForm()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+          
+            try
+            {
+                listener = new Listener();
+                listener.connection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Server Disconnect...");
+            }
+            listener.auth.LogIn += LogIn;
         }
-     
-     
-
-        private bool IsValid()
+        private void LogIn(object sender, EventArgs e)
         {
-            if (login_box.Text == null || login_box.Text == "")
+            this.Hide();
+            this.Close();
+            new LobbyForm(listener,sender).ShowDialog();
+           
+        }
+
+        private bool IsValid(string login,string password)
+        {
+            if (login == null || login == "")
             {
                 MessageBox.Show("Enter name");
                 login_box.Focus();
                 return false;
             }
-            else if (password_box.Text == null || password_box.Text == "")
+            else if (password == null || password == "")
             {
                 MessageBox.Show("Enter password");
                 password_box.Focus();
@@ -41,17 +59,18 @@ namespace GameClient
         }
         private void btn_connect_Click(object sender, EventArgs e)
         {
-            if (IsValid() == true)
+            string login = login_box.Text;
+            string password = password_box.Text;
+            if (IsValid(login,password) == true)
             {
                 try
                 {
-                   // Client.StartClient();
+                    listener.auth.SendLogIn(login, password);
                 }
                 catch
                 {
                     MessageBox.Show("Server Disconnect");
                 }
-               // RequestManager.Login(login_box.Text.ToString(), password_box.Text.ToString());
             }
         }
         private void On_LoginFailed(string error)
@@ -61,24 +80,7 @@ namespace GameClient
             MessageBox.Show(error);
         }
         
-      /*  private SuperDuperChat On_Log(string UserName)
-        {
-            Client.Username = UserName;
-            var chat = new SuperDuperChat();
-            chat.Location = Location;
-            chat.StartPosition = StartPosition;
-            chat.Show();
-            this.Hide();
-            return chat;
-        }*/
-
-        private void On_LoginSuccessfull(string Username)
-        {
-           // On_Log(Username);
-        }
-
-      
-
+     
         private void btn_exit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -99,33 +101,33 @@ namespace GameClient
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Dispose();
+            listener.auth.LogIn -= LogIn;
+            this.Dispose();
         }
 
         private void btn_gmail_Click(object sender, EventArgs e)
         {
-            ApiSend auth = new ApiSend();
-            string info = auth.Google_Auth();
+            ApiSend apiAuth = new ApiSend();
+            string info = apiAuth.Google_Auth();
             if (info == null)
                 return;
-            string name = auth.Tr(info);
+            string name = apiAuth.Tr(info);
             if (name != "")
             {
-                //RequestManager.LoginGmail(name);
+                listener.auth.LoginGmail(name);
             }
-            
         }
 
         private void btn_facebook_Click(object sender, EventArgs e)
         {
-            ApiSend auth = new ApiSend();
-            string info = auth.Facebook_Auth();
+            ApiSend apiAuth = new ApiSend();
+            string info = apiAuth.Facebook_Auth();
             if (info == null)
                 return;
-            string name = auth.Tr(info);
-            if (name != "")
+            string name = apiAuth.Tr(info);
+            if (name != null)
             {
-                //RequestManager.LoginFacebook(name);
+                listener.auth.LoginFacebook(name);
             }
         }
         private bool IsValidEmail(string email)
@@ -137,17 +139,18 @@ namespace GameClient
                 login_box.Focus();
                 return false;
             }
-
             return true;
         }
         private void btnReg_Click(object sender, EventArgs e)
         {
-            if (IsValid() == true)
+            string login = login_box.Text;
+            string password = password_box.Text;
+            if (IsValid(login,password) == true)
             {
-                string email=  email_box.Text.ToString();
+                string email =  email_box.Text.ToString();
                 if (IsValidEmail(email) == true)
                 {
-                   // RequestManager.LoginReg(email, login_box.Text.ToString(), password_box.Text.ToString());
+                    listener.auth.LoginReg(login, password, email);
                 }
             }
         }
@@ -157,7 +160,7 @@ namespace GameClient
             string email = email_box.Text.ToString();
             if (IsValidEmail(email) == true)
             {
-               // RequestManager.LoginForgot(email);
+                listener.auth.LoginForgot(email);
             }
         }
 

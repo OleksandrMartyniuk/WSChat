@@ -23,11 +23,12 @@ function Forgot(args) {
 }
 
 function auth(login, password) {
-    ws.sendMessage(new Request("Auth", "LogIn", new Array(login, password)));
+    
+    ws.SendMessage(new RequestObject("login", "in", [login, password]));
 }
 
 function logout() {
-    ws.sendMessage(new Request("Auth", "LogOut", document.getElementById("textLogin").value));
+    ws.SendMessage(new RequestObject("Auth", "LogOut", document.getElementById("textLogin").value));
     sessionStorage['username'] = undefined;
     sessionStorage['password'] = undefined;
     sessionStorage['status'] = undefined;
@@ -90,8 +91,8 @@ function registr() {
     var password = document.getElementById("textPassword").value;
     var email = document.getElementById("textEmail").value;
     if (inspectionReg(login, password, email) == true){
-        var req = new Request("Auth", "Registration", new Array(login, password, email));
-        ws.sendMessage(req);
+        var req = new RequestObject("Auth", "Registration", [login, password, email]);
+        ws.SendMessage(req);
     }
 }
 
@@ -101,5 +102,5 @@ function forget(login) {
         alert("Fill Login field");
         return;
     }
-    ws.sendMessage(new Request("Auth", "Forget", login));
+    ws.SendMessage(new RequestObject("Auth", "Forget", login));
 }

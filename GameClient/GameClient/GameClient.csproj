@@ -76,11 +76,11 @@
     </Compile>
     <Compile Include="API\HandShake.cs" />
     <Compile Include="API\Lobby.cs" />
-    <Compile Include="GUI\Lobby\MainForm.cs">
+    <Compile Include="GUI\Lobby\LobbyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Lobby\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="GUI\Lobby\LobbyForm.Designer.cs">
+      <DependentUpon>LobbyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="API\Listener.cs" />
     <Compile Include="Program.cs" />
@@ -103,8 +103,8 @@
     <EmbeddedResource Include="GUI\Lobby\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Lobby\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Lobby\LobbyForm.resx">
+      <DependentUpon>LobbyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

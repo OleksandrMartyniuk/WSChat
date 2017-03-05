@@ -8,48 +8,54 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace GameClient
 {
-    class Listener
+    public  class Listener
     {
-        Authorization auth;
-        Lobby lobby;
-        HandShake handShake;
-        Game game;
-
-        public Listener(Authorization auth, Lobby lobby, HandShake handShake, Game game)
+        public Authorization auth;
+        public Lobby lobby;
+        public HandShake handShake;
+        public Game game;
+    
+        public Listener()
         {
-            this.auth = auth;
-            this.lobby = lobby;
-            this.handShake = handShake;
-            this.game = game;
-
-            Thread listenthread = new Thread(new ThreadStart(Listen));
-            listenthread.Start();
+            this.auth = new Authorization();
+            this.lobby = new Lobby();
+            this.handShake = new HandShake();
+            this.game = new Game();
+            
         }
-        public static void SendMessage(RequestObject req)
+        public void connection()
         {
-            StreamWriter writer = new StreamWriter(MainForm.client.netstream);
-            writer.WriteLine(JsonConvert.SerializeObject(req));
-            writer.Flush();
+            new Client();
+            new Thread(new ThreadStart(Listen)).Start();
         }
        
         private void Listen()
         {
             while(true)
             {
-                StreamReader reader = new StreamReader(MainForm.client.netstream);
-                string message = reader.ReadLine();
-                RequestObject info = JsonConvert.DeserializeObject<RequestObject>(message);
+                RequestObject info=null;
+                try
+                {
+                    info = Client.OutStreamRead();
+                }
+                catch (Exception e)
+                {
+
+                }
                 switch (info.Module)
                 {
-                    case "Auth":        auth.Dispacher(info);       break;
-                    case "Lobby":       lobby.Dispacher(info);      break;
-                    case "HandShake":   handShake.Dispacher(info);  break;
-                    case "Game":        game.Dispacher(info);       break;
+                    case "Auth":       auth.Dispacher(info);        break;
+                    case "Lobby":      lobby.Dispacher(info);       break;
+                    case "HandShake":  handShake.Dispacher(info);   break;
+                    case "Game":       game.Dispacher(info);        break;
                 }
             }
         }
+
+        
     }
 }

@@ -17,16 +17,12 @@ namespace GameClient
         public EventHandler Enabled;
 
         public RoomDialog roomdialog;
-        Client client;
+     
         string gameIndex;
 
-        
-
-        public Game(Client client)
+        public Game()
         {
             roomdialog = new RoomDialog();
-            this.client = client;
-           
         }
 
         public void Dispacher(RequestObject info)
@@ -52,7 +48,7 @@ namespace GameClient
             object[] args = JsonConvert.DeserializeObject<object[]>(Args.ToString());
 
             this.gameIndex =  args[0].ToString();
-            roomdialog.Init(client, args[1].ToString());
+         //   roomdialog.Init(client, args[1].ToString());
             //if (roomdialog.game is XO)
             //    roomdialog.game.MouseDown += SendMoveXO;
             Thread open = new Thread(new ThreadStart(OpenForm));
@@ -88,7 +84,7 @@ namespace GameClient
                 x = "2";
             if(x!="" && y!="")
             {
-                Listener.SendMessage(new RequestObject("Game", "Move", new object[] { gameIndex, x, y }));
+                Client.SendMessage(new RequestObject("Game", "Move", new object[] { gameIndex, x, y }));
             }
         }
 
