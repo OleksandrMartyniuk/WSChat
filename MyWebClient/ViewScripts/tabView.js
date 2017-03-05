@@ -55,7 +55,7 @@ UI.addRoomToTabList = function(roomName, wrapperId) {
 
     var closeIcon = document.createElement('span');
     closeIcon.setAttribute('class', 'glyphicon glyphicon-remove');
-    closeIcon.setAttribute('onclick', "Rooms.closeRoom('" + roomName + "', '" + wrapperId + "')");
+    closeIcon.setAttribute('onclick', "UI.closeRoom('" + roomName + "', '" + wrapperId + "')");
 
     tablink.appendChild(closeIcon);
     tablinks.appendChild(tablink);
@@ -75,7 +75,7 @@ UI.addRoomToTabList = function(roomName, wrapperId) {
     tabpage.appendChild(msgs);
 
     tabPageContainer.appendChild(tabpage);
-    Rooms.userEntered(roomName, '<<Me>>');
+    Rooms.userEntered(roomName, '--Me--');
 }
 
 UI.Ban = function () {
@@ -123,7 +123,7 @@ UI.CreateRoom = function () {
     $('#creteRoomName').val('');
 }
 
-Rooms.closeRoom = function(roomName, wrapper) {
+UI.closeRoom = function(roomName, wrapper) {
     var i, tabcontents, tablinkss;
     wrapper = document.getElementById(wrapper);
 
@@ -139,7 +139,7 @@ Rooms.closeRoom = function(roomName, wrapper) {
             links[i].remove();
         }
     }
-    Rooms.userLeft(roomName, '<<Me>>');
+    Rooms.userLeft(roomName, '--Me--');
 }
 
 Rooms.addRoomToMenu = function(room) {

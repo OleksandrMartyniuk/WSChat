@@ -76,5 +76,9 @@
         #username{
             font-size: 17px;
             color: cornflowerblue;
+        }
 
+        div.panel > a.list-group-item{
+            background-color: #337ab7;
+            color: white;
         }
