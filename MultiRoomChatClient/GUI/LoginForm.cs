@@ -146,7 +146,7 @@ namespace MultiRoomChatClient
             bool f = new ApiAuth().IsValidEmail(email);
             if (f == false)
             {
-                MessageBox.Show("Validation email");
+                MessageBox.Show("Bad email");
                 login_box.Focus();
                 return false;
             }
@@ -160,6 +160,7 @@ namespace MultiRoomChatClient
                 string email=  email_box.Text.ToString();
                 if (IsValidEmail(email) == true)
                 {
+                    Client.StartClient();
                     RequestManager.LoginReg(email, login_box.Text.ToString(), password_box.Text.ToString());
                 }
             }

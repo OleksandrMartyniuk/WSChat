@@ -98,7 +98,7 @@
     <Content Include="MyWebClient\Controller\RequestManager.js" />
     <Content Include="MyWebClient\Model\RequestObject.js" />
     <Content Include="MyWebClient\Controller\ResponseHandler.js" />
-    <Content Include="MyWebClient\Model\connection.js" />
+    <Content Include="MyWebClient\Controller\connection.js" />
     <Content Include="MyWebClient\Model\ChatMessage.js" />
     <Content Include="MyWebClient\Model\roomObj.js" />
     <Content Include="MyWebClient\reset.css" />
