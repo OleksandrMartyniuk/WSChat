@@ -1,6 +1,8 @@
-﻿namespace MultiRoomChatClient
+﻿using System.Windows.Forms;
+
+namespace MultiRoomChatClient
 {
-    partial class SuperDuperChat
+    partial class SuperDuperChat : Form
     {
         /// <summary>
         /// Required designer variable.

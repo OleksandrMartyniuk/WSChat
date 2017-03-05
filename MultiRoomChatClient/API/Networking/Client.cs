@@ -30,9 +30,6 @@ namespace MultiRoomChatClient
             string protocol = ConfigurationManager.AppSettings["protocol"];
             switch (protocol)
             {
-                case "tcp":
-                    ConnectionClient = new ClientTCP();
-                    break;
                 case "ws":
                     string uri = ConfigurationManager.AppSettings["wsuri"];
                     ConnectionClient = new WSClient(uri);

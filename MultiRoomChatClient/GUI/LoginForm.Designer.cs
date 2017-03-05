@@ -151,7 +151,6 @@
             this.email_box.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.email_box.Location = new System.Drawing.Point(114, 97);
             this.email_box.Name = "email_box";
-            this.email_box.PasswordChar = '*';
             this.email_box.Size = new System.Drawing.Size(199, 31);
             this.email_box.TabIndex = 14;
             // 

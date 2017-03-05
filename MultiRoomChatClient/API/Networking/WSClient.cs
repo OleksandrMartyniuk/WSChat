@@ -28,14 +28,7 @@ namespace MultiRoomChatClient.API.Networking
             socket.Open();                                //Открытие соединения
             socket.MessageReceived += InvokeMessageReceived;
 
-            socket.Closed += (sender, args) => ACHTUNG();
-
             socket.Error += (sender, args) => NewErrorMessage?.Invoke(args.Exception.Message);
-        }
-
-        private void ACHTUNG()
-        {
-            //throw new NotImplementedException();
         }
 
         private void InvokeMessageReceived(object sender, MessageReceivedEventArgs e)
