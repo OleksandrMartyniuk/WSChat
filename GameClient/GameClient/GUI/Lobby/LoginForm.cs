@@ -1,5 +1,6 @@
 ﻿using AuthServer;
 using Core;
+using GameClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MultiRoomChatClient
+namespace GameClient
 {
     public partial class LoginForm : Form
     {
@@ -44,13 +45,13 @@ namespace MultiRoomChatClient
             {
                 try
                 {
-                    Client.StartClient();
+                   // Client.StartClient();
                 }
                 catch
                 {
                     MessageBox.Show("Server Disconnect");
                 }
-                RequestManager.Login(login_box.Text.ToString(), password_box.Text.ToString());
+               // RequestManager.Login(login_box.Text.ToString(), password_box.Text.ToString());
             }
         }
         private void On_LoginFailed(string error)
@@ -60,7 +61,7 @@ namespace MultiRoomChatClient
             MessageBox.Show(error);
         }
         
-        private SuperDuperChat On_Log(string UserName)
+      /*  private SuperDuperChat On_Log(string UserName)
         {
             Client.Username = UserName;
             var chat = new SuperDuperChat();
@@ -69,11 +70,11 @@ namespace MultiRoomChatClient
             chat.Show();
             this.Hide();
             return chat;
-        }
+        }*/
 
         private void On_LoginSuccessfull(string Username)
         {
-            On_Log(Username);
+           // On_Log(Username);
         }
 
       
@@ -103,29 +104,33 @@ namespace MultiRoomChatClient
 
         private void btn_gmail_Click(object sender, EventArgs e)
         {
-            ApiAuth auth = new ApiAuth();
+            ApiSend auth = new ApiSend();
             string info = auth.Google_Auth();
+            if (info == null)
+                return;
             string name = auth.Tr(info);
             if (name != "")
             {
-                RequestManager.LoginGmail(name);
+                //RequestManager.LoginGmail(name);
             }
             
         }
 
         private void btn_facebook_Click(object sender, EventArgs e)
         {
-            ApiAuth auth = new ApiAuth();
+            ApiSend auth = new ApiSend();
             string info = auth.Facebook_Auth();
+            if (info == null)
+                return;
             string name = auth.Tr(info);
             if (name != "")
             {
-                RequestManager.LoginFacebook(name);
+                //RequestManager.LoginFacebook(name);
             }
         }
         private bool IsValidEmail(string email)
         {
-            bool f = new ApiAuth().IsValidEmail(email);
+            bool f = new ApiSend().IsValidEmail(email);
             if (f == false)
             {
                 MessageBox.Show("Validation email");
@@ -142,7 +147,7 @@ namespace MultiRoomChatClient
                 string email=  email_box.Text.ToString();
                 if (IsValidEmail(email) == true)
                 {
-                    RequestManager.LoginReg(email, login_box.Text.ToString(), password_box.Text.ToString());
+                   // RequestManager.LoginReg(email, login_box.Text.ToString(), password_box.Text.ToString());
                 }
             }
         }
@@ -152,7 +157,7 @@ namespace MultiRoomChatClient
             string email = email_box.Text.ToString();
             if (IsValidEmail(email) == true)
             {
-                RequestManager.LoginForgot(email);
+               // RequestManager.LoginForgot(email);
             }
         }
 

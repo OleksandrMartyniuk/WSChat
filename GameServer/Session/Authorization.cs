@@ -101,25 +101,6 @@ namespace GameServer
         {   
             clients.Dell(client);
         }
-        
-
-        //api gmail    auth-160013
-        //API key      AIzaSyASYCMt5dkiQw-5jetuwWN7EZCnnDcD-wo
-
-
-        //facebook  
-        //secret 69395937e654d29e6be9811271be073c
-        //id 159651474545587
-
-        //host zzz.com.ua
-        //gameXO.helpe@gmail.com    
-        //gamexo   login
-        ///bilokbilok1  
-        ///
-        ////gmail
-        ///API Key key=КЛЮЧ_API .     AIzaSyBjiWl2MVhNEx2pHMFM7MGKs8g7QpgljD4
-        ///Client ID 854904160019-r2r2gd5bq5ob0hi5hb5bifa16v9j16uj.apps.googleusercontent.com
-
     }
 }
 

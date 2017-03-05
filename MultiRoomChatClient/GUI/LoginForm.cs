@@ -121,6 +121,8 @@ namespace MultiRoomChatClient
         {
             ApiSend auth = new ApiSend();
             string info = auth.Google_Auth();
+            if (info == null)
+                return;
             string name = auth.Tr(info);
             if (name != "")
             {
@@ -133,6 +135,8 @@ namespace MultiRoomChatClient
         {
             ApiSend auth = new ApiSend();
             string info = auth.Facebook_Auth();
+            if (info == null)
+                return;
             string name = auth.Tr(info);
             if (name != "")
             {

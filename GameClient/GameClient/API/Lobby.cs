@@ -25,12 +25,8 @@ namespace GameClient
         {
             switch (tmpinfo.Cmd)
             {
-                case "refreshClients":
-                    RefreshClients(tmpinfo.Args, null);
-                    break;
-                case "Notification":
-                    Notification(tmpinfo.Args, null);
-                    break;
+                case "refreshClients": RefreshClients(tmpinfo.Args, null); break;
+                case "Notification":   Notification(tmpinfo.Args, null);   break;
             }
         }
 

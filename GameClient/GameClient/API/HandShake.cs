@@ -24,15 +24,9 @@ namespace GameClient
         {
             switch (tmpinfo.Cmd)
             {
-                case "Invited":
-                    Answer(tmpinfo.Args, null);
-                    break;
-                case "Cancle":
-                    Cancle(null, null);
-                    break;
-                case "Wait":
-                    Wait(null, null);
-                    break;
+                case "Invited": Answer(tmpinfo.Args, null); break;
+                case "Cancle":  Cancle(null, null);         break;
+                case "Wait":    Wait(null, null);           break;
             }
         }
       

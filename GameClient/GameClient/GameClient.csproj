@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nemiro.OAuth, Version=1.12.452.2615, Culture=neutral, PublicKeyToken=cb06320e362d440b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nemiro.OAuth.1.12\lib\net452\Nemiro.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nemiro.OAuth.LoginForms, Version=1.6.0.2705, Culture=neutral, PublicKeyToken=2656cfe28099e3f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nemiro.OAuth.LoginForms.1.6\lib\net452\Nemiro.OAuth.LoginForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -50,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiSend.cs" />
     <Compile Include="GUI\AnswerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,15 +67,15 @@
     </Compile>
     <Compile Include="API\Client.cs" />
     <Compile Include="API\Game.cs" />
-    <Compile Include="Authorization.cs" />
+    <Compile Include="API\Authorization.cs" />
     <Compile Include="GUI\Lobby\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\Lobby\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HandShake.cs" />
-    <Compile Include="Lobby.cs" />
+    <Compile Include="API\HandShake.cs" />
+    <Compile Include="API\Lobby.cs" />
     <Compile Include="GUI\Lobby\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,9 +144,6 @@
       <Project>{0ee8b9a2-7341-4c15-9d4d-8c249e204ad2}</Project>
       <Name>Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

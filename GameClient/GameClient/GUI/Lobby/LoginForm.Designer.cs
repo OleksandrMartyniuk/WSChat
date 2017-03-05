@@ -1,4 +1,4 @@
-﻿namespace MultiRoomChatClient
+﻿namespace GameClient
 {
     partial class LoginForm
     {
@@ -170,7 +170,7 @@
             this.AcceptButton = this.btn_connect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 243);
+            this.ClientSize = new System.Drawing.Size(337, 243);
             this.Controls.Add(this.Email);
             this.Controls.Add(this.email_box);
             this.Controls.Add(this.btn_Forgot);

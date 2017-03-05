@@ -16,7 +16,7 @@ namespace GameClient
         public Client()
         {
             client = new TcpClient();
-            client.Connect("127.0.0.1", 8888);
+            client.Connect("127.0.0.1", 9898);
             netstream = client.GetStream();
             StreamWriter writer = new StreamWriter(netstream);
             writer.WriteLine();

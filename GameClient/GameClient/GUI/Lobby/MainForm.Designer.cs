@@ -149,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 437);
+            this.ClientSize = new System.Drawing.Size(319, 360);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btn_registration);
             this.Controls.Add(this.txt_password);
