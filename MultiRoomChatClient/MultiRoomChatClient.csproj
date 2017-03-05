@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\ApiAuth.cs" />
+    <Compile Include="API\ApiSend.cs" />
     <Compile Include="API\History\HistoryDataprovider.cs" />
     <Compile Include="API\Networking\Client.cs" />
     <Compile Include="API\Controller\RequestManager.cs" />

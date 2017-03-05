@@ -88,11 +88,7 @@ function SendPrivateMessage(message, username) {
         var request = {
             Module: "private",
             Cmd: username,
-            args: [
-                username,
-                message,
-                time
-            ]
+            args: [ username, message, time ]
         };
         ws.send(JSON.stringify(request));
        // alert(JSON.stringify(request));

@@ -14,7 +14,7 @@
     <RootNamespace>ChatServer</RootNamespace>
     <AssemblyName>WSChat</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -94,17 +94,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\js\auth\facebook.js" />
+    <Content Include="html\js\Controller\RequestManager.js" />
+    <Content Include="html\js\lib\jquery-3.1.1.min.js" />
+    <Content Include="html\js\lib\sdk.js" />
+    <Content Include="html\js\Model\RequestObject.js" />
+    <Content Include="html\js\Controller\ResponseHandler.js" />
+    <Content Include="html\js\Model\connection.js" />
+    <Content Include="html\js\Model\ChatMessage.js" />
+    <Content Include="html\js\Model\roomObj.js" />
+    <Content Include="html\js\Model\ShowModules.js" />
+    <Content Include="html\style\reset.css" />
+    <Content Include="html\style\styles.css" />
+    <Content Include="html\js\ViewScripts\tabView.js" />
     <Content Include="default.html" />
-    <Content Include="MyWebClient\Controller\RequestManager.js" />
-    <Content Include="MyWebClient\Model\RequestObject.js" />
-    <Content Include="MyWebClient\Controller\ResponseHandler.js" />
-    <Content Include="MyWebClient\Controller\connection.js" />
-    <Content Include="MyWebClient\Model\ChatMessage.js" />
-    <Content Include="MyWebClient\Model\roomObj.js" />
-    <Content Include="MyWebClient\reset.css" />
-    <Content Include="MyWebClient\styles.css" />
-    <Content Include="MyWebClient\ViewScripts\tabView.js" />
-    <Content Include="MyWebClient\WebClient.html" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
@@ -115,6 +118,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-2.0.2.min.map" />
+    <Content Include="html\js\auth\authorization.js" />
     <Content Include="WebClient\scripts\Connection.js" />
     <Content Include="WebClient\scripts\Handler.js" />
     <Content Include="WebClient\Main.html" />

@@ -13,5 +13,10 @@ namespace AuthServer
         LinkedList<Person> Read();
         void Update(string login, string password);
         void Delete();
+
+    }
+    public interface ISerializeDao : Idatabase
+    {
+        string path { get; set; }
     }
 }

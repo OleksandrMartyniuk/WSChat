@@ -1,19 +1,20 @@
-﻿using System;
+﻿using AuthServer;
+using Nemiro.OAuth.LoginForms;
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace AuthServer
 {
     public class ApiAuth
     {
-        Idatabase db;
         public IAuth api;
         public ApiAuth()
         {
-            db = new Filedb();
+            Idatabase db = new Filedb();
             api = new Destop(db);
         }
-      
     }
 }

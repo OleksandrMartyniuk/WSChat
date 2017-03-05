@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Main Window XO</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div class="auth" id="auth">
+        <div class="wrapper">
+            <table>
+                <tr>
+                    <td>
+                        <label>Login</label>
+                    </td>
+                    <td>
+                        <input type="text" id="textLogin" maxlength="50" />
+                    </td>
+                    <td>
+                        <input type="button" value="Log in" id="btnLogIn" onclick="login()" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Password</label>
+                    </td>
+                    <td>
+                        <input type="password" size="20" maxlength="50" id="textPassword" />
+                    </td>
+                    <td>
+                        <input type="button" value="Registration" id="btnReg" onclick="registr()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email</label>
+                    </td>
+                    <td>
+                        <input type="text" size="20" maxlength="50" id="textEmail" />
+                    </td>
+                    <td>
+                        <input type="button" value="Forget Password?" id="btnForget" onclick="forget(textLogin.value)" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="Lobby" id="lobby">
+        <label id="label"></label> <br />
+        <input type="button" id="btnRefresh" value="Refresh" onclick="clientsList()">
+        <input type="button" id="btnInvite" value="Invite" onclick="OnInvite()">
+        <input type="button" id="btnLogOut" value="Log out" onclick="logout()">
+
+    </div>
+    <div id="playersList" class="Lobby"> </div> <br />
+
+    <div class="Room" id="game">
+
+        <div id="namelab"></div>
+        <div>
+            <br /><br />
+            <input class="gameField" id="b0" type="button" onclick="OnButtonClicked(0)" value=" " />
+            <input class="gameField" id="b1" type="button" onclick="OnButtonClicked(1)" value=" " />
+            <input class="gameField" id="b2" type="button" onclick="OnButtonClicked(2)" value=" " /><br>
+            <input class="gameField" id="b3" type="button" onclick="OnButtonClicked(3)" value=" " />
+            <input class="gameField" id="b4" type="button" onclick="OnButtonClicked(4)" value=" " />
+            <input class="gameField" id="b5" type="button" onclick="OnButtonClicked(5)" value=" " /><br />
+            <input class="gameField" id="b6" type="button" onclick="OnButtonClicked(6)" value=" " />
+            <input class="gameField" id="b7" type="button" onclick="OnButtonClicked(7)" value=" " />
+            <input class="gameField" id="b8" type="button" onclick="OnButtonClicked(8)" value=" " /><br />
+
+        </div>
+        <div id="course" class="Lobby"> </div> <br />
+    </div>
+
+    <!---auth google-->
+    <!--script>
+      var GoogleAuth;
+    var SCOPE = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+    function handleClientLoad() {
+
+      gapi.load('client:auth2', initClient);
+    }
+
+    function initClient() {
+
+      var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+
+      gapi.client.init({
+          'apiKey': ' AIzaSyASYCMt5dkiQw-5jetuwWN7EZCnnDcD-wo',
+          'discoveryDocs': [discoveryUrl],
+          'clientId': 'auth-160013',
+          'scope': SCOPE
+      }).then(function () {
+        GoogleAuth = gapi.auth2.getAuthInstance();
+
+
+        GoogleAuth.isSignedIn.listen(updateSigninStatus);
+
+        var user = GoogleAuth.currentUser.get();
+        setSigninStatus();
+
+
+        $('#sign-in-or-out-button').click(function() {
+          handleAuthClick();
+        });
+        $('#revoke-access-button').click(function() {
+          revokeAccess();
+        });
+      });
+    }
+
+    function handleAuthClick() {
+      if (GoogleAuth.isSignedIn.get()) {
+        GoogleAuth.signOut();
+      } else {
+        GoogleAuth.signIn();
+      }
+    }
+
+    function revokeAccess() {
+      GoogleAuth.disconnect();
+    }
+
+    function setSigninStatus(isSignedIn) {
+      var user = GoogleAuth.currentUser.get();
+      var isAuthorized = user.hasGrantedScopes(SCOPE);
+      if (isAuthorized) {
+        $('#sign-in-or-out-button').html('Sign out');
+        $('#revoke-access-button').css('display', 'inline-block');
+        $('#auth-status').html('You are currently signed in and have granted ' +
+            'access to this app.');
+      } else {
+        $('#sign-in-or-out-button').html('Sign In/Authorize');
+        $('#revoke-access-button').css('display', 'none');
+        $('#auth-status').html('You have not authorized this app or you are ' +
+            'signed out.');
+      }
+    }
+
+    function updateSigninStatus(isSignedIn) {
+      setSigninStatus();
+    }
+          </script>
+              <button id="sign-in-or-out-button" style="margin-left: 25px">  Sign In/Authorize    </button>
+              <button id="revoke-access-button" style="display: none; margin-left: 25px">
+                  Revoke access
+              </button>
+
+              <div id="auth-status" style="display: inline; padding-left: 25px"></div><hr>
+              -->
+    <!-------------------------//ID    159651474545587-------------------------------------------------------------------------------------------Facebook-->
+     <div id="fb-root"></div>   
+
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
+
+    <div id="status">
+    </div>
+
+	
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="javascript/connection.js"></script>
+    <script src="javascript/authorization.js"></script>
+    <script src="javascript/Game.js"></script>
+    <script src="javascript/HandShake.js"></script>
+    <script src="javascript/Lobby.js"></script>
+    <script src="javascript/Request.js"></script>
+    <script src="javascript/ShowModules.js"></script>
+    <script src="javascript/facebook.js"></script>
+
+</body>
+</html>

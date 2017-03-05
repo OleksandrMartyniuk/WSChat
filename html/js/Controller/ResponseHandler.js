@@ -11,12 +11,8 @@ ResponseHandler.Handle = function (msg) {
         case "admin":
             switch (req.Cmd)
             {
-                case "ban":
-                    UI.Ban();
-                    break;
-                case "unban":
-                    UI.Unban();
-                    break;
+                case "ban":   UI.Ban();   break;
+                case "unban": UI.Unban(); break;
             }
             break;
         case "info":
