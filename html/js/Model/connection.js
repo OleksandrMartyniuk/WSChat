@@ -2,7 +2,7 @@
 function connection() {
     if (ws === undefined) {
 
-        ws = new WebSocket("ws://localhost/WSChat/WSHandler.ashx");//192.168.1.100 10.200.26.51
+        ws = new WebSocket("ws://sanyok-001-site1.htempurl.com/WSHandler.ashx");//192.168.1.100 10.200.26.51
 
         ws.onopen = function () {
             sessionStorage['detailPage'] = true;
@@ -36,7 +36,7 @@ window.onload = function () {
         ShowLobby();
     }
     else if (sessionStorage['status'] === "logout") {
-        ShowAuth();
+        ShowLobby();
     }
     connection();
 }

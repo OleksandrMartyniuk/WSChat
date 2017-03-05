@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,16 +13,39 @@ namespace GameClient
     public class Client
     {
         public static TcpClient client { get; set; }
-        public NetworkStream netstream;
-       
+        public static NetworkStream netstream;
+
         public Client()
         {
-            client = new TcpClient();
-            client.Connect("127.0.0.1", 9898);
-            netstream = client.GetStream();
-            StreamWriter writer = new StreamWriter(netstream);
-            writer.WriteLine();
-            writer.Flush();
+            try
+            {
+                client = new TcpClient();
+                client.Connect("192.168.0.98", 9898);
+                netstream = client.GetStream();
+            } catch (Exception e)
+            {
+
+            }
+
+        }
+
+        public static void SendMessage(RequestObject str)
+        {
+            try
+            {
+                StreamWriter writer = new StreamWriter(netstream);
+                writer.WriteLine(JsonConvert.SerializeObject(str));
+                writer.Flush();
+            }
+            catch (Exception e)
+            {
+                
+            }
+        }
+        public static RequestObject OutStreamRead()
+        {
+            StreamReader reader = new StreamReader(netstream);
+            return JsonConvert.DeserializeObject<RequestObject>(reader.ReadLine());
         }
     }
 }

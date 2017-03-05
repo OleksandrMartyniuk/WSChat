@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameClient
 {
-    class Lobby
+    public class Lobby
     {
         public Lobby()
         {
@@ -32,7 +32,7 @@ namespace GameClient
 
         public void SendRefreshClients(object sender, EventArgs e)
         {
-            Listener.SendMessage(new RequestObject("Lobby", "refreshClients", "null"));
+            Client.SendMessage(new RequestObject("Lobby", "refreshClients", "null"));
         }
     }
 }

@@ -14,87 +14,36 @@ namespace GameClient
 {
     public partial class MainForm : Form
     {
-        Authorization auth;
-        public static Client client;
-        Lobby lobby;
-        HandShake handShake;
-        WaitForm wait;
-        Game game;
-
+        Listener listener;
         delegate void InvokeDelegate();
-
-        public MainForm()
+        public MainForm(Listener listener)
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-        
-            client = new Client();
-            auth = new Authorization(client);
-            lobby = new Lobby();
-            handShake = new HandShake();
-            game = new Game(client);
-            
-            auth.LogIn += LogInHandler;
-
-            lobby.RefreshClients += RefreshClientsHandler;
-            lobby.Notification   += ShowNotificationHandler;
-
-            handShake.Answer += AnswerFormHandler;
-            handShake.Cancle += CancleHandler;
-            handShake.Wait += WaitHandler;
-
-            game.Close += WaitFormClose;
-            game.roomdialog.FormClosed += CloseFormHandler;
-            game.Enabled += EnabledHandler;
-
-            this.btn_refresh.Click += lobby.SendRefreshClients;
-            this.btn_log_out.Click += auth.SendLogout;
-            this.FormClosed        += auth.SendLogout;
-        }
-        private void btn_registration_Click(object sender, EventArgs e)
-        {
-            auth.SendRegistration(txt_login.Text, txt_password.Text);
-            Listener listener = new Listener(auth, lobby, handShake, game);
-        }
-
-        private void btn_login_Click(object sender, EventArgs e)
-        {
-            auth.SendLogIn(txt_login.Text, txt_password.Text);
-            Listener listener = new Listener( auth, lobby, handShake, game);
-        }
-        public void LogInHandler(object sender, EventArgs e)
-        {
+            this.listener = listener;
            
-            this.Text = (sender as string);
-            lst_clients.Enabled = true;
-            btn_refresh.Enabled = true;
-            btn_invite.Enabled = true;
-            comboBox1.Enabled = true;
-            comboBox1.SelectedIndex = 0;
-            BeginInvoke(new InvokeDelegate(LogIn));
+
+            listener.lobby.RefreshClients += RefreshClientsHandler;
+            listener.lobby.Notification   += ShowNotificationHandler;
+
+            ///lobby.handShake.Answer += AnswerFormHandler;
+            //lobby.handShake.Cancle += CancleHandler;
+            //lobby.handShake.Wait += WaitHandler;
+
+            listener.game.Close += WaitFormClose;
+            listener.game.roomdialog.FormClosed += CloseFormHandler;
+            listener.game.Enabled += EnabledHandler;
+
+         
+            
         }
-
-        private void LogIn()
-        {
-            btn_login.Visible = false;
-            btn_registration.Visible = false;
-
-            txt_login.Visible = false;
-            txt_password.Visible = false;
-
-            lbl_login.Visible = false;
-            lbl_password.Visible = false;
-
-            btn_log_out.Visible = true;
-        }
-
+      
+     
         public void RefreshClientsHandler(object sender, EventArgs e)
         {
-         //   List<string> info = sender as List<string>;
-            object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
-            //string[] clients = json. info.ToArray<sender as string>();
-            lst_clients.Items.Clear();
-            lst_clients.Items.AddRange(clients);
+           // object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
+           // lst_clients.Items.Clear();
+          //  lst_clients.Items.AddRange(clients);
         }
 
         void ShowNotificationHandler(object sender, EventArgs e)
@@ -108,41 +57,40 @@ namespace GameClient
         {
             if (lst_clients.SelectedItem != null)
             {
-                handShake.SendInvite(new object[] { lst_clients.SelectedItem.ToString(), comboBox1.SelectedItem.ToString() });
-                
+                listener.handShake.SendInvite(new object[] { lst_clients.SelectedItem.ToString(), comboBox1.SelectedItem.ToString() });
             }
         }
 
         private void WaitHandler(object sender, EventArgs e)
         {
-            this.Enabled = false;
-            wait = new WaitForm();
-            wait.FormClosed += CloseFormHandler;
-            Thread tr = new Thread(new ThreadStart(OpenWaitForm));
-            tr.Start();
+            //this.Enabled = false;
+            //wait = new WaitForm();
+            //wait.FormClosed += CloseFormHandler;
+            //Thread tr = new Thread(new ThreadStart(OpenWaitForm));
+            //tr.Start();
         }
 
         private void OpenWaitForm()
         {
-            wait.ShowDialog();
+           // wait.ShowDialog();
         }
 
         private void AnswerFormHandler(object sender, EventArgs e)
         {
             this.Enabled = false;
             
-            AnswerForm answerForm = new AnswerForm(handShake, sender);
+            AnswerForm answerForm = new AnswerForm(listener.handShake, sender);
             answerForm.FormClosed += CloseFormHandler;
             answerForm.ShowDialog();
         }
 
         private void CancleHandler(object sender, EventArgs e)
         {
-            wait.Close();
-            this.Enabled = false;
-            MessageBox.Show("Приглашение откланено");
-            this.Enabled = true;
-            wait = null;
+            //wait.Close();
+            //this.Enabled = false;
+            //MessageBox.Show("Приглашение откланено");
+            //this.Enabled = true;
+            //wait = null;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -166,8 +114,14 @@ namespace GameClient
 
         private void WaitFormClose(object sender, EventArgs e)
         {
-            if (wait != null)
-                wait.Close();
+            //if (wait != null)
+            //    wait.Close();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+            Dispose();
         }
     }
 }

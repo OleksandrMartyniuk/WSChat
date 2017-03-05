@@ -32,16 +32,16 @@ namespace GameClient
       
         public void SendInvite(object args)
         {
-            Listener.SendMessage(new RequestObject("HandShake","Invite", args));
+            Client.SendMessage(new RequestObject("HandShake","Invite", args));
         }
         public void SendOk(object args)
         {
-            Listener.SendMessage(new RequestObject("HandShake", "Ok", args));
+            Client.SendMessage(new RequestObject("HandShake", "Ok", args));
         }
 
         public void SendCancle(object args)
         {
-            Listener.SendMessage(new RequestObject("HandShake", "Cancle", args));
+            Client.SendMessage(new RequestObject("HandShake", "Cancle", args));
         }
     }
 }
