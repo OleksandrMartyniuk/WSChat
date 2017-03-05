@@ -119,21 +119,19 @@ namespace MultiRoomChatClient
 
         private void btn_gmail_Click(object sender, EventArgs e)
         {
-            ApiAuth auth = new ApiAuth();
+            ApiSend auth = new ApiSend();
             string info = auth.Google_Auth();
             string name = auth.Tr(info);
             if (name != "")
             {
                 RequestManager.LoginGmail(name);
             }
-            //cm.ConnectAuth(name, info[1], this, "g+_auth");
-            //rl.set_parameter(name, cm.get_netStream());
-            //rl.Show();
+            
         }
 
         private void btn_facebook_Click(object sender, EventArgs e)
         {
-            ApiAuth auth = new ApiAuth();
+            ApiSend auth = new ApiSend();
             string info = auth.Facebook_Auth();
             string name = auth.Tr(info);
             if (name != "")
@@ -143,7 +141,7 @@ namespace MultiRoomChatClient
         }
         private bool IsValidEmail(string email)
         {
-            bool f = new ApiAuth().IsValidEmail(email);
+            bool f = new ApiSend().IsValidEmail(email);
             if (f == false)
             {
                 MessageBox.Show("Validation email");

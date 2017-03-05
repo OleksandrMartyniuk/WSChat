@@ -83,6 +83,20 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="html\javascript\authorization.js" />
+    <Content Include="html\javascript\connection.js" />
+    <Content Include="html\javascript\facebook.js" />
+    <Content Include="html\javascript\Game.js" />
+    <Content Include="html\javascript\HandShake.js" />
+    <Content Include="html\javascript\Lobby.js" />
+    <Content Include="html\javascript\Request.js" />
+    <Content Include="html\javascript\ShowModules.js" />
+    <Content Include="html\lib\jquery-3.1.1.min.js" />
+    <Content Include="html\lib\sdk.js" />
+    <Content Include="html\style.css" />
+    <Content Include="html\WebClientXO.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

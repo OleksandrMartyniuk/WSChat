@@ -8,16 +8,28 @@ using System.Text;
 
 namespace AuthServer
 {
-    public class Filedb: Idatabase
+    public class Filedb: ISerializeDao
     {
-        private string tablename = "user";
+        private string path = "user";
         public Filedb() { }
-   
+        string ISerializeDao.path
+        {
+            get
+            {
+                return path;
+            }
+
+            set
+            {
+                value = path;
+            }
+        }
+
         public void Create(Person user)
         {
             try
             {
-                File.AppendAllLines(tablename, new string[] { JsonConvert.SerializeObject(user) });
+                File.AppendAllLines(path, new string[] { JsonConvert.SerializeObject(user) });
             }
             catch (Exception ex)
             {
@@ -27,11 +39,11 @@ namespace AuthServer
         public LinkedList<Person> Read()
         {
             LinkedList<Person> records = new LinkedList<Person>();
-            if (!File.Exists(tablename))
+            if (!File.Exists(path))
             {
                 return records;
             }
-            string[] json = File.ReadAllLines(tablename);
+            string[] json = File.ReadAllLines(path);
             if (json.Length == 0)
                 return records;
 

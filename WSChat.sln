@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer", "AuthServer\Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "GameServer\GameServer.csproj", "{1BEC9F6E-BE3F-4C3B-BC7B-B83747A76BD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClient", "GameClient\GameClient\GameClient.csproj", "{6F25B384-E232-4E9F-959C-0EA204986B49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTest", "..\NunitTest\NunitTest.csproj", "{4E5208FB-F801-462B-9DF6-014227ACC57C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{1BEC9F6E-BE3F-4C3B-BC7B-B83747A76BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BEC9F6E-BE3F-4C3B-BC7B-B83747A76BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BEC9F6E-BE3F-4C3B-BC7B-B83747A76BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F25B384-E232-4E9F-959C-0EA204986B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F25B384-E232-4E9F-959C-0EA204986B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F25B384-E232-4E9F-959C-0EA204986B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F25B384-E232-4E9F-959C-0EA204986B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5208FB-F801-462B-9DF6-014227ACC57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5208FB-F801-462B-9DF6-014227ACC57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5208FB-F801-462B-9DF6-014227ACC57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5208FB-F801-462B-9DF6-014227ACC57C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
