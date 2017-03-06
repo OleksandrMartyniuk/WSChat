@@ -35,12 +35,13 @@ namespace GameClient
        
         private void Listen()
         {
-            while(true)
+            var info = new RequestObject();
+            while (true)
             {
-                RequestObject info=null;
+                StreamReader reader = new StreamReader(Client.netstream);
                 try
                 {
-                    info = Client.OutStreamRead();
+                    info = JsonConvert.DeserializeObject<RequestObject>(reader.ReadLine());
                 }
                 catch (Exception e)
                 {

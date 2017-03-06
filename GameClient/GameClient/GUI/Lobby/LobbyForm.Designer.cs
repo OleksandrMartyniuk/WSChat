@@ -73,6 +73,7 @@
             this.btn_refresh.TabIndex = 7;
             this.btn_refresh.Text = "Refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // comboBox1
             // 
@@ -104,9 +105,8 @@
             this.Controls.Add(this.lst_clients);
             this.Controls.Add(this.btn_log_out);
             this.Name = "LobbyForm";
-            this.Text = "Form1";
+            this.Text = "Lobby";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

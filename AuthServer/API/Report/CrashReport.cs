@@ -9,9 +9,9 @@ namespace AuthServer
 {
     public class CrashReport
     {
-        private static string pathreport = "CrashReport";
-        
-    
+        private static string pathreport = "CrashReport/";
+
+
         public static void CrashReportToFile(params string[] message)
         {
             try

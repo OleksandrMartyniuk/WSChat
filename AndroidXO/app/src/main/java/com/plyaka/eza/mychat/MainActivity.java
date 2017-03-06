@@ -47,43 +47,32 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //кто победил
-    //чей ход
-    //проверки на ввод
-    // log out
-    // statusPlay
-
     Button btnLogin, btnReg, btnInvite, btnRefresh, btnForget, btnLogout;
     EditText etPassword, etLogin, etEmail;
     ListView etClients;
     TextView tvName, tvStatus;
 
-    private String playerMove = "";
-    private String playerName = "";
-    private int roomNumber;
-
     private WebSocketClient mWebSocketClient;
     final Gson gson = new Gson();
 
     Request content;
-    // Listener listener /*= new Listener()*/ ;
+    Writer writer;
+    Reader reader;
 
     String[] names;
     Button[] gamebuttons = new Button[9];
     private static final String TAG = "MyActivity";
 
     private UiLifecycleHelper uiHelper;
-    //наша кнопка для авторизации
     private LoginButton enterByFB;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
     public void setTvName(String tvName) {
         this.tvName.setText(tvName);
     }
+
+
 
     public void setEtClients(String[] names) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -138,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onUserInfoFetched(GraphUser user) {
                 if (user != null) {
-                    //получаема имя и выводим в текст вью
                     tvName.setText(user.getName());
                 }
             }
@@ -165,32 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnInvite.setEnabled(true);
         btnRefresh.setEnabled(true);
 
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    public void goPlaying(String[] play) {
-        content = new Request("HandShake", "Ok", play);
-        SendPush(gson.toJson(content));
-    }
-
-    public void start(Request request) {
-        String[] arg = new Gson().fromJson(request.Args.toString(), String[].class);
-
-        double total = Double.parseDouble(arg[0]);
-        int x = (int) total;
-        roomNumber = x;
-        String t = Integer.toString(x);
-        content = new Request("Game", "Start", new Object[]{t, "XO"});
-
-        SendPush(gson.toJson(content));
-    }
-
-    public void move(int number) {
-        content = new Request("Game", "Move", new Object[]{roomNumber, playerMove, number, playerName});
-        SendPush(gson.toJson(content));
     }
 
     public boolean inspection(String login, String password) {
@@ -224,19 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return true;
     }
-
-    public void statusPlay(String args) {
-        if (args.equals(playerName)) {
-            playerMove = "X";
-            tvStatus.setText("play: " + playerMove + " go");
-        } else {
-            playerMove = "O";
-            tvStatus.setText("play: " + playerMove + " wait");
-
-        }
-
-    }
-
     @Override
     public void onClick(View v) {
 
@@ -249,8 +199,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     content = new Request("Auth", "LogIn", new Object[]{login, password});
                     SendPush(gson.toJson(content));
                 }
-                //KhQdbe2BsefkBrslcuT4Qe/bs/E=\n
-
                 break;
             case R.id.btnLogout:
                 content = new Request("Auth", "LogIn", login);
@@ -280,33 +228,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
-            case R.id.bt1:
-                move(0);
-                break;
-            case R.id.bt2:
-                move(1);
-                break;
-            case R.id.bt3:
-                move(2);
-                break;
-            case R.id.bt4:
-                move(3);
-                break;
-            case R.id.bt5:
-                move(4);
-                break;
-            case R.id.bt6:
-                move(5);
-                break;
-            case R.id.bt7:
-                move(6);
-                break;
-            case R.id.bt8:
-                move(7);
-                break;
-            case R.id.bt9:
-                move(8);
-                break;
+            case R.id.bt1: writer.move(0); break;
+            case R.id.bt2: writer.move(1); break;
+            case R.id.bt3: writer.move(2); break;
+            case R.id.bt4: writer.move(3); break;
+            case R.id.bt5: writer.move(4); break;
+            case R.id.bt6: writer.move(5); break;
+            case R.id.bt7: writer.move(6); break;
+            case R.id.bt8: writer.move(7); break;
+            case R.id.bt9: writer.move(8); break;
         }
     }
 
@@ -332,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             uri = new URI("ws://192.168.0.101:9898");
         } catch (URISyntaxException e) {
             e.printStackTrace();
-            //etLogin.setText(e.toString());
             return;
         }
 
@@ -348,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getMessage(message);
+                        reader.getMessage(message);
                         Log.i("Websocket", message);
                     }
                 });
@@ -382,7 +311,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
         AlertDialog alert = builder.create();
         alert.show();
-
     }
 
 
@@ -394,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDialog.setMessage("Player " + arg[0] + "vs " + arg[1] + " wants to play with you!");
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                goPlaying(info);
+                writer.goPlaying(info);
                 dialog.cancel();
             }
         });
@@ -424,7 +352,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etPassword.setVisibility(View.GONE);
         etLogin.setVisibility(View.GONE);
         tvStatus.setVisibility(View.VISIBLE);
-
 
     }
 
@@ -457,10 +384,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Main Page") // TODO: Define a title for the content shown.
@@ -476,9 +399,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
@@ -486,142 +406,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
 
-    public class Request {
-        String Module;
-        String Cmd;
-        Object Args;
 
-        public Request(String Module, String Cmd, Object Args) {
-            this.Module = Module;
-            this.Cmd = Cmd;
-            this.Args = Args;
-        }
-    }
-
-
-    public void getMessage(String tmp) {
-        Request request = new Gson().fromJson(tmp, Request.class);
-        switch (request.Module) {
-            case "Auth":
-                Authorization(request);
-                break;
-            case "Lobby":
-                Lobby(request);
-                break;
-            case "HandShake":
-                HandShake(request);
-                break;
-            case "Game":
-                Game(request);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void Authorization(Request response) {
-        switch (response.Cmd) {
-            case "LogIn": {
-                if (response.Args != null) {
-                    playerName = response.Args.toString();
-                    setTvName("Your name is: " + playerName);
-                    btnLogout.setVisibility(View.VISIBLE);
-                    btnInvite.setEnabled(true);
-                    btnRefresh.setEnabled(true);
-
-
-                }
-            }
-        }
-
-    }
-
-    public void Lobby(Request response) {
-        switch (response.Cmd) {
-            case "refreshClients":
-                if (response.Args != null) {
-                    String[] personlist = new Gson().fromJson(response.Args.toString(), String[].class);
-                    String[] newpersonlist = new String[personlist.length];
-                    for (int i = 0; i < newpersonlist.length; i++) {
-                        newpersonlist[i] = personlist[i];
-                    }
-                    setEtClients(newpersonlist);
-                }
-                break;
-            case "Notification":
-                showAlert(response.Args.toString());
-                break;
-        }
-    }
-
-    /* public String responseString(Object arg){
-         Double d = new Double(arg.toString());
-         int t = d.intValue();
-         return ""+t;
-     }*/
-    public void HandShake(Request response) {
-        switch (response.Cmd) {
-            case "Wait":
-                // showAlert("Wait"); ///////////////////////////////////////////////  Wait
-
-                break;
-            case "Invited":
-                String[] arg = new Gson().fromJson(response.Args.toString(), String[].class);
-                try {
-                    showConfirm(arg);
-                } catch (Exception e) {
-                    Log.i("ShowConfirm go game", e.toString());
-                }
-                break;
-            default:
-                break;
-
-
-        }
-    }
-
-    public void Game(Request response) {
-        String[] arg;
-        switch (response.Cmd) {
-            case "Role":
-
-                String str = response.Args.toString();
-                statusPlay(str);
-                break;
-            case "Over":
-//                arg = new Gson().fromJson(response.Args.toString(), String[].class);
-                ShowLobby();
-                //               showAlert(arg[0].toString());
-                break;
-            case "Start":
-
-                start(response);
-                ShowGame();
-                break;
-            case "Move":
-                arg = new Gson().fromJson(response.Args.toString(), String[].class);
-                moveBtn(arg);
-                break;
-            default:
-                break;
-        }
-
-    }
 
     private Session.StatusCallback statusCallback = new Session.StatusCallback() {
         @Override
         public void call(Session session, SessionState state, Exception exception) {
             if (state.isOpened()) {
-                //здесь так же можно получить токен вот таким способом
-                //session.getAccessToken();
-                // и кучу всего еще можно получить из сесии
                 Log.d("FacebookSampleActivity", "Facebook session opened");
             } else if (state.isClosed()) {
                 Log.d("FacebookSampleActivity", "Facebook session closed");
@@ -635,36 +429,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         uiHelper.onResume();
     }
 
-    // на паузе стопим все к чертям
     @Override
     public void onPause() {
         super.onPause();
         uiHelper.onPause();
     }
-
-    //выходя гасите свет, убиваем процес что бы не палить електричество
     @Override
     public void onDestroy() {
         super.onDestroy();
         uiHelper.onDestroy();
     }
 
-    //по возвращению обратно на активность передаем все полученные данные с диалога в колбек
-    // и живем дальше счастливо
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-    //при вращении экрана и т д сохраняем все что происходит на экране,
-    // а то активити обычно обновляется. а диалог останется жив
     @Override
     public void onSaveInstanceState(Bundle savedState) {
         super.onSaveInstanceState(savedState);
         uiHelper.onSaveInstanceState(savedState);
     }
-
-    
 
 }

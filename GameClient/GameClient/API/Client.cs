@@ -46,15 +46,7 @@ namespace GameClient
         public static RequestObject OutStreamRead()
         {
             RequestObject req = new RequestObject();
-            try
-            {
-                StreamReader reader = new StreamReader(netstream);
-                req = JsonConvert.DeserializeObject<RequestObject>(reader.ReadLine());
-            }
-            catch(Exception e)
-            {
-
-            }
+           
             return req;
         }
     }

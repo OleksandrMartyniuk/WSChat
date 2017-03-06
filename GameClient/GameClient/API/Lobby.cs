@@ -30,7 +30,7 @@ namespace GameClient
             }
         }
 
-        public void SendRefreshClients(object sender, EventArgs e)
+        public void SendRefreshClients()
         {
             Client.SendMessage(new RequestObject("Lobby", "refreshClients", "null"));
         }

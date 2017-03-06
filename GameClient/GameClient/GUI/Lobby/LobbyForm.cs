@@ -26,23 +26,20 @@ namespace GameClient
             listener.lobby.RefreshClients += RefreshClientsHandler;
             listener.lobby.Notification   += ShowNotificationHandler;
 
-           // lobby.handShake.Answer += AnswerFormHandler;
-            //lobby.handShake.Cancle += CancleHandler;
-            //lobby.handShake.Wait += WaitHandler;
+            listener.handShake.Answer += AnswerFormHandler;
+            listener.handShake.Cancle += CancleHandler;
+            listener.handShake.Wait += WaitHandler;
 
             listener.game.Close += WaitFormClose;
             listener.game.roomdialog.FormClosed += CloseFormHandler;
             listener.game.Enabled += EnabledHandler;
         }
-     
-    
-      
-     
+
         public void RefreshClientsHandler(object sender, EventArgs e)
         {
-           // object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
-           // lst_clients.Items.Clear();
-          //  lst_clients.Items.AddRange(clients);
+            object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
+            lst_clients.Items.Clear();
+            lst_clients.Items.AddRange(clients);
         }
 
         void ShowNotificationHandler(object sender, EventArgs e)
@@ -91,14 +88,17 @@ namespace GameClient
             //this.Enabled = true;
             //wait = null;
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private void btn_refresh_Click(object sender, EventArgs e)
         {
+            listener.lobby.SendRefreshClients();
         }
-
+      
         private void btn_log_out_Click(object sender, EventArgs e)
         {
+            this.Hide();
             this.Close();
+            new LoginForm().ShowDialog();
+
         }
 
         private void CloseFormHandler(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace GameClient
 
         private void WaitFormClose(object sender, EventArgs e)
         {
-            //if (wait != null)
+        //    if (wait != null)
             //    wait.Close();
         }
 
@@ -124,8 +124,14 @@ namespace GameClient
             listener.game.Close -= WaitFormClose;
             listener.game.roomdialog.FormClosed -= CloseFormHandler;
             listener.game.Enabled -= EnabledHandler;
+            listener.handShake.Answer -= AnswerFormHandler;
+            listener.handShake.Cancle -= CancleHandler;
+            listener.handShake.Wait -= WaitHandler;
+
             this.Close();
             this.Dispose();
         }
+
+      
     }
 }

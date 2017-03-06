@@ -14,7 +14,7 @@ namespace AuthServer
             try
             {
                 string filename = string.Format("{0}_{1}_{2}", DateTime.Now.Date.Day, DateTime.Now.Month, DateTime.Now.Year);
-                string pathname = path +filename;
+                string pathname = path + filename;
                 if (!File.Exists(pathname))
                 {
                     File.Create(pathname);
