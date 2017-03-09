@@ -7,6 +7,10 @@ ResponseHandler.Handle = function (msg) {
     
     switch (req.Module)
     {
+        case "Lobby":
+            switch (req.Cmd) {
+                case "Notification": alert(req.Args); break;
+            }
         case "admin":
             switch (req.Cmd)
             {
