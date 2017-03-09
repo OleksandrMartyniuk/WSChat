@@ -14,7 +14,7 @@ namespace GameServer
     {
         private Clients clients { get; set; }
         Rooms rooms { get; set; }
-    
+      
         public HandShake(Clients clients, Rooms rooms)
         {
             this.clients = clients;

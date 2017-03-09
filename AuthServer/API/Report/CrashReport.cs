@@ -7,22 +7,15 @@ using System.Threading.Tasks;
 
 namespace AuthServer
 {
-    public class CrashReport
+    public static class CrashReport
     {
-        private static string pathreport = "CrashReport/";
-
-
-        public static void CrashReportToFile(params string[] message)
+        static PersonDAO_MySQL db;
+        public static void AppendRecord(string message)
         {
             try
             {
-                string filename = string.Format("{0}_{1}_{2}", DateTime.Now.Date.Day, DateTime.Now.Month, DateTime.Now.Year);
-                string pathname = pathreport + filename;
-                if (!File.Exists(pathname))
-                {
-                    File.Create(pathname);
-                }
-                File.AppendAllText(pathname, String.Format("{0} {1}", message[0], message[1]) + Environment.NewLine);
+                string date = string.Format("{0}_{1}_{2}", DateTime.Now.Date.Day, DateTime.Now.Month, DateTime.Now.Year);
+                db.Create("crash", String.Format("{0} - {1}", date, message));
             }
             catch (Exception ex)
             {

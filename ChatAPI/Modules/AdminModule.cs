@@ -12,6 +12,7 @@ namespace ChatServer
 {
     public class AdminModule : IHandlerModule
     {
+    
         public bool Handle(IClientObject client, RequestObject request)
         {
             if (request.Module != "admin")

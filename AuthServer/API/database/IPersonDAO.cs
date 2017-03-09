@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace AuthServer
 {
-    public interface Idatabase
+    public interface IPersonDAO
     {
         void Create(Person user);
         LinkedList<Person> Read();
-        void Update(string login, string password);
-        void Delete();
-
+        void Create(params string[] message);
     }
-    public interface ISerializeDao : Idatabase
-    {
-        string path { get; set; }
-    }
+  
 }

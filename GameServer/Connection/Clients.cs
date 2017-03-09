@@ -13,9 +13,10 @@ namespace GameServer
     public class Clients
     {
         public List<Client> clientsList;
+      
         public Clients()
         {
-            clientsList = new List<Client>();
+            clientsList = new List<Client>(); 
         }
 
         public void Add(TcpListener server)
@@ -56,7 +57,7 @@ namespace GameServer
 
         public void Dell(Client client)
         {
-            LogProvider.AppendRecord(string.Format("{0}  Remove client [{1}]", DateTime.Now.ToString(), client.name));
+            LogProvider.AppendRecord(string.Format("Remove client [{0}]", client.name));
             clientsList.Remove(client);
         }
     }
