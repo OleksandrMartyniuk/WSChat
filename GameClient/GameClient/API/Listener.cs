@@ -9,54 +9,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel;
+using GameClient.API.Networking;
 
 namespace GameClient
 {
-    public  class Listener
+    public class Listener
     {
-        public Authorization auth;
-        public Lobby lobby;
-        public HandShake handShake;
-        public Game game;
-    
-        public Listener()
+        public Listener() {}
+        public void SendInvite(object args)
         {
-            this.auth = new Authorization();
-            this.lobby = new Lobby();
-            this.handShake = new HandShake();
-            this.game = new Game();
-            
+            Client.AddRequest(new RequestObject("HandShake", "Invite", args));
         }
-        public void connection()
+        public void SendOk(object args)
         {
-            new Client();
-            new Thread(new ThreadStart(Listen)).Start();
-        }
-       
-        private void Listen()
-        {
-            var info = new RequestObject();
-            while (true)
-            {
-                StreamReader reader = new StreamReader(Client.netstream);
-                try
-                {
-                    info = JsonConvert.DeserializeObject<RequestObject>(reader.ReadLine());
-                }
-                catch (Exception e)
-                {
-
-                }
-                switch (info.Module)
-                {
-                    case "Auth":       auth.Dispacher(info);        break;
-                    case "Lobby":      lobby.Dispacher(info);       break;
-                    case "HandShake":  handShake.Dispacher(info);   break;
-                    case "Game":       game.Dispacher(info);        break;
-                }
-            }
+            Client.AddRequest(new RequestObject("HandShake", "Ok", args));
         }
 
-        
+        public void SendCancle(object args)
+        {
+            Client.AddRequest(new RequestObject("HandShake", "Cancle", args));
+        }
     }
+
 }

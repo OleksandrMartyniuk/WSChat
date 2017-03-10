@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GameClient.API.Networking;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,29 +15,18 @@ namespace GameClient
 {
     public partial class RoomDialog : Form
     {
-        public UserControl game;
+       
         public RoomDialog()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
+            ResponseHandler.end += End;
         }
-        public void Init(Client client, string gameName)
+        public void Init()
         {
-            switch (gameName)
-            {
-                case "XO":
-                   // game = new XO(client);
-                    break;
-            }
-            this.Controls.Add(game);
+            username.Text = "Name: "+ Client.Username;
         }
-
-        public void Draw(object Args)
-        {
-            object[] args = JsonConvert.DeserializeObject<object[]>(Args.ToString());
-           // if (game is XO)
-            //    (game as XO).Draw(args[0].ToString(), args[1].ToString(), args[2].ToString());
-        }
+      
 
         public void End()
         {
@@ -46,7 +36,7 @@ namespace GameClient
 
         private void btn_xo_Click(object sender, EventArgs e)
         {
-            string tag = (sender as Button).Tag.ToString();
+        //    string tag = (sender as Button).Tag.ToString();
             
         }
     }

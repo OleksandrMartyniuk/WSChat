@@ -32,13 +32,13 @@
             this.lst_clients = new System.Windows.Forms.ListBox();
             this.btn_invite = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Text_name = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_log_out
             // 
-            this.btn_log_out.Location = new System.Drawing.Point(138, 275);
+            this.btn_log_out.Location = new System.Drawing.Point(138, 276);
             this.btn_log_out.Name = "btn_log_out";
             this.btn_log_out.Size = new System.Drawing.Size(121, 23);
             this.btn_log_out.TabIndex = 4;
@@ -57,7 +57,7 @@
             // 
             // btn_invite
             // 
-            this.btn_invite.Location = new System.Drawing.Point(139, 246);
+            this.btn_invite.Location = new System.Drawing.Point(138, 247);
             this.btn_invite.Name = "btn_invite";
             this.btn_invite.Size = new System.Drawing.Size(120, 23);
             this.btn_invite.TabIndex = 6;
@@ -75,6 +75,14 @@
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
+            // Text_name
+            // 
+            this.Text_name.AutoSize = true;
+            this.Text_name.Location = new System.Drawing.Point(13, 247);
+            this.Text_name.Name = "Text_name";
+            this.Text_name.Size = new System.Drawing.Size(0, 13);
+            this.Text_name.TabIndex = 15;
+            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -85,19 +93,11 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 14;
             // 
-            // Text_name
-            // 
-            this.Text_name.AutoSize = true;
-            this.Text_name.Location = new System.Drawing.Point(13, 247);
-            this.Text_name.Name = "Text_name";
-            this.Text_name.Size = new System.Drawing.Size(0, 13);
-            this.Text_name.TabIndex = 15;
-            // 
             // LobbyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 308);
+            this.ClientSize = new System.Drawing.Size(275, 309);
             this.Controls.Add(this.Text_name);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btn_refresh);
@@ -117,8 +117,8 @@
         public System.Windows.Forms.ListBox lst_clients;
         public System.Windows.Forms.Button btn_invite;
         private System.Windows.Forms.Button btn_refresh;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label Text_name;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

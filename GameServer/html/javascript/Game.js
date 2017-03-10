@@ -7,12 +7,13 @@ function Game(response)
     switch (response.Cmd) {
         case "Start":
             roomNumber = response.Args;
+            statusPlay(response.Args[2]);
             start(roomNumber);
             ShowGame();
             break;
         case "Over": alert(response.Args); ShowLobby();  break;
         case "Move": moveBtn(response.Args); break;
-        case "Role": statusPlay(response.Args); break; 
+      
     }
 }
 
