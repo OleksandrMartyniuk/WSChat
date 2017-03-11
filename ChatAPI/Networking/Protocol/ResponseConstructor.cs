@@ -66,7 +66,7 @@ namespace ChatServer
 
         internal static string GetPrivateHistoryResponse(string user, ChatMessage[] history)
         {
-            return JsonConvert.SerializeObject(new RequestObject("history", "room", new object[] { user, history }));
+            return JsonConvert.SerializeObject(new RequestObject("history", "private", new object[] { user, history }));
         }
     }
 }

@@ -20,7 +20,7 @@ UI.openRoom = function(evt, roomName, wrapperId) {
     for (i = 0; i < tabcontents.length; i++) {
             tabcontents[i].style.display = "none";
     }
-
+   
     var el = $("div[name='" + roomName + "']", wrapper)[0];
     el.style.display = "block";
     Messages.removeNotification(roomName, wrapperId == 'privatePanel');

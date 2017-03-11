@@ -84,8 +84,7 @@ namespace ChatServer
                 ChatMessage[] msgs = room.GetMessageHistoryTo(DateTime.Now);
                 if (msgs.Length > 0)
                 {
-                    RequestObject req = new RequestObject("msg", "active", new object[] { room.Name, msgs });
-                    client.SendMessage(JsonConvert.SerializeObject(req));
+                    client.SendMessage(ResponseConstructor.GetRoomHistoryResponse(room.Name, msgs));
                 }
             }
         }
