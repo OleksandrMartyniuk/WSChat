@@ -18,7 +18,7 @@ namespace GameServer
        
         private Clients clients { get; set; }
         private ApiAuth auth = new ApiAuth();
-        
+      
         private static string AuthFolder = "Users.json";
 
         public Authorization(Clients clients)
@@ -52,7 +52,7 @@ namespace GameServer
         {
             string name = args.ToString();
             remove(client, name);
-            LogProvider.AppendRecord(string.Format("{0} loggin facebook user [{1}]", DateTime.Now.ToString(), name));
+            LogProvider.AppendRecord(string.Format("loggin facebook user [{0}]", name));
             client.name = name;
             client.Write(new RequestObject("Auth", "LogIn", name));
 

@@ -1,6 +1,7 @@
 ﻿using AuthServer;
 using Core;
 using GameClient;
+using GameClient.API.Networking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,30 +16,30 @@ namespace GameClient
 {
     public partial class LoginForm : Form
     {
-        Listener listener;
+        Authorization auth;
         public LoginForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
+            auth = new Authorization();
+            ResponseHandler.loginFail += (x) => Invoke(new Action<string>(On_LoginFailed), x);
+            ResponseHandler.loginSuccess += (x) => Invoke(new Action<string>(On_LoginSuccess), x);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-          
-            try
-            {
-                listener = new Listener();
-                listener.connection();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Server Disconnect...");
-            }
-            listener.auth.LogIn += LogIn;
         }
         private void LogIn(object sender, EventArgs e)
         {
             this.Hide();
             this.Close();
-            new LobbyForm(listener,sender).ShowDialog();
-           
+        }
+  
+        private void On_LoginSuccess(string Username)
+        {
+            Client.Username = Username;
+            var chat = new LobbyForm();
+            chat.Location = Location;
+            chat.StartPosition = StartPosition;
+            chat.Show();
+            this.Hide();
         }
 
         private bool IsValid(string login,string password)
@@ -57,21 +58,24 @@ namespace GameClient
             }
             return true;
         }
+
         private void btn_connect_Click(object sender, EventArgs e)
         {
             string login = login_box.Text;
             string password = password_box.Text;
-            if (IsValid(login,password) == true)
+            if (IsValid(login, password) == true)
             {
                 try
                 {
-                    listener.auth.SendLogIn(login, password);
+                    Client.StartClient();
                 }
                 catch
                 {
                     MessageBox.Show("Server Disconnect");
                 }
+                auth.SendLogIn(login, password);
             }
+          
         }
         private void On_LoginFailed(string error)
         {
@@ -101,8 +105,8 @@ namespace GameClient
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            listener.auth.LogIn -= LogIn;
-            this.Dispose();
+          //  auth.LogIn -= LogIn;
+          //  this.Dispose();
         }
 
         private void btn_gmail_Click(object sender, EventArgs e)
@@ -114,7 +118,7 @@ namespace GameClient
             string name = apiAuth.Tr(info);
             if (name != "")
             {
-                listener.auth.LoginGmail(name);
+                auth.LoginGmail(name);
             }
         }
 
@@ -127,7 +131,7 @@ namespace GameClient
             string name = apiAuth.Tr(info);
             if (name != null)
             {
-                listener.auth.LoginFacebook(name);
+                auth.LoginFacebook(name);
             }
         }
         private bool IsValidEmail(string email)
@@ -150,7 +154,7 @@ namespace GameClient
                 string email =  email_box.Text.ToString();
                 if (IsValidEmail(email) == true)
                 {
-                    listener.auth.LoginReg(login, password, email);
+                    auth.LoginReg(login, password, email);
                 }
             }
         }
@@ -160,7 +164,7 @@ namespace GameClient
             string email = email_box.Text.ToString();
             if (IsValidEmail(email) == true)
             {
-                listener.auth.LoginForgot(email);
+                auth.LoginForgot(email);
             }
         }
 

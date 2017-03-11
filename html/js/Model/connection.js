@@ -2,6 +2,7 @@
 function connection() {
     if (ws === undefined) {
 
+        //ws = new WebSocket("ws://127.0.0.1:9898");
         ws = new WebSocket("ws://sanyok-001-site1.htempurl.com/WSHandler.ashx");//192.168.1.100 10.200.26.51
 
         ws.onopen = function() {
@@ -11,7 +12,8 @@ function connection() {
                 ws.send(JSON.stringify(req));
             }
         };
-        ws.onmessage = function(evt) {
+        ws.onmessage = function (evt) {
+            console.log(evt.data);
             ResponseHandler.Handle(evt.data);
         };
         ws.onclose = function() {

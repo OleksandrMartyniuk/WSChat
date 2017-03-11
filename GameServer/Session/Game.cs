@@ -17,7 +17,7 @@ namespace GameServer
             this.rooms = rooms;
         }
 
-        public void Dispacher(Client client, RequestObject info)
+        public void Dispacher(Client client, RequestObject info)// комсомолькая 52б 16:30
         {
             object[] args = JsonConvert.DeserializeObject<object[]>(info.Args.ToString());
             int index = Convert.ToInt32(args[0]);

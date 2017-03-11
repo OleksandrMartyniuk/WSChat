@@ -8,7 +8,7 @@ using Core;
 
 namespace NunitTest
 {
-    public class FileMock : Idatabase
+    public class FileMock 
     {
         LinkedList<Person> pp = null;
         public FileMock()

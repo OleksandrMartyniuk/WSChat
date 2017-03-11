@@ -24,6 +24,7 @@ namespace GameServer
             this.client1Name = client1Name;
             this.client2Name = client2Name;
             turn = client1Name;
+          
         }
 
         public bool IsTurn(string name)
@@ -49,8 +50,7 @@ namespace GameServer
                     else
                         turn = client1Name;
 
-                    LogProvider.AppendRecord(string.Format("{0}  user [{1}] - {2} [{3}]", 
-                        DateTime.Now.ToString(), turn, tmp, x.ToString()));
+                    LogProvider.AppendRecord(string.Format("user [{0}] - {1} [{2}]", turn, tmp, x.ToString()));
                     return new RequestObject("Game", "Move", new object[] { tmp, x.ToString() });
                 }
             }

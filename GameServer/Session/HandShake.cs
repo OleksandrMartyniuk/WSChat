@@ -14,7 +14,7 @@ namespace GameServer
     {
         private Clients clients { get; set; }
         Rooms rooms { get; set; }
-    
+      
         public HandShake(Clients clients, Rooms rooms)
         {
             this.clients = clients;
@@ -88,9 +88,9 @@ namespace GameServer
             for(int i=0; i<tmpclients.Count; i++)
             {
                 LogProvider.AppendRecord(string.Format("{0} Start [{1}]", DateTime.Now.ToString(), tmpclients[i].name));
-                tmpclients[i].Write(new RequestObject("Game", "Start", 
-                    new object[] { rooms.rooms.Count - 1, gameName }));
+                tmpclients[i].Write(new RequestObject("Game", "Start",  new object[] { rooms.rooms.Count - 1, gameName, tmpclients[0].name }));
             }
+           
         }
         private void Cancle(Client invitedClient, string creatorName)
         {

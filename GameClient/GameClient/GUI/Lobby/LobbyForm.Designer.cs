@@ -32,13 +32,13 @@
             this.lst_clients = new System.Windows.Forms.ListBox();
             this.btn_invite = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Text_name = new System.Windows.Forms.Label();
+            this.games_name = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_log_out
             // 
-            this.btn_log_out.Location = new System.Drawing.Point(138, 275);
+            this.btn_log_out.Location = new System.Drawing.Point(138, 276);
             this.btn_log_out.Name = "btn_log_out";
             this.btn_log_out.Size = new System.Drawing.Size(121, 23);
             this.btn_log_out.TabIndex = 4;
@@ -57,7 +57,7 @@
             // 
             // btn_invite
             // 
-            this.btn_invite.Location = new System.Drawing.Point(139, 246);
+            this.btn_invite.Location = new System.Drawing.Point(138, 247);
             this.btn_invite.Name = "btn_invite";
             this.btn_invite.Size = new System.Drawing.Size(120, 23);
             this.btn_invite.TabIndex = 6;
@@ -73,16 +73,7 @@
             this.btn_refresh.TabIndex = 7;
             this.btn_refresh.Text = "Refresh";
             this.btn_refresh.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "XO"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 219);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 14;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // Text_name
             // 
@@ -92,21 +83,32 @@
             this.Text_name.Size = new System.Drawing.Size(0, 13);
             this.Text_name.TabIndex = 15;
             // 
+            // games_name
+            // 
+            this.games_name.FormattingEnabled = true;
+            this.games_name.ItemHeight = 13;
+            this.games_name.Items.AddRange(new object[] {
+            "XO"});
+            this.games_name.Location = new System.Drawing.Point(138, 219);
+            this.games_name.Name = "games_name";
+            this.games_name.Size = new System.Drawing.Size(121, 21);
+            this.games_name.TabIndex = 14;
+            this.games_name.Tag = "";
+            // 
             // LobbyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 308);
+            this.ClientSize = new System.Drawing.Size(275, 309);
             this.Controls.Add(this.Text_name);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.games_name);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_invite);
             this.Controls.Add(this.lst_clients);
             this.Controls.Add(this.btn_log_out);
             this.Name = "LobbyForm";
-            this.Text = "Form1";
+            this.Text = "Lobby";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,8 +119,8 @@
         public System.Windows.Forms.ListBox lst_clients;
         public System.Windows.Forms.Button btn_invite;
         private System.Windows.Forms.Button btn_refresh;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label Text_name;
+        private System.Windows.Forms.ComboBox games_name;
     }
 }
 

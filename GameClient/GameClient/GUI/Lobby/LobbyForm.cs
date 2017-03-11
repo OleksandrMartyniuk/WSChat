@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GameClient.API.Networking;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,118 +15,120 @@ namespace GameClient
 {
     public partial class LobbyForm : Form
     {
-        Listener listener;
-        delegate void InvokeDelegate();
-        public LobbyForm(Listener listener,object sender)
+        //Listener listener;
+        //delegate void InvokeDelegate();
+        private WaitForm wait;
+        private AnswerForm answerForm;
+        private RoomDialog room;
+        public LobbyForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            this.listener = listener;
-            Text_name.Text = "name: " + sender.ToString();
-
-            listener.lobby.RefreshClients += RefreshClientsHandler;
-            listener.lobby.Notification   += ShowNotificationHandler;
-
-           // lobby.handShake.Answer += AnswerFormHandler;
-            //lobby.handShake.Cancle += CancleHandler;
-            //lobby.handShake.Wait += WaitHandler;
-
-            listener.game.Close += WaitFormClose;
-            listener.game.roomdialog.FormClosed += CloseFormHandler;
-            listener.game.Enabled += EnabledHandler;
-        }
-     
-    
-      
-     
-        public void RefreshClientsHandler(object sender, EventArgs e)
-        {
-           // object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
-           // lst_clients.Items.Clear();
-          //  lst_clients.Items.AddRange(clients);
+            Text_name.Text = Client.Username;
+            games_name.SelectedIndex = 0;
+            ResponseHandler.refreshClients += RefreshClientsHandler;
+            ResponseHandler.notificationLobby += ShowNotificationHandler;
+          
+            ResponseHandler.answer += AnswerFormHandler;
+            ResponseHandler.cancle += CancleHandler;
+            ResponseHandler.wait += WaitHandler;
+            ResponseHandler.start += (x) => room = new RoomDialog(x);
+            ResponseHandler.enabled += EnabledHandler;
         }
 
-        void ShowNotificationHandler(object sender, EventArgs e)
+       
+        public void RefreshClientsHandler(object sender)
         {
-          //  this.Enabled = false;
-            
-        //    MessageBox.Show(sender as string);
-          //  this.Enabled = true;
+            object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
+            lst_clients.Items.Clear();
+            lst_clients.Items.AddRange(clients);
+        }
+
+        void ShowNotificationHandler(object sender)
+        {
+             this.Enabled = false;   
+             MessageBox.Show(sender.ToString());
+             this.Enabled = true;
         }
         private void btn_invite_Click(object sender, EventArgs e)
         {
             if (lst_clients.SelectedItem != null)
             {
-                listener.handShake.SendInvite(new object[] { lst_clients.SelectedItem.ToString(), comboBox1.SelectedItem.ToString() });
+                new Listener().SendInvite(new object[] { lst_clients.SelectedItem.ToString(), games_name.SelectedItem.ToString() });
             }
         }
 
-        private void WaitHandler(object sender, EventArgs e)
+        private void WaitHandler()
         {
-            //this.Enabled = false;
-            //wait = new WaitForm();
-            //wait.FormClosed += CloseFormHandler;
-            //Thread tr = new Thread(new ThreadStart(OpenWaitForm));
-            //tr.Start();
+            this.Enabled = false;
+            wait = new WaitForm();
+            wait.FormClosed += CloseFormHandler;
+            wait.ShowDialog();
         }
-
-        private void OpenWaitForm()
+        private void AnswerFormHandler(object sender)
         {
-           // wait.ShowDialog();
-        }
-
-        private void AnswerFormHandler(object sender, EventArgs e)
-        {
-          //  this.Enabled = false;
-            
-            AnswerForm answerForm = new AnswerForm(listener.handShake, sender);
+            this.Enabled = false;
+             answerForm = new AnswerForm(sender);
             answerForm.FormClosed += CloseFormHandler;
             answerForm.ShowDialog();
         }
 
-        private void CancleHandler(object sender, EventArgs e)
+        private void CancleHandler()
         {
-            //wait.Close();
-            //this.Enabled = false;
-            //MessageBox.Show("Приглашение откланено");
-            //this.Enabled = true;
-            //wait = null;
+            wait.Close();
+            this.Enabled = false;
+            MessageBox.Show("Приглашение откланено");
+            this.Enabled = true;
+            wait = null;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void btn_refresh_Click(object sender, EventArgs e)
         {
+            RequestManager.SendRefreshClients();
         }
-
+      
         private void btn_log_out_Click(object sender, EventArgs e)
         {
+            this.Hide();
             this.Close();
+            new LoginForm().ShowDialog();
+
         }
 
         private void CloseFormHandler(object sender, EventArgs e)
         {
-            this.Enabled = true;
+            this.Close();
         }
 
-        public void EnabledHandler(object sender, EventArgs e)
+        public void EnabledHandler()
         {
+           // wait.FormClosed -= CloseFormHandler;
             this.Enabled = false;
         }
 
         private void WaitFormClose(object sender, EventArgs e)
         {
-            //if (wait != null)
-            //    wait.Close();
+        //    if (wait != null)
+        //    //    wait.Close();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            listener.lobby.RefreshClients -= RefreshClientsHandler;
-            listener.lobby.Notification -= ShowNotificationHandler;
-            listener.game.Close -= WaitFormClose;
-            listener.game.roomdialog.FormClosed -= CloseFormHandler;
-            listener.game.Enabled -= EnabledHandler;
-            this.Close();
-            this.Dispose();
+            //ResponseHandler.refreshClients -= RefreshClientsHandler;
+            //ResponseHandler.notificationLobby -= ShowNotificationHandler;
+
+            //ResponseHandler.answer -= AnswerFormHandler;
+            //ResponseHandler.cancle -= CancleHandler;
+            //ResponseHandler.wait -= WaitHandler;
+
+            //ResponseHandler.start -= (x) => {new Game(x);};
+            
+            //ResponseHandler.enabled -= EnabledHandler;
+            
+            //this.Dispose();
+            //this.Close();
         }
+
+      
     }
 }

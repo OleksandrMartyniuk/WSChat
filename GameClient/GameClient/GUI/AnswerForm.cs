@@ -13,27 +13,24 @@ namespace GameClient
 {
     public partial class AnswerForm : Form
     {
-        HandShake handShake;
         object args;
-
-        public AnswerForm(HandShake handShake, object arg)
+        public AnswerForm(object arg)
         {
             InitializeComponent();
-            this.handShake = handShake;
             object[] args = JsonConvert.DeserializeObject<object[]>(arg.ToString());
             label1.Text = args[0] + " приглашает вас поиграть в " + args[1];
-            this.args = args;
+           this.args = args;
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
-            handShake.SendOk(args);
+            new Listener().SendOk(args);
             this.Close();
         }
 
         private void btn_cancle_Click(object sender, EventArgs e)
         {
-            handShake.SendCancle(args);
+            new Listener().SendCancle(args);
             this.Close();
         }
     }

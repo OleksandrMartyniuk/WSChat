@@ -12,13 +12,13 @@ namespace AuthServer
 {
     public class Destop : IAuth
     {
-        Idatabase db;
-        public Destop(Idatabase db){
+        IPersonDAO db;
+        public Destop(IPersonDAO db){
             this.db = db;
         }
         private Object[] json(Object args)
         {
-            return  JsonConvert.DeserializeObject<object[]>(args.ToString());
+            return JsonConvert.DeserializeObject<object[]>(args.ToString());
         }
         public string LogIn(Person user)
         {
@@ -31,13 +31,13 @@ namespace AuthServer
                     {
                         if (record.password == user.password)
                         {
-                            LogProvider.AppendRecord(string.Format("{0} loggin user [{1}]", DateTime.Now.ToString(), user.name));   
+                            LogProvider.AppendRecord(string.Format("loggin user [{0}]", user.name));   
                             return "true";
                         }
                     }
                 }
             }
-            LogProvider.AppendRecord(string.Format("{0} login and password no correctly [{1}]", DateTime.Now.ToString(), user.name));
+            LogProvider.AppendRecord(string.Format("login and password no correctly [{0}]", user.name));
             return "Please check that you have entered your login and password correctly";
         }
         public string Reg(Person user)
@@ -47,11 +47,11 @@ namespace AuthServer
             {
                 if (record.name == user.name)
                 {
-                    LogProvider.AppendRecord(string.Format(" registered user exists [{0}]", user.name));
+                    LogProvider.AppendRecord(string.Format("registered user exists [{0}]", user.name));
                     return "User exists";
                 }
             }
-            LogProvider.AppendRecord(string.Format("{0}  registered new user [{1}]", DateTime.Now.ToString(), user.name));
+            LogProvider.AppendRecord(string.Format("registered new user [{0}]", user.name));
             db.Create(user);
             return "You have registered"; 
         }
@@ -63,7 +63,7 @@ namespace AuthServer
             {
                 if (record.email == email)
                 {
-                    LogProvider.AppendRecord(string.Format("{0} recovery password user [{1}]", DateTime.Now.ToString(), record.name));
+                    LogProvider.AppendRecord(string.Format("recovery password user [{0}]", record.name));
                     SmtpClient Smtp = new SmtpClient("smtp.gmail.com", 587);
                     Smtp.Credentials = new NetworkCredential("gameXO.helpe@gmail.com", "bilokbilok1");
                     MailMessage Message = new MailMessage();
@@ -73,7 +73,7 @@ namespace AuthServer
                     Message.Body = "your password : " + record.password;
                     Smtp.EnableSsl = true;
                     Smtp.Send(Message);
-                    LogProvider.AppendRecord(string.Format("{0} Forgot user [{1}]", DateTime.Now.ToString(), email));
+                    LogProvider.AppendRecord(string.Format("Forgot user [{0}]",email));
                     return true;
                 }
             }

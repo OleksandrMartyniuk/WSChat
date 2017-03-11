@@ -10,10 +10,12 @@ namespace AuthServer
     public class ApiAuth
     {
         public IAuth api;
+   
         public ApiAuth()
         {
-            Idatabase db = new Filedb();
+            IPersonDAO db = new PersonDAO_MySQL();
             api = new Destop(db);
         }
+      
     }
 }
