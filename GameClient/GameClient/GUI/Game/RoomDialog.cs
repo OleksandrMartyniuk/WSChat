@@ -16,9 +16,19 @@ namespace GameClient
     public partial class RoomDialog : Form
     {
        
-        public RoomDialog()
+        public RoomDialog(object x)
         {
             InitializeComponent();
+            UserControl game;
+            object[] args = JsonConvert.DeserializeObject<object[]>(x.ToString());
+            switch (args[1].ToString())
+            {
+                case "XO":
+                    game = new XO(this, args);
+                    break;
+            }
+            this.Init();
+            this.ShowDialog();
             CheckForIllegalCrossThreadCalls = false;
             ResponseHandler.end += End;
         }

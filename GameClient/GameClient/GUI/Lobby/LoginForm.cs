@@ -30,22 +30,16 @@ namespace GameClient
         {
             this.Hide();
             this.Close();
-           
         }
-        private LobbyForm On_Log(string UserName)
+  
+        private void On_LoginSuccess(string Username)
         {
-            Client.Username = UserName;
+            Client.Username = Username;
             var chat = new LobbyForm();
             chat.Location = Location;
             chat.StartPosition = StartPosition;
             chat.Show();
             this.Hide();
-            return chat;
-        }
-
-        private void On_LoginSuccess(string Username)
-        {
-            On_Log(Username);
         }
 
         private bool IsValid(string login,string password)
@@ -64,6 +58,7 @@ namespace GameClient
             }
             return true;
         }
+
         private void btn_connect_Click(object sender, EventArgs e)
         {
             string login = login_box.Text;

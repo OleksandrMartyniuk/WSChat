@@ -33,7 +33,7 @@
             this.btn_invite = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.Text_name = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.games_name = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_log_out
@@ -83,15 +83,17 @@
             this.Text_name.Size = new System.Drawing.Size(0, 13);
             this.Text_name.TabIndex = 15;
             // 
-            // comboBox1
+            // games_name
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.games_name.FormattingEnabled = true;
+            this.games_name.ItemHeight = 13;
+            this.games_name.Items.AddRange(new object[] {
             "XO"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 219);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 14;
+            this.games_name.Location = new System.Drawing.Point(138, 219);
+            this.games_name.Name = "games_name";
+            this.games_name.Size = new System.Drawing.Size(121, 21);
+            this.games_name.TabIndex = 14;
+            this.games_name.Tag = "";
             // 
             // LobbyForm
             // 
@@ -99,7 +101,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(275, 309);
             this.Controls.Add(this.Text_name);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.games_name);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_invite);
             this.Controls.Add(this.lst_clients);
@@ -118,7 +120,7 @@
         public System.Windows.Forms.Button btn_invite;
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.Label Text_name;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox games_name;
     }
 }
 

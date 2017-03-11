@@ -1,4 +1,4 @@
-var roomNumber;
+var room;
 var userName;
 var gamestorage;
 
@@ -6,9 +6,9 @@ function Game(response)
 {
     switch (response.Cmd) {
         case "Start":
-            roomNumber = response.Args;
+            room = response.Args;
             statusPlay(response.Args[2]);
-            start(roomNumber);
+            start(room);
             ShowGame();
             break;
         case "Over": alert(response.Args); ShowLobby();  break;
@@ -49,7 +49,7 @@ function GetSelectedPlayer() {
 }
 
 function OnButtonClicked(coord) {
-    move(new Array(roomNumber[0],gamestorage, coord, sessionStorage['username']));
+    move(new Array(room[0],gamestorage, coord, sessionStorage['username']));
 }
 
 function moveBtn(args) {

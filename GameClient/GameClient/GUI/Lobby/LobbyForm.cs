@@ -18,24 +18,25 @@ namespace GameClient
         //Listener listener;
         //delegate void InvokeDelegate();
         private WaitForm wait;
+        private AnswerForm answerForm;
+        private RoomDialog room;
         public LobbyForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-        
-
+            Text_name.Text = Client.Username;
+            games_name.SelectedIndex = 0;
             ResponseHandler.refreshClients += RefreshClientsHandler;
             ResponseHandler.notificationLobby += ShowNotificationHandler;
-
+          
             ResponseHandler.answer += AnswerFormHandler;
             ResponseHandler.cancle += CancleHandler;
             ResponseHandler.wait += WaitHandler;
-            ResponseHandler.start += (x) => new Game(x);
-
-     
+            ResponseHandler.start += (x) => room = new RoomDialog(x);
             ResponseHandler.enabled += EnabledHandler;
         }
 
+       
         public void RefreshClientsHandler(object sender)
         {
             object[] clients = JsonConvert.DeserializeObject<object[]>(sender.ToString());
@@ -53,7 +54,7 @@ namespace GameClient
         {
             if (lst_clients.SelectedItem != null)
             {
-                new Listener().SendInvite(new object[] { lst_clients.SelectedItem.ToString(), comboBox1.SelectedItem.ToString() });
+                new Listener().SendInvite(new object[] { lst_clients.SelectedItem.ToString(), games_name.SelectedItem.ToString() });
             }
         }
 
@@ -67,7 +68,7 @@ namespace GameClient
         private void AnswerFormHandler(object sender)
         {
             this.Enabled = false;
-            AnswerForm answerForm = new AnswerForm(sender);
+             answerForm = new AnswerForm(sender);
             answerForm.FormClosed += CloseFormHandler;
             answerForm.ShowDialog();
         }
@@ -96,7 +97,7 @@ namespace GameClient
 
         private void CloseFormHandler(object sender, EventArgs e)
         {
-            this.Enabled = true;
+            this.Close();
         }
 
         public void EnabledHandler()
@@ -124,8 +125,8 @@ namespace GameClient
             
             //ResponseHandler.enabled -= EnabledHandler;
             
-            this.Dispose();
-            this.Close();
+            //this.Dispose();
+            //this.Close();
         }
 
       
