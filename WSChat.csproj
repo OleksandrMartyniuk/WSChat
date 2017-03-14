@@ -102,9 +102,7 @@
     <Content Include="default.html" />
     <Content Include="packages.config" />
     <Content Include="LoginHandler.ashx" />
-    <None Include="Properties\PublishProfiles\Default Settings %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
-    <None Include="Properties\PublishProfiles\sanyok-001-site1.htempurl.com.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -126,15 +124,16 @@
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthApi\AuthPool.cs" />
     <Compile Include="ChatAPI\Logging\CrashReportProvider.cs" />
     <Compile Include="ChatAPI\Logging\LogProvider.cs" />
     <Compile Include="ChatAPI\Modules\Authentication\LoginBase.cs" />
     <Compile Include="ChatAPI\Modules\Authentication\Facebook.cs" />
     <Compile Include="ChatAPI\Modules\Authentication\ForgotPassword.cs" />
     <Compile Include="ChatAPI\Modules\Authentication\Gmail.cs" />
+    <Compile Include="ChatAPI\Modules\AuthModule.cs" />
     <Compile Include="ChatAPI\Modules\HistoryModule.cs" />
     <Compile Include="ChatAPI\Modules\Authentication\Registration.cs" />
-    <Compile Include="ChatAPI\Networking\ABaseClientObject.cs" />
     <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
     <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
     <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />
@@ -149,10 +148,8 @@
     <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserver.cs" />
     <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserverBase.cs" />
     <Compile Include="ChatAPI\Modules\RoomObservers\RoomObserverReadonly.cs" />
-    <Compile Include="ChatAPI\Networking\ClientObject.cs" />
     <Compile Include="ChatAPI\Networking\IClientObject.cs" />
     <Compile Include="ChatAPI\Networking\Protocol\ResponseConstructor.cs" />
-    <Compile Include="ChatAPI\Networking\ServerObject.cs" />
     <Compile Include="ChatAPI\Roles\Admin.cs" />
     <Compile Include="ChatAPI\Roles\BannedUser.cs" />
     <Compile Include="ChatAPI\Roles\RoleBase.cs" />
@@ -184,7 +181,6 @@
     <Folder Include="App_Data\Auth\" />
     <Folder Include="App_Data\Log\" />
     <Folder Include="App_Data\Msg\" />
-    <Folder Include="AuthApi\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
 ﻿using AuthApp.Controllers;
+using AuthApp.Models;
 using Core;
 using Newtonsoft.Json;
 using System;
@@ -38,8 +39,8 @@ namespace AuthApp
                     response.Args = "Email exists";
                     break;
                 case PersonDAO.RegistrationStatus.LoginExists:
-
-                    PersonDAO.LoginStatus loginStatus = check.TryLogIn(username, password);
+                    PersonAuth pers = null;
+                    PersonDAO.LoginStatus loginStatus = check.TryLogIn(username, password, out pers);
                     //switch
                     response.Cmd = "fail";
                     response.Args = "Login exists";

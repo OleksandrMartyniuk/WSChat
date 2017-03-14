@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccessKeyProvider.cs" />
     <Compile Include="Controllers\LogProvider.cs" />
     <Compile Include="Controllers\PasswordRecoveryManager.cs" />
     <Compile Include="Controllers\PersonDAO.cs" />

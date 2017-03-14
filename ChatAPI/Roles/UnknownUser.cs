@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatServer.ChatAPI.Modules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,7 @@ namespace ChatServer.Roles
         public UnknownUser(IClientObject clnt): base(clnt)
         {
             Handlers = new IHandlerModule[] {
-                new Login(),
-                new Gmail(),
-                new Facebook(),
-                new ForgotPassword(),
-                new Registration(),
+                new AuthModule()
             };
         }
     }

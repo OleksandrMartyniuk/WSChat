@@ -6,7 +6,7 @@
     <script>
         function login() {
             var r = new XMLHttpRequest();
-            r.open("POST", "http://xzxzxz-001-site1.htempurl.com/Login.ashx", true);
+            r.open("POST", "http://localhost/AuthApp/Login.ashx", true); //"http://xzxzxz-001-site1.htempurl.com/Login.ashx"
             var robj = function () {
                 this.Module = 'Login';
                 this.Cmd = 'in';
@@ -17,7 +17,8 @@
                 if (r.readyState != 4)
                     return;
 
-                (document).getElementById('result').innerHTML = r.responseText;
+                (document).getElementById('result').innerHTML = r.responseText + r.getResponseHeader('access-key');
+                
             }
         }
 

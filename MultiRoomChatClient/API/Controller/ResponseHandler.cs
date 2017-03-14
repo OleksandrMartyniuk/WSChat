@@ -51,7 +51,7 @@ namespace MultiRoomChatClient
                 case "login":
                     switch (req.Cmd)
                     {
-                        case "ok":
+                        case "user":
                             loginSuccessfull?.Invoke((string)req.Args);
                             break;
                         case "admin":

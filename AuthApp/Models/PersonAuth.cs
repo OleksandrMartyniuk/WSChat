@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,5 @@ namespace AuthApp.Models
         public AuthStatus status { get; set; }
     }
 
-    public enum AuthStatus
-    {
-        User,
-        Banned,
-        Admin
-    }
+    
 }

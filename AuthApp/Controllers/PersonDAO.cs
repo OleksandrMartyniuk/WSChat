@@ -5,12 +5,12 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using Core.Models;
 
 namespace AuthApp.Controllers
 {
     public class PersonDAO
     {
-        string databaseName;
         string connectionString;// = @"Server=sql11.freesqldatabase.com;Port=3306;Database=sql11163728;Uid=sql11163728;Pwd=3mdBcaEsYD;CharSet=utf8;";
         private MySqlConnection connection;
         public PersonDAO()
@@ -34,9 +34,9 @@ namespace AuthApp.Controllers
             LoginAndEmailExists
         }
 
-        public LoginStatus TryLogIn(string login, string password)
+        public LoginStatus TryLogIn(string login, string password, out PersonAuth p)
         {
-            var p = GetPerson("username", login);
+            p = GetPerson("username", login);
             if(p == null)
             {
                 return LoginStatus.WrongLogin;
@@ -59,10 +59,12 @@ namespace AuthApp.Controllers
             }
             string insertScript = String.Format("UPDATE `Persons` SET `password`='{0}' WHERE `email`='{1}'", pass, email);
             MySqlCommand iniQuery = null;
+            int res = 0;
             try
             {
                 connection.Open();
                 iniQuery = new MySqlCommand(insertScript, connection);
+                res = iniQuery.ExecuteNonQuery();
             }
             catch (MySqlException ex)
             {
@@ -70,7 +72,6 @@ namespace AuthApp.Controllers
                 //
                 //
             }
-            int res = iniQuery.ExecuteNonQuery();
             connection.Close();
             return res == 1 ? true : false;
         }

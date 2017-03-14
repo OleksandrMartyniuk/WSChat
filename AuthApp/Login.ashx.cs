@@ -6,6 +6,11 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 using AuthApp.Controllers;
+using System.Net;
+using System.Net.Http;
+using AuthApp.Models;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace AuthApp
 {
@@ -28,7 +33,8 @@ namespace AuthApp
             string password = args[1];
 
             PersonDAO check = new PersonDAO();
-            PersonDAO.LoginStatus res = check.TryLogIn(login, password);
+            PersonAuth account = null;
+            PersonDAO.LoginStatus res = check.TryLogIn(login, password, out account);
 
             switch (res)
             {
@@ -40,6 +46,19 @@ namespace AuthApp
                     break;
                 case PersonDAO.LoginStatus.OK:
                     context.Response.Write("ok");
+                    string accessKey = AccessKeyProvider.GetKey();
+                    string serviceURI = ConfigurationManager.AppSettings["app_URI"];
+
+                    using (var client = new WebClient())
+                    {
+                        var values = new Dictionary<string,string>();
+                        values.Add("username", account.name);
+                        values.Add("key", accessKey);
+                        values.Add("status", ((int)account.status).ToString()); 
+
+                        var response = client.UploadString(serviceURI, JsonConvert.SerializeObject(values));
+                    }
+                    context.Response.AddHeader("access-key", accessKey);
                     break;
             }
             LogProvider.AppendRecord("Logged in");

@@ -21,5 +21,5 @@ namespace ChatServer
         void Close();
     }
 
-
+    public delegate void handler(IClientObject sender, string message);
 }
