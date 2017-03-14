@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Core;
-using AuthServer;
 
 namespace ChatServer
 {
@@ -19,7 +18,7 @@ namespace ChatServer
 
             LogProvider.AppendRecord(string.Format("{0} loggin gmail user [{1}]", DateTime.Now.ToString(), name));
             client.Username = name;
-            status(client);
+            ResolveStatus(client);
             return true;
         }
     }

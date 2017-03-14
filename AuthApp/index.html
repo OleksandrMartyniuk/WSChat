@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script>
+        function login() {
+            var r = new XMLHttpRequest();
+            r.open("POST", "http://xzxzxz-001-site1.htempurl.com/Login.ashx", true);
+            var robj = function () {
+                this.Module = 'Login';
+                this.Cmd = 'in';
+                this.Args = ["sanyok", " "];
+            }
+            r.send(JSON.stringify(new robj()));
+            r.onreadystatechange = function () {
+                if (r.readyState != 4)
+                    return;
+
+                (document).getElementById('result').innerHTML = r.responseText;
+            }
+        }
+
+        function register() {
+            var r = new XMLHttpRequest();
+            r.open("POST", "http://xzxzxz-001-site1.htempurl.com/Registration.ashx", true);
+            var robj = function () {
+                this.Module = 'Login';
+                this.Cmd = 'in';
+                this.Args = ["vasja", " ", "email@sabaka"];
+            }
+            r.send(JSON.stringify(new robj()));
+            r.onreadystatechange = function () {
+                if (r.readyState != 4)
+                    return;
+
+                (document).getElementById('result').innerHTML = r.responseText;
+            }
+        }
+
+        function getPassword() {
+            var r = new XMLHttpRequest();
+            r.open("POST", "http://xzxzxz-001-site1.htempurl.com/PasswordRecovery.ashx", true);
+            
+            r.send('alexandrmartiniuk@gmail.com');
+            r.onreadystatechange = function () {
+                if (r.readyState != 4)
+                    return;
+
+                (document).getElementById('result').innerHTML = r.responseText;
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" onclick="login()" value="Login" />
+    <input type="button" onclick="register()" value="Register" />
+    <input type="button" onclick="getPassword()" value="GetPassword" />
+    <div>
+        <span id="result"></span>
+    </div>
+</body>
+</html>

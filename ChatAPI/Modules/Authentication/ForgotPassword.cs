@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using AuthServer;
 
 namespace ChatServer
 {
@@ -16,7 +15,7 @@ namespace ChatServer
             {
                 return false;
             }
-            bool flag =  new ApiAuth().api.ForgotPassword(request.Args.ToString());
+            bool flag = false;//new ApiAuth().api.ForgotPassword(request.Args.ToString());
             if (flag == true)
             {
                 client.SendMessage(ResponseConstructor.GetErrorNotification("Success", "login"));

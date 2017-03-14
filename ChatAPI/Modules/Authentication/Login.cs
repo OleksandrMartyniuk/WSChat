@@ -1,6 +1,4 @@
-﻿
-using AuthServer;
-using ChatServer.Roles;
+﻿using ChatServer.Roles;
 using Core;
 using Newtonsoft.Json;
 using System;
@@ -23,14 +21,14 @@ namespace ChatServer
             object[] arg = JsonConvert.DeserializeObject<object[]>(request.Args.ToString());
             Person user = new Person(arg[0].ToString(), arg[1].ToString(), null);
 
-            string flag = new ApiAuth().api.LogIn(user);
+            /*string flag = "hooy";// new ApiAuth().api.LogIn(user);
             if (flag == "false")
             {
                 client.SendMessage(ResponseConstructor.GetErrorNotification("Please check that you have entered your login and password correctly", "login"));
                 return true;
-            }
+            }*/
             client.Username = user.name;
-            status(client);
+            ResolveStatus(client);
             return true;
         }
 

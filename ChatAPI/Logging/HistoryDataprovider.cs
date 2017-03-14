@@ -17,8 +17,8 @@ namespace ChatServer
 
         static HistoryDataprovider()
         {
-            PublicFolder = HttpContext.Current.Server.MapPath(@"/App_Data/Msg/Rooms/");
-            PrivateFolder = HttpContext.Current.Server.MapPath(@"/App_Data/Msg/Private/");
+            PublicFolder = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Msg/Rooms/";
+            PrivateFolder = AppDomain.CurrentDomain.BaseDirectory + "/App_Data/Msg/Private/";
             Directory.CreateDirectory(PublicFolder);
             Directory.CreateDirectory(PrivateFolder);
         }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using Core;
 using ChatServer.Roles;
-using AuthServer;
 
 namespace ChatServer
 {
@@ -12,7 +11,7 @@ namespace ChatServer
     {
         abstract public bool Handle(IClientObject client, RequestObject request);
 
-        protected void status(IClientObject client)
+        protected void ResolveStatus(IClientObject client)
         {
             if (IsAdmin(client.Username))
             {
@@ -20,7 +19,7 @@ namespace ChatServer
                 client.SendMessage(ResponseConstructor.GetLoginResultNotification("admin", client.Username));
                 LogProvider.AppendRecord(string.Format("[{0}]: Logged in as admin", client.Username));
             }
-            else if (IsInBlackList(client.Username))
+            else if (BlackListProvider.RecordExists(client.Username))
             {
                 client.Role = new BannedUser(client);
                 client.SendMessage(ResponseConstructor.GetLoginResultNotification("banned", client.Username));
@@ -34,11 +33,7 @@ namespace ChatServer
             }
             Manager.AddClient(client);
         }
-        private bool IsInBlackList(string Username)
-        {
-            return BlackListProvider.RecordExists(Username);
-        }
-
+        
         private bool IsAdmin(string Username)
         {
             if (Username == "admin")
