@@ -27,32 +27,28 @@ namespace AuthApp
 
             string email = (string)robj.Args;
             string username = email.Split('@')[0];
-            string password = Membership.GeneratePassword(10, 3);
+            string password = Membership.GeneratePassword(10, 0);
 
             PersonDAO check = new PersonDAO();
             PersonDAO.RegistrationStatus res = check.TryRegister(username, password, email);
-            RequestObject response = new RequestObject("registration", "", null);
+
             switch (res)
             {
                 case PersonDAO.RegistrationStatus.EmailExists:
-                    response.Cmd = "fail";
-                    response.Args = "Email exists";
+                    
                     break;
                 case PersonDAO.RegistrationStatus.LoginExists:
                     PersonAuth pers = null;
                     PersonDAO.LoginStatus loginStatus = check.TryLogIn(username, password, out pers);
-                    //switch
-                    response.Cmd = "fail";
-                    response.Args = "Login exists";
+                    
                     break;
 
                 case PersonDAO.RegistrationStatus.OK:
-                    response.Cmd = "ok";
-                    response.Args = username;
+                    
                     break;
             }
-            string r = JsonConvert.SerializeObject(response);
-            context.Response.Write(r);
+            
+           // context.Response.Write(r);
         }
 
         public bool IsReusable

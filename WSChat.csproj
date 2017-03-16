@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="html\js\auth\facebook.js" />
+    <Content Include="html\js\Controller\onLoadScript.js" />
     <Content Include="html\js\Controller\RequestManager.js" />
     <Content Include="html\js\lib\jquery-3.1.1.min.js" />
     <Content Include="html\js\lib\sdk.js" />
@@ -95,13 +96,13 @@
     <Content Include="html\js\Model\connection.js" />
     <Content Include="html\js\Model\ChatMessage.js" />
     <Content Include="html\js\Model\roomObj.js" />
-    <Content Include="html\js\Model\ShowModules.js" />
     <Content Include="html\style\reset.css" />
     <Content Include="html\style\styles.css" />
     <Content Include="html\js\ViewScripts\tabView.js" />
     <Content Include="default.html" />
     <Content Include="packages.config" />
     <Content Include="LoginHandler.ashx" />
+    <Content Include="ClientLoadHandler.ashx" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -110,30 +111,21 @@
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
     <Content Include="Scripts\jquery-2.0.2.min.js" />
+    <Content Include="html\js\lib\js.cookie.js" />
     <Content Include="test.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-2.0.2.min.map" />
     <Content Include="html\js\auth\authorization.js" />
-    <Content Include="WebClient\scripts\Connection.js" />
-    <Content Include="WebClient\scripts\Handler.js" />
-    <Content Include="WebClient\Main.html" />
-    <Content Include="WebClient\scripts\RequestManager.js" />
-    <Content Include="WebClient\scripts\ResponseHandler.js" />
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthApi\AuthPool.cs" />
     <Compile Include="ChatAPI\Logging\CrashReportProvider.cs" />
     <Compile Include="ChatAPI\Logging\LogProvider.cs" />
-    <Compile Include="ChatAPI\Modules\Authentication\LoginBase.cs" />
-    <Compile Include="ChatAPI\Modules\Authentication\Facebook.cs" />
-    <Compile Include="ChatAPI\Modules\Authentication\ForgotPassword.cs" />
-    <Compile Include="ChatAPI\Modules\Authentication\Gmail.cs" />
     <Compile Include="ChatAPI\Modules\AuthModule.cs" />
     <Compile Include="ChatAPI\Modules\HistoryModule.cs" />
-    <Compile Include="ChatAPI\Modules\Authentication\Registration.cs" />
     <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
     <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
     <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />
@@ -141,7 +133,6 @@
     <Compile Include="ChatAPI\Modules\AdminModule.cs" />
     <Compile Include="ChatAPI\Modules\IHandlerModule.cs" />
     <Compile Include="ChatAPI\Modules\Info.cs" />
-    <Compile Include="ChatAPI\Modules\Authentication\Login.cs" />
     <Compile Include="ChatAPI\Modules\Logout.cs" />
     <Compile Include="ChatAPI\Modules\Private.cs" />
     <Compile Include="ChatAPI\Modules\Room.cs" />
@@ -157,6 +148,9 @@
     <Compile Include="ChatAPI\Roles\User.cs" />
     <Compile Include="ChatAPI\Rooms\Manager.cs" />
     <Compile Include="ChatAPI\Rooms\RoomObject.cs" />
+    <Compile Include="ClientLoadHandler.ashx.cs">
+      <DependentUpon>ClientLoadHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="LoginHandler.ashx.cs">
       <DependentUpon>LoginHandler.ashx</DependentUpon>
     </Compile>

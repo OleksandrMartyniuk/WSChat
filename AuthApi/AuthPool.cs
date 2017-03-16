@@ -16,9 +16,9 @@ namespace ChatServer.AuthApi
             PoolObject record = new PoolObject(username, key, status);
             pool.AddLast(record);
 
-            Task removeByTimeout = new Task(() =>
+            Task removeByTimeout = new Task(async () =>
             {
-                Task.Delay(new TimeSpan(0, 2, 0));
+                await Task.Delay(120000);
                 pool.Remove(record);
             });
             removeByTimeout.Start();
@@ -26,16 +26,16 @@ namespace ChatServer.AuthApi
 
         public static PoolObject GetRecordByKey(string key)
         {
-            var res = pool.Where<PoolObject>((obj) => obj.Key == key).ToArray();
-            if(res.Length == 0)
+            PoolObject res = null;
+            foreach(PoolObject p in pool)
             {
-                return null;
+                if(p.Key == key)
+                {
+                    res = p;
+                    break;
+                }
             }
-            else
-            {
-                pool.Remove(res[0]);
-                return res[0];
-            }
+            return res;
         }
 
         public class PoolObject

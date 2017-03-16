@@ -17,16 +17,15 @@ namespace AuthApp
 
         public void ProcessRequest(HttpContext context)
         {
-            RequestObject robj = null;
+            Dictionary<string, string> robj = null;
             using (StreamReader sr = new StreamReader(context.Request.InputStream))
             {
                 string body = sr.ReadLine();
-                robj = JsonConvert.DeserializeObject<RequestObject>(body);
+                robj = JsonConvert.DeserializeObject<Dictionary<string, string>>(body);
             }
-            string[] args = JsonConvert.DeserializeObject<string[]>(robj.Args.ToString());
-            string login = args[0];
-            string password = args[1];
-            string email = args[2];
+            string login = robj["login"];
+            string email = robj["email"];
+            string password = robj["password"];
 
             PersonDAO check = new PersonDAO();
             PersonDAO.RegistrationStatus res = check.TryRegister(login, password, email);

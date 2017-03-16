@@ -32,13 +32,3 @@ function connection() {
         };
     }
 };
-
-window.onload = function () {
-    if (sessionStorage['status'] === "loggin") {
-        ShowLobby();
-    }
-    else{
-        ShowAuth();
-    }
-    connection();
-}

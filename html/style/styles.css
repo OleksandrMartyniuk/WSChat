@@ -83,10 +83,6 @@ div.panel > a.list-group-item {
     color: white;
 }
 
-.lobby{
-   display:none;
-}
-
 .auth {
     border: groove;
     width: 405px;

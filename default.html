@@ -5,10 +5,14 @@
     <link href="html/style/reset.css" rel="stylesheet" />
     <link href="html/style/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    
+   <!-- <script src="html/js/auth/facebook.js"></script>
+    <script src="html/js/auth/authorization.js"></script>-->
   
 </head>
 <body>
-    <div class="auth" id="auth">
+  <!--  <div class="auth" id="auth">
         <div class="wrapper">
             <table>
                 <tr>
@@ -50,7 +54,7 @@
             <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
         </div>
     </div>
-
+    -->
     <div class="lobby" id="lobby">
         <div id="wrapper">
             <div style="height:30px; "><span>Hello, <span id="username"></span></span> <button type="button" class="btn" id="btnLogOut" style="float:right; display:inline; padding:2px;">Log Out</button></div>
@@ -103,22 +107,17 @@
 
     <script src="html/js/lib/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="html/js/lib/js.cookie.js"></script>
     
     <script src="html/js/Model/connection.js"></script>
-
     <script src="html/js/ViewScripts/tabView.js"></script>
     <script src="html/js/Model/ChatMessage.js"></script>
     <script src="html/js/Model/RoomObj.js"></script>
     <script src="html/js/Model/RequestObject.js"></script>
-    <script src="html/js/Model/ShowModules.js"></script>
-
     <script src="html/js/Controller/RequestManager.js"></script>
     <script src="html/js/Controller/ResponseHandler.js"></script>
 
-    <script src="html/js/auth/facebook.js"></script>
-    <script src="html/js/auth/authorization.js"></script>
-    
-
+    <script src="html/js/Controller/onLoadScript.js"></script>
     <script>
         //Rooms.addRoomToMenu({ 'Name': 'Host', 'clients': ['vasya', 'petya'] });
         //Rooms.addRoomToMenu({ 'Name': 'v1', 'clients': ['1', '2'] });

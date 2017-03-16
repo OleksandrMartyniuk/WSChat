@@ -93,8 +93,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
     <Content Include="packages.config" />
+    <Content Include="PasswordRecoveryForm.html" />
+    <Content Include="LoginForm.html" />
     <Content Include="Registration.ashx" />
     <Content Include="Login.ashx" />
     <Content Include="PasswordRecovery.ashx" />
@@ -109,11 +110,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Registration.html" />
+    <Content Include="scripts\authApi.js" />
+    <Content Include="scripts\loginFormScriptswp.js" />
+    <Content Include="scripts\passwordRecoveryForm.js" />
+    <Content Include="scripts\registrationFormScript.js" />
+    <Content Include="scripts\errorBox.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccessKeyProvider.cs" />
+    <Compile Include="Models\AccessKeyProvider.cs" />
     <Compile Include="Controllers\LogProvider.cs" />
     <Compile Include="Controllers\PasswordRecoveryManager.cs" />
     <Compile Include="Controllers\PersonDAO.cs" />

@@ -11,6 +11,7 @@ using System.Net.Http;
 using AuthApp.Models;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Threading;
 
 namespace AuthApp
 {
@@ -22,15 +23,14 @@ namespace AuthApp
 
         public void ProcessRequest(HttpContext context)
         {
-            RequestObject robj = null;
+            Dictionary<string,string> robj = null;
             using (StreamReader sr = new StreamReader(context.Request.InputStream))
             {
                 string body = sr.ReadLine();
-                robj = JsonConvert.DeserializeObject<RequestObject>(body);
+                robj = JsonConvert.DeserializeObject<Dictionary<string, string>>(body);
             }
-            string[] args = JsonConvert.DeserializeObject<string[]>(robj.Args.ToString());
-            string login = args[0];
-            string password = args[1];
+            string login = robj["login"];
+            string password = robj["password"];
 
             PersonDAO check = new PersonDAO();
             PersonAuth account = null;
@@ -46,7 +46,7 @@ namespace AuthApp
                     break;
                 case PersonDAO.LoginStatus.OK:
                     context.Response.Write("ok");
-                    string accessKey = AccessKeyProvider.GetKey();
+                    string accessKey = AccessKeyProvider.GetMD5Key(login);
                     string serviceURI = ConfigurationManager.AppSettings["app_URI"];
 
                     using (var client = new WebClient())
@@ -58,6 +58,7 @@ namespace AuthApp
 
                         var response = client.UploadString(serviceURI, JsonConvert.SerializeObject(values));
                     }
+                    Thread.Sleep(100); 
                     context.Response.AddHeader("access-key", accessKey);
                     break;
             }
