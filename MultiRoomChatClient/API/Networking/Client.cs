@@ -24,6 +24,7 @@ namespace MultiRoomChatClient
 
         public static event responseHandler responseReceived;
         public static event errorMessage NewErrorMessage;
+        public static event connectionHandler ConnectionOpened;
 
         static Client()
         {
@@ -42,6 +43,7 @@ namespace MultiRoomChatClient
 
         public static void StartClient()
         {
+            ConnectionClient.ConnectionOpened += () => ConnectionOpened?.Invoke();
             ConnectionClient.StartClient();
         }
 

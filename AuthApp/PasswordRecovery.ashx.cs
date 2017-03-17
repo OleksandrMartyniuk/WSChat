@@ -31,7 +31,7 @@ namespace AuthApp
             else
             {
                 PasswordRecoveryManager.SendByEmail(p.email, p.name, p.password);
-                context.Response.Write("OK");
+                context.Response.Write("ok");
             }
         }
 

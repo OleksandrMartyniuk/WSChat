@@ -43,42 +43,53 @@ namespace ChatServer
             return fileName;
         }
 
-        public static ChatMessage[] GetPrivateHistory(string user1, string user2)
+        public static LinkedList<ChatMessage> GetPrivateHistory(string user1, string user2)
         {
             return GetHistoryFromFile(FindPrivateHistory(user1, user2));
         }
 
-        public static ChatMessage[] GetPrivateHistory(string user1, string user2, DateTime last)
+        public static ChatMessage[] GetPrivateHistory(string user1, string user2, DateTime time)
         {
-            if(last == default(DateTime))
+            LinkedList<ChatMessage> Messages = GetHistoryFromFile(FindPrivateHistory(user1, user2));
+
+            LinkedList<ChatMessage> msgs = new LinkedList<ChatMessage>();
+
+            LinkedListNode<ChatMessage> next = Messages.Last;
+
+            while (next != null && next.Value.TimeStamp >= time)
             {
-                last = DateTime.Now;
-            }
-            ChatMessage[] msgs = GetHistoryFromFile(FindPrivateHistory(user1, user2));
-            if(msgs.Length == 0)
-            {
-                return msgs;
+                next = next.Previous;
             }
 
-            LinkedList<ChatMessage> res = new LinkedList<ChatMessage>();
-
-            for(int i = msgs.Length-1, j = 0; i > 0 && j < 10; i--)
+            if (next == null)
             {
-                if(msgs[i].TimeStamp < last)
+                return msgs.ToArray();
+            }
+
+            LinkedListNode<ChatMessage> current = next;
+
+            for (int i = 0; i <= 10; i++)
+            {
+                if (current != null)
                 {
-                    res.AddLast(msgs[i]);
-                    j++;
+                    msgs.AddFirst(current.Value);
                 }
+                else
+                {
+                    break;
+                }
+                current = current.Previous;
             }
-            return res.ToArray();
+
+            return msgs.ToArray();
         }
 
-        public static ChatMessage[] GetHistory(string roomName)
+        public static LinkedList<ChatMessage> GetHistory(string roomName)
         {
             return GetHistoryFromFile(PublicFolder + roomName);
         }
 
-        private static ChatMessage[] GetHistoryFromFile(string path)
+        private static LinkedList<ChatMessage> GetHistoryFromFile(string path)
         {
             if (!File.Exists(path))
             {
@@ -93,7 +104,7 @@ namespace ChatServer
                 ChatMessage msg = JsonConvert.DeserializeObject<ChatMessage>(list[i]);
                 messages.AddLast(msg);
             }
-            return messages.ToArray();
+            return messages;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ChatServer
 
             context.Response.Cookies.Add(new HttpCookie("username", username));
             context.Response.Cookies.Add(new HttpCookie("status", status.ToString()));
-            context.Response.WriteFile(@"C:\Users\sanyok\Source\Repos\WSChat\default.html");
+            context.Response.WriteFile( AppDomain.CurrentDomain.BaseDirectory + "/default.html");
         }
 
         public bool IsReusable

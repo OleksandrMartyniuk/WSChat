@@ -209,11 +209,15 @@ namespace MultiRoomChatClient
 
         private void UploadHistory_Click(object sender, EventArgs e)
         {
+            if(tabbedMessageList1.selectedTab == null)
+            {
+                return;
+            }
             var room = ((RoomObjExt)tabbedMessageList1.selectedTab.Tag);
             string active = room.Name;
             if(room.Messages.Count == 0)
             {
-                RequestManager.RequestMessageList(active);
+                RequestManager.RequestMessageList(active, DateTime.Now);
             }
             else
             {

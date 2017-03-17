@@ -24,7 +24,7 @@
                     mail.parent().addClass('has-error has-feedback');
                     showMessage('Email ' + mail.val() + ' not found');
                     break;
-                case 'OK':
+                case 'ok':
                     mail.parent().removeClass('has-error has-feedback');
                     messageSuccess('<p>The password was successfully sent to you</p>');
                     break;

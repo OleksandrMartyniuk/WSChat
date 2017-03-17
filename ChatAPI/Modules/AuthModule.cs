@@ -25,27 +25,34 @@ namespace ChatServer.ChatAPI.Modules
             if(obj == null)
             {
                 client.SendMessage(ResponseConstructor.GetErrorNotification("authorization failed", "login"));
+                return true;
             }
-            else
+            if(Manager.FindClient(obj.Username) != null)
             {
-                switch (obj.status){
-                    case AuthStatus.User:
-                        client.Role = new User(client);
-                        client.SendMessage(ResponseConstructor.GetLoginResultNotification("user", obj.Username));
-                        LogProvider.AppendRecord(string.Format("[{0}]: Logged in as user", client.Username));
-                        break;
-                    case AuthStatus.Banned:
-                        client.Role = new BannedUser(client);
-                        client.SendMessage(ResponseConstructor.GetLoginResultNotification("banned", obj.Username));
-                        LogProvider.AppendRecord(string.Format("[{0}]: Logged in as banned user", client.Username));
-                        break;
-                    case AuthStatus.Admin:
-                        client.Role = new Admin(client);
-                        client.SendMessage(ResponseConstructor.GetLoginResultNotification("admin", obj.Username));
-                        LogProvider.AppendRecord(string.Format("[{0}]: Logged in as admin", client.Username));
-                        break;
-                }
+                client.SendMessage(ResponseConstructor.GetErrorNotification("You have already logged in", "login"));
+                client.Close();
+                return true;
             }
+            client.Username = obj.Username;
+            switch (obj.status)
+            {
+                case AuthStatus.User:
+                    client.Role = new User(client);
+                    client.SendMessage(ResponseConstructor.GetLoginResultNotification("user", obj.Username));
+                    LogProvider.AppendRecord(string.Format("[{0}]: Logged in as user", client.Username));
+                    break;
+                case AuthStatus.Banned:
+                    client.Role = new BannedUser(client);
+                    client.SendMessage(ResponseConstructor.GetLoginResultNotification("banned", obj.Username));
+                    LogProvider.AppendRecord(string.Format("[{0}]: Logged in as banned user", client.Username));
+                    break;
+                case AuthStatus.Admin:
+                    client.Role = new Admin(client);
+                    client.SendMessage(ResponseConstructor.GetLoginResultNotification("admin", obj.Username));
+                    LogProvider.AppendRecord(string.Format("[{0}]: Logged in as admin", client.Username));
+                    break;
+            }
+            Manager.AddClient(client);
             return true;
         }
     }

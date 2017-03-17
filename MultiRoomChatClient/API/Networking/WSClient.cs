@@ -16,6 +16,7 @@ namespace MultiRoomChatClient.API.Networking
 
         public event responseHandler responseReceived;
         public event errorMessage NewErrorMessage;
+        public event connectionHandler ConnectionOpened;
 
         public WSClient(string wsURI)
         {
@@ -24,8 +25,9 @@ namespace MultiRoomChatClient.API.Networking
 
         public void StartClient()
         {
-            socket = new WebSocket(wsURI);            //Инициализация веб сокет клиента 
-            socket.Open();                                //Открытие соединения
+            socket = new WebSocket(wsURI);
+            socket.Opened += (x,y) => ConnectionOpened?.Invoke();
+            socket.Open();
             socket.MessageReceived += InvokeMessageReceived;
 
             socket.Error += (sender, args) => NewErrorMessage?.Invoke(args.Exception.Message);

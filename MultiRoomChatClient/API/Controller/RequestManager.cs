@@ -11,26 +11,26 @@ namespace MultiRoomChatClient
     public static class RequestManager
     {
         
-        public static void Login(string name,string password)
+        public static void Login(string key)
         {
-            Client.AddRequest(new RequestObject("login", "in", new object[] { name, password }));
+            Client.AddRequest(new RequestObject("auth", "in", key));
         }
-        public static void LoginGmail(string name)
-        {
-            Client.AddRequest(new RequestObject("login", "Gmail",  name ));
-        }
-        public static void LoginFacebook(string name)
-        {
-            Client.AddRequest(new RequestObject("login", "Facebook", name));
-        }
-        public static void LoginReg(string name, string password, string email)
-        {
-            Client.AddRequest(new RequestObject("login", "Registration", new object[] { name, password, email }));
-        }
-        public static void LoginForgot(string name)
-        {
-            Client.AddRequest(new RequestObject("login", "Forgot", name));
-        }
+        //public static void LoginGmail(string name)
+        //{
+        //    Client.AddRequest(new RequestObject("login", "Gmail",  name ));
+        //}
+        //public static void LoginFacebook(string name)
+        //{
+        //    Client.AddRequest(new RequestObject("login", "Facebook", name));
+        //}
+        //public static void LoginReg(string name, string password, string email)
+        //{
+        //    Client.AddRequest(new RequestObject("login", "Registration", new object[] { name, password, email }));
+        //}
+        //public static void LoginForgot(string name)
+        //{
+        //    Client.AddRequest(new RequestObject("login", "Forgot", name));
+        //}
         
         public static void Logout(string name)
         {
@@ -69,12 +69,12 @@ namespace MultiRoomChatClient
             Client.AddRequest(new RequestObject("info", "get", "null"));
         }
 
-        public static void RequestMessageList(string room, DateTime last = default(DateTime))
+        public static void RequestMessageList(string room, DateTime last)
         {
             Client.AddRequest(new RequestObject("history", "room", new object[] { room, last }));
         }
 
-        public static void RequestPrivateMessageList(string username, DateTime last = default(DateTime))
+        public static void RequestPrivateMessageList(string username, DateTime last)
         {
             Client.AddRequest(new RequestObject("history", "private", 
                 new object[] { Client.Username, username, last }));

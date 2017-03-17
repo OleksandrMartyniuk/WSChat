@@ -99,6 +99,13 @@ namespace MultiRoomChatClient
             {
                 return;
             }
+            foreach (ChatMessage msg in history)
+            {
+                if (msg.Sender == Client.Username)
+                {
+                    msg.Sender = "Me";
+                }
+            }
             r.PrependMessages(history);
         }
     }

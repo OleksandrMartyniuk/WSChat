@@ -16,7 +16,9 @@ namespace MultiRoomChatClient.API.Networking
 
         event responseHandler responseReceived;
         event errorMessage NewErrorMessage;
+        event connectionHandler ConnectionOpened;
     }
     public delegate void responseHandler(string json);
     public delegate void errorMessage(string msg);
+    public delegate void connectionHandler();
 }

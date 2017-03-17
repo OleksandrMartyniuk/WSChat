@@ -55,22 +55,19 @@ namespace ChatServer
             LinkedList<ChatMessage> msgs = new LinkedList<ChatMessage>();
 
             LinkedListNode<ChatMessage> next = Messages.Last;
-            if(next == null)
-            {
-                return msgs.ToArray();
-            }
 
-            if(time == default(DateTime))
-            {
-                time = DateTime.Now;
-            }
-            
-            while(next.Value.TimeStamp > time && next != Messages.First)
+            while( next != null && next.Value.TimeStamp >= time)// Messages.First)
             {
                 next = next.Previous;
             }
 
+            if (next == null)
+            {
+                return msgs.ToArray();
+            }
+
             LinkedListNode<ChatMessage> current = next;
+
             for (int i = 0; i <= 10; i++)
             {
                 if (current != null)

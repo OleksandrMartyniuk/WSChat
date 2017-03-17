@@ -118,9 +118,9 @@ namespace MultiRoomChatClient
                             break;
                         case "private":
                             args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
-                            string user = (string)args[1] == Client.Username ? (string)args[1] : (string)args[0];
-                            history = JsonConvert.DeserializeObject<ChatMessage[]>(args[2].ToString());
-                            RoomHistoryReceived?.Invoke(user, history);
+                            string user = args[0].ToString();
+                            history = JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString());
+                            PrivateHistoryReceived?.Invoke(user, history);
                             break;
                         default:
                             break;

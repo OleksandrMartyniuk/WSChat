@@ -24,7 +24,7 @@ namespace MultiRoomChatClient
             Text = username;
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            ResponseHandler.PrivateHistoryReceived += PrependHistory;
+            ResponseHandler.PrivateHistoryReceived += (user,history) => Invoke(new Action<string, ChatMessage[]>(PrependHistory), user, history);
         }
 
         public void AppendMessage(ChatMessage msg)
@@ -62,15 +62,32 @@ namespace MultiRoomChatClient
             {
                 return;
             }
+            foreach (ChatMessage msg in history)
+            {
+                if(msg.Sender == Client.Username)
+                {
+                    msg.Sender = "Me";
+                }
+            }
             var msgs = list_msg.Items.Cast<ChatMessage>().ToList();
             list_msg.Items.Clear();
             List<ChatMessage> refreshed = new List<ChatMessage>(history);
-            refreshed.AddRange(refreshed);
+            refreshed.AddRange(msgs);
+            
+            list_msg.Items.AddRange(refreshed.ToArray());
         }
 
         private void btn_updHistory_Click(object sender, EventArgs e)
         {
-            RequestManager.RequestPrivateMessageList(this.Recipient, (list_msg.Items[0] as ChatMessage).TimeStamp);
+            if(list_msg.Items.Count > 0)
+            {
+                RequestManager.RequestPrivateMessageList(this.Recipient, (list_msg.Items[0] as ChatMessage).TimeStamp);
+            }
+            else
+            {
+                RequestManager.RequestPrivateMessageList(this.Recipient, DateTime.Now);
+            }
+            
         }
     }
 }
