@@ -122,13 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthApi\AuthPool.cs" />
+    <Compile Include="AuthApi\AuthServerAdminClient.cs" />
     <Compile Include="ChatAPI\Logging\CrashReportProvider.cs" />
     <Compile Include="ChatAPI\Logging\LogProvider.cs" />
     <Compile Include="ChatAPI\Modules\AuthModule.cs" />
     <Compile Include="ChatAPI\Modules\HistoryModule.cs" />
     <Compile Include="ChatAPI\Networking\MyWebSocketClient.cs" />
-    <Compile Include="ChatAPI\Logging\AuthProvider.cs" />
-    <Compile Include="ChatAPI\Logging\BlackListProvider.cs" />
     <Compile Include="ChatAPI\Logging\HistoryDataprovider.cs" />
     <Compile Include="ChatAPI\Modules\AdminModule.cs" />
     <Compile Include="ChatAPI\Modules\IHandlerModule.cs" />

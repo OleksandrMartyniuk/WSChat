@@ -17,7 +17,7 @@ namespace AuthApp.Controllers
 
         public static string GetMD5Key(string s)
         {
-            return FormsAuthentication.HashPasswordForStoringInConfigFile(s, "MD5");
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(s + DateTime.Now.ToShortTimeString(), "MD5");
         }
     }
 }

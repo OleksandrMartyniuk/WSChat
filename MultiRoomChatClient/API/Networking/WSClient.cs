@@ -47,6 +47,7 @@ namespace MultiRoomChatClient.API.Networking
         public void Disconnect()
         {
             socket.Close();
+            socket = null;
         }
     }
 }

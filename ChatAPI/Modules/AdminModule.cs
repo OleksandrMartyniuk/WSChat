@@ -1,4 +1,5 @@
-﻿using ChatServer.Roles;
+﻿using ChatServer.AuthApi;
+using ChatServer.Roles;
 using Core;
 using Newtonsoft.Json;
 using System;
@@ -26,28 +27,31 @@ namespace ChatServer
                     BanUser((string)args[0], (DateTime)args[1]); //[0] -username
                     break;
                 case "unban":
-                    UnBanUser((string)request.Args);
+                    UnBanUser(request.Args.ToString());
+                    break;
+                case "close_room":
+                    Manager.CloseRoom(request.Args.ToString());
                     break;
                 default: break;
             }
             return true;
         }
         
-        private void BanUser(string username, DateTime duration)
+        private void BanUser(string username, DateTime? duration)
         {
-            BlackListProvider.AppendRecord(username, duration);
+            AuthServerAdminClient.Ban(username, duration);
 
             IClientObject user = Manager.FindClient(username);
             if (user == null || user.ToString() == "")  //user not found
                 return;
             LogProvider.AppendRecord(string.Format("[{0}]: banned user {1}", user.Username , username));
             user.SendMessage(ResponseConstructor.GetBannedNotification(duration));
-            //user.Role = new BannedUser(user);
+            user.Role = new BannedUser(user, duration);
         }
 
         private void UnBanUser(string username)
         {
-            BlackListProvider.RemoveRecord(username);
+            AuthServerAdminClient.UnBan(username);
 
             IClientObject user = Manager.FindClient(username);
             if (user == null || user.ToString() == "")

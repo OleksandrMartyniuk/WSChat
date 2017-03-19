@@ -1,5 +1,6 @@
 ﻿using Core;
 using MultiRoomChatClient.API;
+using MultiRoomChatClient.API.Networking;
 using MultiRoomChatClient.GUI.Auth;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace MultiRoomChatClient
     public partial class LoginForm : Form
     {
         public AuthServerClient authClient;
+        private string key;
 
         public LoginForm()
         {
@@ -30,6 +32,8 @@ namespace MultiRoomChatClient
             ResponseHandler.loggedAsAdmin += (login) => this.Invoke(new Action<string>(On_LoginAdmin), login);
             ResponseHandler.loggedBanned += (login) => this.Invoke(new Action<string>(On_LoginBanned), login);
             ResponseHandler.loginFail += (msg) => this.Invoke(new Action<string>(On_LoginError), msg);
+
+            Client.ConnectionOpened += () => RequestManager.Login(this.key);
         }
 
         private void OnWrongUsername()
@@ -58,7 +62,7 @@ namespace MultiRoomChatClient
 
         private void OnLoginSuccessfull(string key)
         {
-            Client.ConnectionOpened += () => RequestManager.Login(key);
+            this.key = key;
             Client.StartClient();
         }
 
@@ -131,7 +135,7 @@ namespace MultiRoomChatClient
         {
             Client.Username = username;
             var chat = new SuperDuperChat();
-            chat.Ban();
+            chat.Ban(null);
             chat.Location = Location;
             chat.StartPosition = StartPosition;
             chat.Show();

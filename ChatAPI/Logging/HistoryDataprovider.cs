@@ -84,6 +84,15 @@ namespace ChatServer
             return msgs.ToArray();
         }
 
+        internal static void RemoveHistory(string roomName)
+        {
+            string path = PublicFolder + roomName;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+
         public static LinkedList<ChatMessage> GetHistory(string roomName)
         {
             return GetHistoryFromFile(PublicFolder + roomName);

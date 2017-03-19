@@ -29,5 +29,23 @@ namespace Core
         {
             return "[" + TimeStamp.ToString("T", CultureInfo.CreateSpecificCulture("es-ES")) + "]" + Sender + " : " + Text ;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+            ChatMessage msg = obj as ChatMessage;
+            if(Sender != msg.Sender)
+            {
+                return false;
+            }
+            if(TimeStamp != msg.TimeStamp)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

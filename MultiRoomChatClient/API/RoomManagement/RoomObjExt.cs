@@ -21,15 +21,7 @@ namespace MultiRoomChatClient
         {
             this.Name = r.Name;
             this.clients = r.clients;
-
-            //ChatMessage[] msgs = Client.RoomHistory.GetHistory(Name);
-            //if(msgs!= null)
-            //{
-            //    foreach(ChatMessage msg in msgs)
-            //    {
-            //        Messages.Add(msg);
-            //    }
-            //}
+            this.Creator = r.Creator;
         }
 
         public void SendMessage(string message)
@@ -113,10 +105,24 @@ namespace MultiRoomChatClient
             NotificationUpdated?.Invoke(Notifications);
         }
 
-        public void PrependMessages(IEnumerable<ChatMessage> history)
+        public void PrependMessages(ChatMessage[] history)
         {
+            List<ChatMessage> upl = new List<ChatMessage>();
+            if(Messages.Count > 0)
+            {
+                int index = 0;
+                while (index < history.Length && history[index].TimeStamp < this.Messages.First().TimeStamp)
+                {
+                    upl.Add(history[index]);
+                    index--;
+                }
+            }
+            else
+            {
+                upl.AddRange(history);
+            }
             List<ChatMessage> hist = Messages;
-            Messages = new List<ChatMessage>(history);
+            Messages = upl;
             Messages.AddRange(hist);
             MessageReceived?.Invoke(null);
         }

@@ -11,6 +11,7 @@ namespace ChatServer
     public class RoomObject
     {
         public readonly string Name;
+        public readonly string Creator;
 
         public LinkedList<ChatMessage> Messages = new LinkedList<ChatMessage>();
         public LinkedList<RoomObserverBase> Clients = new LinkedList<RoomObserverBase>();
@@ -23,9 +24,11 @@ namespace ChatServer
 
         public event messageDelegate NewMessage;
 
-        public RoomObject(string name)
+        public RoomObject(string name, string creator)
         {
             Name = name;
+            Creator = creator;
+
             var history = HistoryDataprovider.GetHistory(name);
 
             if (history != null)
@@ -39,6 +42,7 @@ namespace ChatServer
         {
             RoomObj res = new RoomObj();
             res.Name = this.Name;
+            res.Creator = this.Creator;
             List<string> users = new List<string>();
             foreach(RoomObserverBase clnt in Clients)
             {

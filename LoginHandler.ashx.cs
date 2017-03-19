@@ -23,7 +23,11 @@ namespace ChatServer
             }
             Dictionary<string, string> obj = JsonConvert.DeserializeObject<Dictionary<string, string>>(input);
 
-            AuthPool.AppendRecord(obj["username"], obj["key"], int.Parse(obj["status"]));
+            AuthPool.AppendRecord(new AuthPool.PoolObject(
+                    obj["username"], 
+                    obj["key"], 
+                    int.Parse(obj["status"]), 
+                    obj["banTill"]));
         }
 
         public bool IsReusable

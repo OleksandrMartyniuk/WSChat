@@ -16,7 +16,7 @@ namespace ChatServer
 
         static Manager()
         {
-            CreateRoom("Host");
+            CreateRoom("Host", null);
             Host = Rooms.First.Value;
         }
 
@@ -54,11 +54,11 @@ namespace ChatServer
             return null;
         }
 
-        public static void CreateRoom(string roomName)
+        public static void CreateRoom(string roomName, string creator)
         {
             if(FindRoom(roomName) == null)
             {
-                RoomObject room = new RoomObject(roomName);
+                RoomObject room = new RoomObject(roomName, creator);
                 Rooms.AddLast(room);
                 OnRoomCreated(roomName);
                 room.NewMessage += HistoryDataprovider.AppendMessage;
@@ -76,6 +76,7 @@ namespace ChatServer
                 room.NewMessage -= HistoryDataprovider.AppendMessage;
                 OnRoomDeleted(roomName);
             }
+            HistoryDataprovider.RemoveHistory(roomName);
         }
 
         public static void BroadcastAll(string message)

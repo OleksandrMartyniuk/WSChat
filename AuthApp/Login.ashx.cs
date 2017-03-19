@@ -54,7 +54,9 @@ namespace AuthApp
                         var values = new Dictionary<string,string>();
                         values.Add("username", account.name);
                         values.Add("key", accessKey);
-                        values.Add("status", ((int)account.status).ToString()); 
+                        values.Add("status", ((int)account.status).ToString());
+                        string bantime = account.banTill == null ? "" : account.banTill.ToString();
+                        values.Add("banTill", bantime);
 
                         var response = client.UploadString(serviceURI, JsonConvert.SerializeObject(values));
                     }

@@ -31,10 +31,21 @@ namespace MultiRoomChatClient
                     switch (req.Cmd)
                     {
                         case "ban":
-                            Banned?.Invoke();
+                            string msg = "You got banned ";
+                            if (req.Args != null)
+                            {
+                                msg += "till " + req.Args.ToString();
+                            }
+                            else
+                            {
+                                msg += "permanently";
+                            }
+                            Banned?.Invoke(msg);
+                            
                             break;
                         case "unban":
-                            Unbanned?.Invoke();
+                            msg = "You got Unbanned";
+                            Unbanned?.Invoke(msg);
                             break;
                     }
                     break;
@@ -71,7 +82,6 @@ namespace MultiRoomChatClient
                         case "msg":
                             object[] args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
                             messageRecieived?.Invoke((string)args[0], JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString()));
-                            //messageRecieived?.Invoke(JsonConvert.DeserializeObject<ChatMessage>(req.args.ToString()));
                             break;
                         case "active":
                             args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
@@ -129,7 +139,7 @@ namespace MultiRoomChatClient
             }
         }
 
-        public delegate void adminDelegate();
+        public delegate void adminDelegate(string msg);
         public static event adminDelegate Banned;
         public static event adminDelegate Unbanned;
 
@@ -149,7 +159,6 @@ namespace MultiRoomChatClient
 
         public static event messageDelegate messageRecieived;
         public static event notificationDelegate notificationReceived;
-        public static event dataDelegate msgDataReceived;
         public static event userMovedDelegate UserEntered;
         public static event userMovedDelegate UserLeft;
 

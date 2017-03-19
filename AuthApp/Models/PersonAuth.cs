@@ -13,14 +13,24 @@ namespace AuthApp.Models
         {
 
         }
-        public PersonAuth(string username, string email, string password, int status)
+        public PersonAuth(string username, string email, string password, int status, string banTill)
         {
             this.name = username;
             this.email = email;
             this.password = password;
             this.status = (AuthStatus)status;
+            if (banTill != "")
+            {
+                this.banTill = DateTime.Parse(banTill);
+            }
+            else
+            {
+                this.banTill = null;
+            }
+                
         }
         public AuthStatus status { get; set; }
+        public DateTime? banTill { get; set; }
     }
 
     

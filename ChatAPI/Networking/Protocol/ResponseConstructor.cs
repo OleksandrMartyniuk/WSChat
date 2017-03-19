@@ -10,13 +10,6 @@ namespace ChatServer
 {
     public static class ResponseConstructor
     {
-      /*  public static string GetRoolNotification(string role, string username)
-        { 
-            object args = new string[] { role, username };
-            return JsonConvert.SerializeObject(new RequestObject("msg", "entered", args));
-           
-        }*/
-  
         public static string GetUserEnteredNotification(string room, string username)
         {
             object args = new string[] { room, username };
@@ -29,9 +22,9 @@ namespace ChatServer
             return JsonConvert.SerializeObject(new RequestObject("msg", "left", args));
         }
 
-        public static string GetBannedNotification(DateTime time)
-        {
-            return JsonConvert.SerializeObject(new RequestObject("admin", "ban", time.ToString()));
+        public static string GetBannedNotification(DateTime? time)
+        { 
+            return JsonConvert.SerializeObject(new RequestObject("admin", "ban", time != null ? time.ToString() : null));
         }
 
         public static string GetUnBannedNotification(string username)

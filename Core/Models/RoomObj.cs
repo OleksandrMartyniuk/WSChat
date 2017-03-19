@@ -19,6 +19,7 @@ namespace Core
             clients = new List<string>();
         }
         public string Name { get; set; }
+        public string Creator { get; set; }
         public List<string> clients { get; set; }
 
         public override bool Equals(object obj)

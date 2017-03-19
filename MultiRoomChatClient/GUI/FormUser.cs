@@ -26,8 +26,8 @@ namespace MultiRoomChatClient
             this.Text += "   Name: " + Client.Username.ToString();
             Manager = new RoomManager();
             Manager.RoomDataUpdated += () => Invoke(new Action(onRoomDataUpdated));
-            ResponseHandler.Banned += () => Invoke(new Action(Ban));
-            ResponseHandler.Unbanned += () => Invoke(new Action(unBan));
+            ResponseHandler.Banned += (msg) => Invoke(new Action<string>(Ban), msg);
+            ResponseHandler.Unbanned += (msg) => Invoke(new Action<string>(unBan), msg);
             ResponseHandler.privateMessageReceived += (x) => Invoke(new Action<ChatMessage>(HandleMessage), x);
             ResponseHandler.roomError += (x) => Invoke(new Action<string>(OnRoomError), x);
             Client.NewErrorMessage += ShowConnectionError;
@@ -125,14 +125,16 @@ namespace MultiRoomChatClient
             tb_message.Focus();
         }
 
-        public void Ban()
+        public void Ban(string msg)
         {
+            if (msg != null) MessageBox.Show(msg);
             btn_send.Enabled = false;
             tb_message.Enabled = false;
             btn_createRoom.Enabled = false;
         }
-        public void unBan()
+        public void unBan(string msg)
         {
+            if(msg!= null) MessageBox.Show(msg);
             btn_send.Enabled = true;
             tb_message.Enabled = true;
             btn_createRoom.Enabled = true;

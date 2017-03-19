@@ -42,7 +42,7 @@ namespace ChatServer.ChatAPI.Modules
                     LogProvider.AppendRecord(string.Format("[{0}]: Logged in as user", client.Username));
                     break;
                 case AuthStatus.Banned:
-                    client.Role = new BannedUser(client);
+                    client.Role = new BannedUser(client, obj.banTill);
                     client.SendMessage(ResponseConstructor.GetLoginResultNotification("banned", obj.Username));
                     LogProvider.AppendRecord(string.Format("[{0}]: Logged in as banned user", client.Username));
                     break;

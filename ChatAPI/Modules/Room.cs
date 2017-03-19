@@ -26,7 +26,7 @@ namespace ChatServer
                 }
                 else
                 {
-                    Manager.CreateRoom(roomName);
+                    Manager.CreateRoom(roomName, client.Username);
                     LogProvider.AppendRecord(string.Format("[{0}]: created new room {1}", client.Username, roomName));
                 }
             }
@@ -36,6 +36,11 @@ namespace ChatServer
                 {
                     client.SendMessage(ResponseConstructor.GetErrorNotification("Can't delete this room as it doesn't exist", "room"));
                     LogProvider.AppendRecord(string.Format("[{0}]: tried to close unexisting room {1}", client.Username, roomName));
+                }
+                else if(room.Creator != client.Username)
+                {
+                    client.SendMessage(ResponseConstructor.GetErrorNotification("Can't delete room " + roomName + " . No permission.", "room"));
+                    LogProvider.AppendRecord(string.Format("[{0}]: tried to close room {1} but had no permission", client.Username, roomName));
                 }
                 else
                 {

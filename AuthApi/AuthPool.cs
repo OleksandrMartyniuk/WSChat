@@ -11,9 +11,8 @@ namespace ChatServer.AuthApi
     {
         static LinkedList<PoolObject> pool = new LinkedList<PoolObject>();
 
-        public static void AppendRecord(string username, string key, int status)
+        public static void AppendRecord(PoolObject record)
         {
-            PoolObject record = new PoolObject(username, key, status);
             pool.AddLast(record);
 
             Task removeByTimeout = new Task(async () =>
@@ -40,15 +39,20 @@ namespace ChatServer.AuthApi
 
         public class PoolObject
         {
-            public PoolObject(string username, string key, int status)
+            public PoolObject(string username, string key, int status, string banTill)
             {
                 this.Key = key;
                 this.Username = username;
                 this.status = (AuthStatus)status;
+                if (banTill != null && banTill != "")
+                    this.banTill = DateTime.Parse(banTill);
+                else
+                    this.banTill = null;
             }
             public string Key { get; set; }
             public string Username { get; set; }
             public AuthStatus status { get; set; }
+            public DateTime? banTill { get; set; }
         }
     }
 }

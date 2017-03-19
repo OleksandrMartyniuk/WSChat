@@ -15,22 +15,6 @@ namespace MultiRoomChatClient
         {
             Client.AddRequest(new RequestObject("auth", "in", key));
         }
-        //public static void LoginGmail(string name)
-        //{
-        //    Client.AddRequest(new RequestObject("login", "Gmail",  name ));
-        //}
-        //public static void LoginFacebook(string name)
-        //{
-        //    Client.AddRequest(new RequestObject("login", "Facebook", name));
-        //}
-        //public static void LoginReg(string name, string password, string email)
-        //{
-        //    Client.AddRequest(new RequestObject("login", "Registration", new object[] { name, password, email }));
-        //}
-        //public static void LoginForgot(string name)
-        //{
-        //    Client.AddRequest(new RequestObject("login", "Forgot", name));
-        //}
         
         public static void Logout(string name)
         {

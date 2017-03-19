@@ -11,7 +11,7 @@ namespace AuthApp.Controllers
 {
     public class PersonDAO
     {
-        string connectionString;// = @"Server=sql11.freesqldatabase.com;Port=3306;Database=sql11163728;Uid=sql11163728;Pwd=3mdBcaEsYD;CharSet=utf8;";
+        string connectionString;
         private MySqlConnection connection;
         public PersonDAO()
         {
@@ -47,6 +47,12 @@ namespace AuthApp.Controllers
             }
             else
             {
+                if(p.status == AuthStatus.Banned && p.banTill < DateTime.Now)
+                {
+                    SetStatus(login, 0, null);
+                    p.status = 0;
+                    p.banTill = null;
+                }
                 return LoginStatus.OK;
             }
         }
@@ -58,6 +64,42 @@ namespace AuthApp.Controllers
                 connection = new MySqlConnection(connectionString);
             }
             string insertScript = String.Format("UPDATE `Persons` SET `password`='{0}' WHERE `email`='{1}'", pass, email);
+            MySqlCommand iniQuery = null;
+            int res = 0;
+            try
+            {
+                connection.Open();
+                iniQuery = new MySqlCommand(insertScript, connection);
+                res = iniQuery.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                //
+                //
+                //
+            }
+            connection.Close();
+            return res == 1 ? true : false;
+        }
+
+        public bool SetStatus(string username, AuthStatus status, DateTime? datetime)
+        {
+            if (connection == null)
+            {
+                connection = new MySqlConnection(connectionString);
+            }
+
+            string insertScript = null;
+
+            if (datetime != null)
+            {
+                insertScript = String.Format("UPDATE `Persons` SET `status`='{0}',`banTill`='{1}' WHERE `username`='{2}'", (int)status, datetime.Value.ToString(), username);
+            }
+            else
+            {
+                insertScript = String.Format("UPDATE `Persons` SET `status`='{0}',`banTill`='' WHERE `username`='{1}'", (int)status, username);
+            }
+            
             MySqlCommand iniQuery = null;
             int res = 0;
             try
@@ -90,7 +132,7 @@ namespace AuthApp.Controllers
             person.password = pass;
             person.status = AuthStatus.User;
 
-            string insertScript = String.Format(@"INSERT INTO `Persons`(`email`,`username`,`password`,`status`) VALUES('{0}', '{1}', '{2}', {3})", 
+            string insertScript = String.Format(@"INSERT INTO `Persons`(`email`,`username`,`password`,`status`) VALUES('{0}', '{1}', '{2}', '{3}')", 
                 person.email, 
                 person.name, 
                 person.password, 
@@ -133,7 +175,7 @@ namespace AuthApp.Controllers
             MySqlCommand iniQuery = null;
             MySqlDataReader dataReader = null;
             string selectQuery = string.Format(
-                "SELECT `username`, `email`, `password`, `status` FROM  `Persons` WHERE `{0}`='{1}'", key, value);
+                "SELECT `username`, `email`, `password`, `status`, `banTill` FROM  `Persons` WHERE `{0}`='{1}'", key, value);
             try
             {
                 connection.Open();
@@ -151,7 +193,8 @@ namespace AuthApp.Controllers
                     dataReader.GetString("username"),
                     dataReader.GetString("email"),
                     dataReader.GetString("password"),
-                    dataReader.GetInt32("status"));
+                    dataReader.GetInt32("status"),
+                    dataReader.GetString("banTill"));
             }
 
             dataReader.Close();

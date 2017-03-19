@@ -18,15 +18,12 @@ namespace MultiRoomChatClient
     {
         public static string Username { get; set; }
         static IClient ConnectionClient = null;
-        
-        //public static HistoryDataprovider RoomHistory = new HistoryDataprovider("Msg");
-        //public static HistoryDataprovider PrivateHistory = new HistoryDataprovider("Private");
 
         public static event responseHandler responseReceived;
         public static event errorMessage NewErrorMessage;
         public static event connectionHandler ConnectionOpened;
 
-        static Client()
+        public static void StartClient()
         {
             string protocol = ConfigurationManager.AppSettings["protocol"];
             switch (protocol)
@@ -39,10 +36,7 @@ namespace MultiRoomChatClient
             }
             ConnectionClient.NewErrorMessage += (x) => NewErrorMessage?.Invoke(x);
             ConnectionClient.responseReceived += (x) => responseReceived?.Invoke(x);
-        }
 
-        public static void StartClient()
-        {
             ConnectionClient.ConnectionOpened += () => ConnectionOpened?.Invoke();
             ConnectionClient.StartClient();
         }
