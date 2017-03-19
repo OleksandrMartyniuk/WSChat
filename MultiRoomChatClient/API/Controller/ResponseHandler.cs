@@ -108,7 +108,10 @@ namespace MultiRoomChatClient
                     switch (req.Cmd)
                     {
                         case "created":
-                            roomCreated?.Invoke((string)req.Args);
+                            Dictionary<string, string> kv_args = JsonConvert.DeserializeObject<Dictionary<string,string>>(req.Args.ToString());
+                            string roomname = kv_args["room"];
+                            string creator = kv_args["creator"];
+                            roomCreated?.Invoke(roomname, creator);
                             break;
                         case "removed":
                             roomRemoved?.Invoke((string)req.Args);
@@ -166,7 +169,8 @@ namespace MultiRoomChatClient
         public static event pmDelegate privateMessageReceived;
 
         public delegate void roomDelegate(string roomName);
-        public static event roomDelegate roomCreated;
+        public delegate void roomCreatedDelegate(string roomName, string creator);
+        public static event roomCreatedDelegate roomCreated;
         public static event roomDelegate roomRemoved;
         public static event roomDelegate roomError;
 

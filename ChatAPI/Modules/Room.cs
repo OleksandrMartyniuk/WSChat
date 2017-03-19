@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using ChatServer.Roles;
+using Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace ChatServer
                     client.SendMessage(ResponseConstructor.GetErrorNotification("Can't delete this room as it doesn't exist", "room"));
                     LogProvider.AppendRecord(string.Format("[{0}]: tried to close unexisting room {1}", client.Username, roomName));
                 }
-                else if(room.Creator != client.Username)
+                else if(room.Creator != client.Username && client.Role.GetType() != typeof(Admin))
                 {
                     client.SendMessage(ResponseConstructor.GetErrorNotification("Can't delete room " + roomName + " . No permission.", "room"));
                     LogProvider.AppendRecord(string.Format("[{0}]: tried to close room {1} but had no permission", client.Username, roomName));

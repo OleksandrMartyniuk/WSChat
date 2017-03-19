@@ -23,7 +23,13 @@ namespace MultiRoomChatClient
             ResponseHandler.UserEntered += AddUser;
             ResponseHandler.UserLeft += RemoveUser;
             RequestManager.RequestData();
-            ResponseHandler.roomCreated += (x) => AddRoom(new RoomObj(x));
+            ResponseHandler.roomCreated += (room, creator) =>
+            {
+                var robj = new RoomObj();
+                robj.Creator = creator;
+                robj.Name = room;
+                AddRoom(robj);
+            };
             ResponseHandler.roomRemoved += (x) => RemoveRoom(new RoomObj(x));
             ResponseHandler.RoomHistoryReceived += PrependHistory;
         }
@@ -57,7 +63,7 @@ namespace MultiRoomChatClient
         public void CreateRoom(string room)
         {
             RoomObjExt r = new RoomObjExt(room);
-            AddRoom(r);
+            //AddRoom(r);
             RequestManager.CreateRoom(room);
             MessageListUpdated?.Invoke();
             RoomDataUpdated?.Invoke();
@@ -75,7 +81,7 @@ namespace MultiRoomChatClient
 
         private void RemoveRoom(RoomObj room)
         {
-            if (!Rooms.Contains(room))
+            if (Rooms.Contains(room))
             {
                 Rooms.Remove(new RoomObjExt(room));
                 RoomDataUpdated?.Invoke();

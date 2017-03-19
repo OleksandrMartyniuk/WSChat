@@ -246,3 +246,106 @@
 22:05[sanyok1]: banned user sanyok1
 22:06[sanyok] disconnected
 22:06[sanyok1] disconnected
+22:58[sanyok1]: Logged in as banned user
+22:58[sanyok1]: requested info
+22:59[sanyok1] disconnected
+22:59[sanyok1]: left chat
+22:59[sanyok1] disconnected
+22:59[sanyok1]: Logged in as user
+22:59[sanyok1]: requested info
+22:59[sanyok1]: entered room Host
+22:59[sanyok1]: created new room 123
+22:59[sanyok1]: entered room 123
+23:00[sanyok1] disconnected
+23:02[sanyok1]: Logged in as user
+23:02[sanyok1]: requested info
+23:03[sanyok1]: created new room 123
+23:04[sanyok1]: created new room 321
+23:06[sanyok1] disconnected
+23:16[sanyok1]: Logged in as user
+23:16[sanyok1]: requested info
+23:17[sanyok1]: created new room 123
+23:17[sanyok1]: entered room 123
+23:18[sanyok1]: left room 123
+23:18[sanyok1]: left room 123
+23:19[sanyok1]: created new room 321
+23:20[sanyok1] disconnected
+23:21[sanyok1]: Logged in as user
+23:21[sanyok1]: requested info
+23:21[sanyok1] disconnected
+23:23[sanyok1]: Logged in as user
+23:23[sanyok1]: requested info
+23:23[sanyok1]: closed room 321
+23:23[sanyok1]: tried to close unexisting room 321
+23:23[sanyok1]: closed room 123
+23:23[sanyok1]: entered room Host
+23:23[sanyok1]: tried to close unexisting room 321
+23:23[sanyok1]: tried to close unexisting room 123
+23:23[sanyok1]: entered room Host
+23:23[sanyok1] disconnected
+23:27[sanyok1]: Logged in as user
+23:27[sanyok1]: requested info
+23:27[sanyok1]: created new room 123
+23:28[sanyok1]: closed room 123
+23:28[sanyok1]: tried to close unexisting room 123
+23:29[sanyok1]: tried to close unexisting room 123
+23:29[sanyok1]: created new room 1234
+23:31[sanyok1]: closed room 1234
+23:32[sanyok1] disconnected
+23:32[sanyok1]: Logged in as user
+23:32[sanyok1]: requested info
+23:32[sanyok1]: created new room 123
+23:33[sanyok1]: closed room 123
+23:34[sanyok1]: created new room 123
+23:35[sanyok1] disconnected
+23:35[sanyok1]: Logged in as user
+23:35[sanyok1]: requested info
+23:35[sanyok1]: closed room 123
+23:35[sanyok1]: created new room 321
+23:35[sanyok1]: closed room 321
+23:35[sanyok1]: created new room 123
+23:36[sanyok1] disconnected
+23:38[sanyok1]: Logged in as user
+23:38[sanyok1]: requested info
+23:38[sanyok1]: closed room 123
+23:38[sanyok1]: created new room 123
+23:38[sanyok1]: created new room 321
+23:38[sanyok1]: closed room 123
+23:38[sanyok1]: closed room 321
+23:39[sanyok1]: created new room 123
+23:39[sanyok1]: created new room 1234
+23:39[sanyok1]: entered room 1234
+23:39[sanyok1]: closed room 1234
+23:39[sanyok1]: Sent a message [23:39:16]sanyok1 : dasd
+23:39[sanyok1]: Sent a message [23:39:19]sanyok1 : asdasd
+23:39[sanyok1]: closed room 123
+23:39[sanyok]: Logged in as admin
+23:39[sanyok]: requested info
+23:39[sanyok1]: created new room 123
+23:40[sanyok1]: created new room 1234
+23:40[sanyok1]: closed room 1234
+23:40[sanyok1]: closed room 123
+23:40[sanyok1] disconnected
+23:40[sanyok] disconnected
+23:40[sanyok]: left chat
+23:40[sanyok] disconnected
+23:46[sanyok]: Logged in as admin
+23:46[sanyok]: requested info
+23:47[sanyok1]: Logged in as user
+23:47[sanyok1]: requested info
+23:47[sanyok1]: created new room 123
+23:47[sanyok]: tried to close room 123 but had no permission
+23:48[sanyok1] disconnected
+23:48[sanyok] disconnected
+23:49[sanyok]: Logged in as admin
+23:49[sanyok]: requested info
+23:49[sanyok1]: Logged in as user
+23:49[sanyok1]: requested info
+23:49[sanyok1]: created new room 123
+23:49[sanyok]: closed room 123
+23:50[sanyok] disconnected
+23:50[sanyok]: left chat
+23:50[sanyok] disconnected
+23:50[sanyok1] disconnected
+23:50[sanyok1]: left chat
+23:50[sanyok1] disconnected

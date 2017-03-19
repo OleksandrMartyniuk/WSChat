@@ -237,31 +237,31 @@
   <data name="&gt;&gt;tb_newRoom.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="btn_closeRoom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btn_leaveRoom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btn_closeRoom.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btn_leaveRoom.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 250</value>
   </data>
-  <data name="btn_closeRoom.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btn_leaveRoom.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 23</value>
   </data>
-  <data name="btn_closeRoom.TabIndex" type="System.Int32, mscorlib">
+  <data name="btn_leaveRoom.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="btn_closeRoom.Text" xml:space="preserve">
-    <value>Close Room</value>
+  <data name="btn_leaveRoom.Text" xml:space="preserve">
+    <value>Leave Room</value>
   </data>
-  <data name="&gt;&gt;btn_closeRoom.Name" xml:space="preserve">
-    <value>btn_closeRoom</value>
+  <data name="&gt;&gt;btn_leaveRoom.Name" xml:space="preserve">
+    <value>btn_leaveRoom</value>
   </data>
-  <data name="&gt;&gt;btn_closeRoom.Type" xml:space="preserve">
+  <data name="&gt;&gt;btn_leaveRoom.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btn_closeRoom.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btn_leaveRoom.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btn_closeRoom.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btn_leaveRoom.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tabbedMessageList1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">

@@ -1,4 +1,5 @@
 ﻿using Core;
+using MultiRoomChatClient.GUI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -66,7 +67,7 @@ namespace MultiRoomChatClient
 
         private void btn_send_Click(object sender, EventArgs e)
         {
-            if (tabbedMessageList1.getCountRoom() == 0)
+            if (tabbedMsgList.getCountRoom() == 0)
             {
                 MessageBox.Show("Enter room");
                 return;
@@ -74,7 +75,7 @@ namespace MultiRoomChatClient
             string msg = tb_message.Text;
             if(msg.Length > 0)
             {
-                tabbedMessageList1.SendMessage(msg);   
+                tabbedMsgList.SendMessage(msg);   
             }
             tb_message.Clear();
         }
@@ -82,21 +83,30 @@ namespace MultiRoomChatClient
         private void onRoomDataUpdated()
         {
             tree_Room.Nodes.Clear();
-            foreach (RoomObjExt room in Manager.Rooms)
+            LinkedListNode<RoomObjExt> current = Manager.Rooms.First;
+            while (current != null)
             {
-                TreeNode roomNode = RoomToTreeNode(room);
+                TreeNode roomNode = RoomToTreeNode(current.Value);
                 tree_Room.Nodes.Add(roomNode);
+                current = current.Next;
             }
-
         }
         private void OnRoomError(string error)
         {
             MessageBox.Show(error);
         }
-        private TreeNode RoomToTreeNode(RoomObjExt room)
+        protected TreeNode RoomToTreeNode(RoomObjExt room)
         {
             TreeNode roomNode = new TreeNode(room.Name);
             roomNode.Tag = room;
+
+            roomNode.ContextMenuStrip = new RoomContextMenu(room, this);
+
+            if(room.Creator == Client.Username)
+            {
+                roomNode.NodeFont = new Font(SystemFonts.MenuFont, FontStyle.Bold);
+            }
+
             foreach(string p in room.clients)
             {
                 TreeNode clnt = new TreeNode(p);
@@ -149,7 +159,7 @@ namespace MultiRoomChatClient
           
             if (tag is RoomObjExt)
             {
-                tabbedMessageList1.AddRoom(tag as RoomObjExt);
+                tabbedMsgList.AddRoom(tag as RoomObjExt);
             }
             else if ((tag is string) && tag.ToString() != Client.Username.ToString()) 
             {
@@ -160,7 +170,7 @@ namespace MultiRoomChatClient
         }
         private void btn_closeRoom_Click(object sender, EventArgs e)
         {
-            tabbedMessageList1.CloseRoom();
+            tabbedMsgList.CloseRoom();
         }
 
         private void tree_Room_Click(object sender, EventArgs e)
@@ -203,7 +213,7 @@ namespace MultiRoomChatClient
             ResponseHandler.active = false;
 
             Client.NewErrorMessage -= ShowConnectionError;
-            tabbedMessageList1.CloseAllRooms();
+            tabbedMsgList.CloseAllRooms();
             RequestManager.Logout(Client.Username.ToString());
 
             Client.Disconnect();
@@ -211,11 +221,11 @@ namespace MultiRoomChatClient
 
         private void UploadHistory_Click(object sender, EventArgs e)
         {
-            if(tabbedMessageList1.selectedTab == null)
+            if(tabbedMsgList.selectedTab == null)
             {
                 return;
             }
-            var room = ((RoomObjExt)tabbedMessageList1.selectedTab.Tag);
+            var room = ((RoomObjExt)tabbedMsgList.selectedTab.Tag);
             string active = room.Name;
             if(room.Messages.Count == 0)
             {

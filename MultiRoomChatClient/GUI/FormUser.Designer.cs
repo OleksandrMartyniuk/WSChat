@@ -36,8 +36,8 @@ namespace MultiRoomChatClient
             this.btn_send = new System.Windows.Forms.Button();
             this.tb_message = new System.Windows.Forms.TextBox();
             this.tb_newRoom = new System.Windows.Forms.TextBox();
-            this.btn_closeRoom = new System.Windows.Forms.Button();
-            this.tabbedMessageList1 = new MultiRoomChatClient.TabbedMessageList();
+            this.btn_leaveRoom = new System.Windows.Forms.Button();
+            this.tabbedMsgList = new MultiRoomChatClient.TabbedMessageList();
             this.btn_HistoryUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -75,17 +75,18 @@ namespace MultiRoomChatClient
             this.tb_newRoom.Enter += new System.EventHandler(this.tb_newRoom_Entered);
             this.tb_newRoom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_newRoom_KeyPress);
             // 
-            // btn_closeRoom
+            // btn_leaveRoom
             // 
-            resources.ApplyResources(this.btn_closeRoom, "btn_closeRoom");
-            this.btn_closeRoom.Name = "btn_closeRoom";
-            this.btn_closeRoom.UseVisualStyleBackColor = true;
-            this.btn_closeRoom.Click += new System.EventHandler(this.btn_closeRoom_Click);
+            resources.ApplyResources(this.btn_leaveRoom, "btn_leaveRoom");
+            this.btn_leaveRoom.Name = "btn_leaveRoom";
+            this.btn_leaveRoom.UseVisualStyleBackColor = true;
+            this.btn_leaveRoom.Click += new System.EventHandler(this.btn_closeRoom_Click);
             // 
             // tabbedMessageList1
             // 
-            resources.ApplyResources(this.tabbedMessageList1, "tabbedMessageList1");
-            this.tabbedMessageList1.Name = "tabbedMessageList1";
+            resources.ApplyResources(this.tabbedMsgList, "tabbedMessageList1");
+            this.tabbedMsgList.Name = "tabbedMessageList1";
+            this.tabbedMsgList.selectedTab = null;
             // 
             // btn_HistoryUpdate
             // 
@@ -100,8 +101,8 @@ namespace MultiRoomChatClient
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btn_HistoryUpdate);
-            this.Controls.Add(this.tabbedMessageList1);
-            this.Controls.Add(this.btn_closeRoom);
+            this.Controls.Add(this.tabbedMsgList);
+            this.Controls.Add(this.btn_leaveRoom);
             this.Controls.Add(this.tb_newRoom);
             this.Controls.Add(this.tb_message);
             this.Controls.Add(this.btn_send);
@@ -122,8 +123,8 @@ namespace MultiRoomChatClient
         private System.Windows.Forms.Button btn_createRoom;
         private System.Windows.Forms.TextBox tb_message;
         private System.Windows.Forms.TextBox tb_newRoom;
-        private System.Windows.Forms.Button btn_closeRoom;
-        private TabbedMessageList tabbedMessageList1;
+        private System.Windows.Forms.Button btn_leaveRoom;
+        public TabbedMessageList tabbedMsgList;
         private System.Windows.Forms.Button btn_send;
         private System.Windows.Forms.Button btn_HistoryUpdate;
     }

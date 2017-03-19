@@ -60,7 +60,7 @@ namespace ChatServer
             {
                 RoomObject room = new RoomObject(roomName, creator);
                 Rooms.AddLast(room);
-                OnRoomCreated(roomName);
+                OnRoomCreated(roomName, creator);
                 room.NewMessage += HistoryDataprovider.AppendMessage;
                 room.ClientAdded += OnClientAdded;
                 room.ClientRemoved += OnClientLeft;
@@ -113,14 +113,14 @@ namespace ChatServer
             BroadcastAll(ResponseConstructor.GetUserLeftNotification(room, username));
         }
 
-        public static void OnRoomCreated(string room)
+        public static void OnRoomCreated(string room, string creator)
         {
-            BroadcastAll(ResponseConstructor.GetRoomCreatedNotification(room));
+            BroadcastAll(ResponseConstructor.GetRoomCreatedNotification(room, creator));
         }
 
         public static void OnRoomDeleted(string room)
         {
-            BroadcastAll(ResponseConstructor.GetUserLeftNotification(room));
+            BroadcastAll(ResponseConstructor.GetRoomRemovedNotification(room));
         }
 
         public static RoomObj[] GetAllInfo()

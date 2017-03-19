@@ -107,6 +107,12 @@
     <Compile Include="GUI\Auth\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\RoomContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\RoomContextMenu.Designer.cs">
+      <DependentUpon>RoomContextMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\FormUser.cs">
       <SubType>Form</SubType>
     </Compile>
