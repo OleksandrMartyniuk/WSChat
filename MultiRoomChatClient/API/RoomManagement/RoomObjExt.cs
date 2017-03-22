@@ -11,9 +11,11 @@ namespace MultiRoomChatClient
     {
         public delegate void messageDel(ChatMessage message);
         public delegate void notificationDel(int count);
+        public delegate void historyUpdateDelegate();
 
         public event messageDel MessageReceived;
         public event notificationDel NotificationUpdated;
+        public event historyUpdateDelegate AllHistoryReceived;
         public bool active;
 
 
@@ -90,7 +92,6 @@ namespace MultiRoomChatClient
                 }
             }
             Messages.AddRange(msg);
-            //Client.RoomHistory.AppendSequence(Name, msg);
         }
 
         internal void SetBg()
@@ -107,6 +108,11 @@ namespace MultiRoomChatClient
 
         public void PrependMessages(ChatMessage[] history)
         {
+            if (history.Length == 0)
+            {
+                AllHistoryReceived?.Invoke();
+                return;
+            }
             List<ChatMessage> upl = new List<ChatMessage>();
             if(Messages.Count > 0)
             {
@@ -114,7 +120,7 @@ namespace MultiRoomChatClient
                 while (index < history.Length && history[index].TimeStamp < this.Messages.First().TimeStamp)
                 {
                     upl.Add(history[index]);
-                    index--;
+                    index++;
                 }
             }
             else

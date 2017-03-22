@@ -80,7 +80,6 @@
   <ItemGroup>
     <Compile Include="API\ApiSend.cs" />
     <Compile Include="API\AuthServerClient.cs" />
-    <Compile Include="API\History\HistoryDataprovider.cs" />
     <Compile Include="API\Networking\Client.cs" />
     <Compile Include="API\Controller\RequestManager.cs" />
     <Compile Include="API\Controller\ResponseHandler.cs" />
@@ -106,6 +105,12 @@
     </Compile>
     <Compile Include="GUI\Auth\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ExtendedMessageView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ExtendedMessageView.Designer.cs">
+      <DependentUpon>ExtendedMessageView.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\RoomContextMenu.cs">
       <SubType>Component</SubType>
@@ -147,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Auth\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ExtendedMessageView.resx">
+      <DependentUpon>ExtendedMessageView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\FormUser.resx">
       <DependentUpon>FormUser.cs</DependentUpon>

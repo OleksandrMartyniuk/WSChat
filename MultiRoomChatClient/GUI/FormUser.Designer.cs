@@ -82,10 +82,10 @@ namespace MultiRoomChatClient
             this.btn_leaveRoom.UseVisualStyleBackColor = true;
             this.btn_leaveRoom.Click += new System.EventHandler(this.btn_closeRoom_Click);
             // 
-            // tabbedMessageList1
+            // tabbedMsgList
             // 
-            resources.ApplyResources(this.tabbedMsgList, "tabbedMessageList1");
-            this.tabbedMsgList.Name = "tabbedMessageList1";
+            resources.ApplyResources(this.tabbedMsgList, "tabbedMsgList");
+            this.tabbedMsgList.Name = "tabbedMsgList";
             this.tabbedMsgList.selectedTab = null;
             // 
             // btn_HistoryUpdate

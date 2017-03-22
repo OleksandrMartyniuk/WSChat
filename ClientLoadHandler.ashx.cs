@@ -31,11 +31,12 @@ namespace ChatServer
                 return;
             }
 
-            string username = user.Username;
-            int status = (int)user.status;
+            //string username = user.Username;
+            //int status = (int)user.status;
 
-            context.Response.Cookies.Add(new HttpCookie("username", username));
-            context.Response.Cookies.Add(new HttpCookie("status", status.ToString()));
+            //context.Response.Cookies.Add(new HttpCookie("username", username));
+            //context.Response.Cookies.Add(new HttpCookie("status", status.ToString()));
+            context.Response.Cookies.Add(new HttpCookie("access-key", key));
             context.Response.WriteFile( AppDomain.CurrentDomain.BaseDirectory + "/default.html");
         }
 

@@ -15,6 +15,7 @@ namespace ChatServer.Roles
             Handlers = new IHandlerModule[] {
                 new Logout(),
                 new Info(),
+                new HistoryModule(),
                 ro,
                 new Private(),
                 new Room(),

@@ -2,8 +2,8 @@
 <html>
 <head>
    
-    <link href="html/style/reset.css" rel="stylesheet" />
-    <link href="html/style/styles.css" rel="stylesheet" />
+    <link href="WebClient/style/reset.css" rel="stylesheet" />
+    <link href="WebClient/style/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     
@@ -12,49 +12,6 @@
   
 </head>
 <body>
-  <!--  <div class="auth" id="auth">
-        <div class="wrapper">
-            <table>
-                <tr>
-                    <td>
-                        <label>Login</label>
-                    </td>
-                    <td>
-                        <input type="text" id="textLogin" maxlength="50" />
-                    </td>
-                    <td>
-                        <input type="button" value="Log in" id="btnLogIn" onclick="login()" />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label>Password</label>
-                    </td>
-                    <td>
-                        <input type="password" size="20" maxlength="50" id="textPassword" />
-                    </td>
-                    <td>
-                        <input type="button" value="Registration" id="btnReg" onclick="registr()" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Email</label>
-                    </td>
-                    <td>
-                        <input type="text" size="20" maxlength="50" id="textEmail" />
-                    </td>
-                    <td>
-                        <input type="button" value="Forget Password?" id="btnForget" onclick="forget(textLogin.value)" />
-                    </td>
-                </tr>
-            </table>
-            <div id="fb-root"></div>
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
-        </div>
-    </div>
-    -->
     <div class="lobby" id="lobby">
         <div id="wrapper">
             <div style="height:30px; "><span>Hello, <span id="username"></span></span> <button type="button" class="btn" id="btnLogOut" style="float:right; display:inline; padding:2px;">Log Out</button></div>
@@ -73,8 +30,11 @@
             <div class="block">
                 <div id="menu" style="height:300px; overflow:scroll;">
                     <div class="panel list-group">
+                       
                     </div>
                 </div>
+
+
                 <input type="text" class="form-control" id="creteRoomName">
                 <button type="button" class="btn btn-primary btn-block" id="btnCreateRoom" onclick="UI.CreateRoom()">Create Room</button>
             </div>
@@ -83,7 +43,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse1">Private Messages</a>
+                            <a data-toggle="collapse" href="#collapse1" id="private_panel_header" onclick="$(this).removeClass('signal')">Private Messages</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse">
@@ -105,19 +65,19 @@
         </div>
     </div>
 
-    <script src="html/js/lib/jquery-3.1.1.min.js"></script>
+    <script src="WebClient/Scripts/lib/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="html/js/lib/js.cookie.js"></script>
+    <script src="WebClient/Scripts/lib/js.cookie.js"></script>
     
-    <script src="html/js/Model/connection.js"></script>
-    <script src="html/js/ViewScripts/tabView.js"></script>
-    <script src="html/js/Model/ChatMessage.js"></script>
-    <script src="html/js/Model/RoomObj.js"></script>
-    <script src="html/js/Model/RequestObject.js"></script>
-    <script src="html/js/Controller/RequestManager.js"></script>
-    <script src="html/js/Controller/ResponseHandler.js"></script>
+    <script src="WebClient/Scripts/Model/connection.js"></script>
+    <script src="WebClient/Scripts/ViewScripts/tabView.js"></script>
+    <script src="WebClient/Scripts/Model/ChatMessage.js"></script>
+    <script src="WebClient/Scripts/Model/RoomObj.js"></script>
+    <script src="WebClient/Scripts/Model/RequestObject.js"></script>
+    <script src="WebClient/Scripts/Controller/RequestManager.js"></script>
+    <script src="WebClient/Scripts/Controller/ResponseHandler.js"></script>
 
-    <script src="html/js/Controller/onLoadScript.js"></script>
+    <script src="WebClient/Scripts/Controller/onLoadScript.js"></script>
     <script>
         //Rooms.addRoomToMenu({ 'Name': 'Host', 'clients': ['vasya', 'petya'] });
         //Rooms.addRoomToMenu({ 'Name': 'v1', 'clients': ['1', '2'] });

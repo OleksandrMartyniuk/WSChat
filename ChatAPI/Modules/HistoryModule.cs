@@ -23,19 +23,17 @@ namespace ChatServer
                 case "room":
                     string rstr = args[0] as string;
                     string time = args[1].ToString();
-                    last = DateTime.Parse(time);
+                    last = DateTime.Parse(time).ToUniversalTime();
                     ChatMessage[] h = Manager.FindRoom(rstr)?.GetMessageHistoryTo(last);
-                    if(h.Length > 0)
                     client.SendMessage(ResponseConstructor.GetRoomHistoryResponse(rstr, h));
                     break;
                 case "private":
                     string user1 = (string)args[0];
                     string user2 = (string)args[1];
                     time = args[2].ToString();
-                    last = DateTime.Parse(time);
+                    last = DateTime.Parse(time).ToUniversalTime();
                     h = HistoryDataprovider.GetPrivateHistory(user1, user2, last);
-                    if (h.Length > 0)
-                        client.SendMessage(ResponseConstructor.GetPrivateHistoryResponse(user2, h));
+                    client.SendMessage(ResponseConstructor.GetPrivateHistoryResponse(user2, h));
                     break;
                 default: break;
             }

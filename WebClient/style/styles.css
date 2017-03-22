@@ -97,3 +97,17 @@ div.panel > a.list-group-item {
 .auth td>input[type=button]{
     width: 130px;
 }
+
+span.menu_controls{
+    float: right;
+}
+
+span.menuGliphs{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#private_panel_header.signal{
+    font-weight: bold;
+    color: red;
+}

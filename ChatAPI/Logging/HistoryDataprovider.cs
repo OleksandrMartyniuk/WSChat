@@ -25,7 +25,8 @@ namespace ChatServer
 
         public static void AppendMessage(string roomName, ChatMessage message)
         {
-            File.AppendAllLines(PublicFolder + roomName, new string[] { JsonConvert.SerializeObject(message) });
+            ChatMessage msg = new ChatMessage(message.Sender, message.Text, message.TimeStamp.ToUniversalTime());
+            File.AppendAllLines(PublicFolder + roomName, new string[] { JsonConvert.SerializeObject(msg) });
         }
 
         public static void AppendPrivateMessage(string user1, string user2, ChatMessage message)

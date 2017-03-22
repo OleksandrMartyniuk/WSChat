@@ -14,13 +14,6 @@ namespace ChatServer.AuthApi
         public static void AppendRecord(PoolObject record)
         {
             pool.AddLast(record);
-
-            Task removeByTimeout = new Task(async () =>
-            {
-                await Task.Delay(120000);
-                pool.Remove(record);
-            });
-            removeByTimeout.Start();
         }
 
         public static PoolObject GetRecordByKey(string key)
@@ -34,7 +27,30 @@ namespace ChatServer.AuthApi
                     break;
                 }
             }
+            res.Active = true;
             return res;
+        }
+
+        public static void BeginRemoveObject(string username)
+        {
+            LinkedListNode<PoolObject> r = pool.First;
+
+            while(r != pool.Last)
+            {
+                if(r.Value.Username == username)
+                {
+                    break;
+                }
+            }
+            r.Value.Active = false;
+            Task removeByTimeout = new Task(async () =>
+            {
+                await Task.Delay(30000);
+
+                if(!r.Value.Active)
+                    pool.Remove(r.Value);
+            });
+            removeByTimeout.Start();
         }
 
         public class PoolObject
@@ -44,12 +60,14 @@ namespace ChatServer.AuthApi
                 this.Key = key;
                 this.Username = username;
                 this.status = (AuthStatus)status;
+                this.Active = true;
                 if (banTill != null && banTill != "")
                     this.banTill = DateTime.Parse(banTill);
                 else
                     this.banTill = null;
             }
             public string Key { get; set; }
+            public bool Active { get; set; }
             public string Username { get; set; }
             public AuthStatus status { get; set; }
             public DateTime? banTill { get; set; }

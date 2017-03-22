@@ -40,7 +40,7 @@ namespace ChatServer
         internal static string GetRoomCreatedNotification(string room, string creator)
         {
             Dictionary<string, string> args = new Dictionary<string, string>();
-            args.Add("room", room);
+            args.Add("Name", room);
             args.Add("creator", creator);
             return JsonConvert.SerializeObject(new RequestObject("room", "created",  args));
         }

@@ -81,7 +81,9 @@ namespace MultiRoomChatClient
                     {
                         case "msg":
                             object[] args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
-                            messageRecieived?.Invoke((string)args[0], JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString()));
+                            ChatMessage m = JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString());
+                            m.TimeStamp = m.TimeStamp.ToLocalTime();
+                            messageRecieived?.Invoke((string)args[0], m);
                             break;
                         case "active":
                             args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
@@ -109,7 +111,7 @@ namespace MultiRoomChatClient
                     {
                         case "created":
                             Dictionary<string, string> kv_args = JsonConvert.DeserializeObject<Dictionary<string,string>>(req.Args.ToString());
-                            string roomname = kv_args["room"];
+                            string roomname = kv_args["Name"];
                             string creator = kv_args["creator"];
                             roomCreated?.Invoke(roomname, creator);
                             break;
@@ -127,12 +129,20 @@ namespace MultiRoomChatClient
                         case "room":
                             object[] args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
                             ChatMessage[] history = JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString());
+                            foreach(ChatMessage msg in history)
+                            {
+                                msg.TimeStamp = msg.TimeStamp.ToLocalTime();
+                            }
                             RoomHistoryReceived?.Invoke((string)args[0], history);
                             break;
                         case "private":
                             args = JsonConvert.DeserializeObject<object[]>(req.Args.ToString());
                             string user = args[0].ToString();
                             history = JsonConvert.DeserializeObject<ChatMessage[]>(args[1].ToString());
+                            foreach (ChatMessage msg in history)
+                            {
+                                msg.TimeStamp = msg.TimeStamp.ToLocalTime();
+                            }
                             PrivateHistoryReceived?.Invoke(user, history);
                             break;
                         default:

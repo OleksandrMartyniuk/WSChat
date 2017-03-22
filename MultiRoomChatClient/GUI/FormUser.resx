@@ -264,28 +264,28 @@
   <data name="&gt;&gt;btn_leaveRoom.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tabbedMessageList1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="tabbedMsgList.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="tabbedMessageList1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabbedMsgList.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 12</value>
   </data>
-  <data name="tabbedMessageList1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabbedMsgList.Size" type="System.Drawing.Size, System.Drawing">
     <value>344, 232</value>
   </data>
-  <data name="tabbedMessageList1.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabbedMsgList.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;tabbedMessageList1.Name" xml:space="preserve">
-    <value>tabbedMessageList1</value>
+  <data name="&gt;&gt;tabbedMsgList.Name" xml:space="preserve">
+    <value>tabbedMsgList</value>
   </data>
-  <data name="&gt;&gt;tabbedMessageList1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabbedMsgList.Type" xml:space="preserve">
     <value>MultiRoomChatClient.TabbedMessageList, MultiRoomChatClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;tabbedMessageList1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabbedMsgList.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tabbedMessageList1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabbedMsgList.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btn_HistoryUpdate.Location" type="System.Drawing.Point, System.Drawing">
@@ -299,6 +299,9 @@
   </data>
   <data name="btn_HistoryUpdate.Text" xml:space="preserve">
     <value>GetMessages</value>
+  </data>
+  <data name="btn_HistoryUpdate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;btn_HistoryUpdate.Name" xml:space="preserve">
     <value>btn_HistoryUpdate</value>

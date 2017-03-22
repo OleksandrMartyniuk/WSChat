@@ -86,19 +86,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="html\js\auth\facebook.js" />
-    <Content Include="html\js\Controller\onLoadScript.js" />
-    <Content Include="html\js\Controller\RequestManager.js" />
-    <Content Include="html\js\lib\jquery-3.1.1.min.js" />
-    <Content Include="html\js\lib\sdk.js" />
-    <Content Include="html\js\Model\RequestObject.js" />
-    <Content Include="html\js\Controller\ResponseHandler.js" />
-    <Content Include="html\js\Model\connection.js" />
-    <Content Include="html\js\Model\ChatMessage.js" />
-    <Content Include="html\js\Model\roomObj.js" />
-    <Content Include="html\style\reset.css" />
-    <Content Include="html\style\styles.css" />
-    <Content Include="html\js\ViewScripts\tabView.js" />
+    <Content Include="WebClient\Scripts\auth\facebook.js" />
+    <Content Include="WebClient\Scripts\Controller\onLoadScript.js" />
+    <Content Include="WebClient\Scripts\Controller\RequestManager.js" />
+    <Content Include="WebClient\Scripts\lib\jquery-3.1.1.min.js" />
+    <Content Include="WebClient\Scripts\lib\sdk.js" />
+    <Content Include="WebClient\Scripts\Model\RequestObject.js" />
+    <Content Include="WebClient\Scripts\Controller\ResponseHandler.js" />
+    <Content Include="WebClient\Scripts\Model\connection.js" />
+    <Content Include="WebClient\Scripts\Model\ChatMessage.js" />
+    <Content Include="WebClient\Scripts\Model\roomObj.js" />
+    <Content Include="WebClient\Scripts\ViewScripts\contextMenu.js" />
+    <Content Include="WebClient\style\reset.css" />
+    <Content Include="WebClient\style\styles.css" />
+    <Content Include="WebClient\Scripts\ViewScripts\tabView.js" />
     <Content Include="default.html" />
     <Content Include="packages.config" />
     <Content Include="LoginHandler.ashx" />
@@ -108,16 +109,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Scripts\jquery-2.0.2.intellisense.js" />
-    <Content Include="Scripts\jquery-2.0.2.js" />
-    <Content Include="Scripts\jquery-2.0.2.min.js" />
-    <Content Include="html\js\lib\js.cookie.js" />
+    <Content Include="WebClient\Scripts\lib\js.cookie.js" />
     <Content Include="test.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\jquery-2.0.2.min.map" />
-    <Content Include="html\js\auth\authorization.js" />
+    <Content Include="WebClient\Scripts\auth\authorization.js" />
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>

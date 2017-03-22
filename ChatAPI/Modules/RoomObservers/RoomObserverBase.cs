@@ -65,6 +65,7 @@ namespace ChatServer
             object[] args = JsonConvert.DeserializeObject<object[]>(request.Args.ToString());
             string rstr = args[0] as string;
             ChatMessage msg = JsonConvert.DeserializeObject<ChatMessage>(args[1].ToString());
+            msg.TimeStamp = msg.TimeStamp.ToUniversalTime();
             RoomObject r = Manager.FindRoom(rstr);
             r?.Broadcast(client, msg);
             LogProvider.AppendRecord(string.Format("[{0}]: Sent a message {1}", client.Username, msg.ToString()));

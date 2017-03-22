@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MultiRoomChatClient.GUI.Controls;
 
 namespace MultiRoomChatClient
 {
@@ -42,16 +43,22 @@ namespace MultiRoomChatClient
             }
             TabPage tp = new TabPage(room.Name);
             tp.Tag = room;
-            ListBox lb = new ListBox();
+
+            ExtendedMessageView emv = new ExtendedMessageView(room);
+            emv.Dock = DockStyle.Fill;
+            tp.Controls.Add(emv);
             
-            lb.Dock = DockStyle.Fill;
-            lb.HorizontalScrollbar = true;
-            lb.DataSource = room.Messages;
+            
+            //ListBox lb = new ListBox();
+            
+            //lb.Dock = DockStyle.Fill;
+            ////lb.HorizontalScrollbar = true;
+            ////lb.DataSource = room.Messages;
 
 
            
             tabControl1.SelectedTab = tp;
-            tp.Controls.Add(lb);
+            //tp.Controls.Add(lb);
 
             //(selectedTab?.Tag as RoomObjExt)?.SetBg();
             room.Bind();
@@ -61,15 +68,15 @@ namespace MultiRoomChatClient
             tp.Select();
 
 
-            room.MessageReceived += (x) => {
-                /////kostyl
-                lb.Invoke(new Action(() => {
-                    lb.DataSource = null;
-                    lb.DataSource = room.Messages;
-                    int visibleItems = lb.ClientSize.Height / lb.ItemHeight;
-                    lb.TopIndex = Math.Max(lb.Items.Count - visibleItems + 1, 0);
-                }));
-            };
+            ////room.MessageReceived += (x) => {
+            ////    /////kostyl
+            ////    lb.Invoke(new Action(() => {
+            ////        lb.DataSource = null;
+            ////        lb.DataSource = room.Messages;
+            ////        int visibleItems = lb.ClientSize.Height / lb.ItemHeight;
+            ////        lb.TopIndex = Math.Max(lb.Items.Count - visibleItems + 1, 0);
+            ////    }));
+            ////};
             room.NotificationUpdated += (x) =>
             {
                 if(!(tp.Tag as RoomObjExt).active)

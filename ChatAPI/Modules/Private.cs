@@ -22,6 +22,7 @@ namespace ChatServer
             {
                 recipient.SendMessage(JsonConvert.SerializeObject(new RequestObject("private", null, request.Args)));
                 ChatMessage msg = JsonConvert.DeserializeObject<ChatMessage>(request.Args.ToString());
+                msg.TimeStamp = msg.TimeStamp.ToUniversalTime();
                 HistoryDataprovider.AppendPrivateMessage(client.Username, recipient.Username, msg);
             }
             return true;

@@ -55,12 +55,11 @@ namespace ChatServer
 
         public ChatMessage[] GetMessageHistoryTo(DateTime time)
         {
-
             LinkedList<ChatMessage> msgs = new LinkedList<ChatMessage>();
 
             LinkedListNode<ChatMessage> next = Messages.Last;
 
-            while( next != null && next.Value.TimeStamp >= time)// Messages.First)
+            while( next != null && next.Value.TimeStamp >= time)
             {
                 next = next.Previous;
             }
@@ -130,6 +129,7 @@ namespace ChatServer
 
         public void Broadcast(IClientObject excl, ChatMessage msg)
         {
+            Messages.AddLast(msg);
             foreach (RoomObserverBase observer in Clients)
             {
                 if(observer.client != excl)

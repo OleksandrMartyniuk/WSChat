@@ -7,63 +7,71 @@ ResponseHandler.Handle = function (msg) {
     
     switch (req.Module)
     {
-        case "Lobby":
-            switch (req.Cmd) {
-                case "Notification": alert(req.Args); break;
-            }
         case "admin":
             switch (req.Cmd)
             {
-                case "ban":   UI.Ban();   break;
-                case "unban": UI.Unban(); break;
+                case "ban":
+                    UI.Ban();
+                    sessionStorage['role'] = 'banned';
+                    alert("You got banned till " + req.Args);
+                    break;
+                case "unban":
+                    UI.Unban();
+                    sessionStorage['role'] = 'user';
+                    alert("You got unbanned");
+                    break;
             }
             break;
         case "info":
             if (req.Cmd == "all")
             {
-                if (req.args.length == 0)
+                if (req.Args.length == 0)
                 {
                     return;
                 }
-                var roomList = new [];
-                var a = req.args;
+                var roomList = [];
+                var a = req.Args;
                 for(var i=0; i< a.length; i++){
                     var robj = new roomObj();
                     robj.Name = (a[i])['Name'];
                     robj.clients = (a[i])['clients'];
+                    robj.creator = (a[i])['Creator'];
                     roomList.push(robj);
                 }
+                Rooms.OnDataReceived(roomList);
             }
             break;
         case "login":
             switch (req.Cmd)
             {
-                case "ok":
-                    if (response.Args !== undefined) {
-                        sessionStorage['username'] = response.Args;
-                        sessionStorage['status'] = 'loggin';
-                    }
-                    ShowLobby();
-                break;
-               
                 case "admin":
-                   // loggedAsAdmin?.Invoke((string)req.args);
-                    break;
-                case "banned":
-                 //   loggedBanned?.Invoke((string)req.args);
-                    break;
-                case "Forgot":
-                    switch (response.Args) {
-                        case "Success":
-                            alert("password sent by email")
-                            break;
-                        case "Error":
-                            alert("No such user exists. Please make sure that you entered your login");
-                            break;
+                    if (req.Args !== undefined) {
+                        sessionStorage['username'] = req.Args;
+                        $('#username').text(req.Args);
+                        RequestManager.RequestData();
+                        sessionStorage['role'] = 'admin';
                     }
+                    break;
+                case "user":
+                    if (req.Args !== undefined) {
+                        sessionStorage['username'] = req.Args;
+                        $('#username').text(req.Args);
+                        RequestManager.RequestData();
+                        sessionStorage['role'] = 'user';
+                    }
+                break;
+                   // loggedAsAdmin?.Invoke((string)req.Args);
+                case "banned":
+                    if (req.Args !== undefined) {
+                        sessionStorage['username'] = req.Args;
+                        $('#username').text(username);
+                        sessionStorage['role'] = 'banned';
+                    }
+                    UI.Ban();
+                 //   loggedBanned?.Invoke((string)req.Args);
                     break;
                 default:
-                 //   loginFail?.Invoke((string)req.args);
+                    alert(req.Args);
                     break;
             }
             break;
@@ -71,13 +79,14 @@ ResponseHandler.Handle = function (msg) {
             switch (req.Cmd)
             {
                 case "msg":
-                    Messages.onRoomMessageReceived( req.args[0], new ChatMessage( req.args[1]));
+                    var msg = new ChatMessage(req.Args[1]);
+                    Messages.onRoomMessageReceived( req.Args[0], msg);
                     break;
                 case "active":
-                    var roomName = req.args[0];
-                    var msgList = req.args[1];
+                    var roomName = req.Args[0];
+                    var msgList = req.Args[1];
                     for(var i=0; i<msgList.length; i++){
-                        msgList[i] = new ChatMessage([msgList[i]]);
+                        msgList[i] = new ChatMessage(msgList[i]);
                         if(msgList[i].Sender == sessionStorage['username']){
                             msgList[i].Sender = 'Me';
                         }
@@ -88,27 +97,29 @@ ResponseHandler.Handle = function (msg) {
                     //
                     break;
                 case "entered":
-                    Rooms.userEntered(req.args[0], req.args[1]);
+                    Rooms.userEntered(req.Args[0], req.Args[1]);
                     break;
                 case "left":
-                    Rooms.userLeft(req.args[0], req.args[1]);
+                    Rooms.userLeft(req.Args[0], req.Args[1]);
                     break;
             }
             break;
         case "private":
-            onPrivateMessageReceived(new ChatMessage(req.args));
+            Messages.onPrivateMessageReceived(new ChatMessage(req.Args));
             break;
         case "room":
             switch (req.Cmd)
             {
                 case "created":
-                    Rooms.addRoomToMenu(req.args);////////
+                    var r = req.Args;
+                    var room = new roomObj(r.Name, r.creator, r.clients? r.clients: []);
+                    Rooms.addRoomToMenu(room);
                     break;
                 case "removed":
-                    Rooms.RemoveRoom(req.args);
+                    Rooms.removeRoom(req.Args);
                     break;
                 default:
-                    alert(req.args);
+                    alert(req.Args);
                     break;
             }
             break;
@@ -116,10 +127,10 @@ ResponseHandler.Handle = function (msg) {
             switch (req.Cmd)
             {
                 case "room":
-                    var roomName = req.args[0];
-                    var msgList = req.args[1];
+                    var roomName = req.Args[0];
+                    var msgList = req.Args[1];
                     for(var i=0; i<msgList.length; i++){
-                        msgList[i] = new ChatMessage([msgList[i]]);
+                        msgList[i] = new ChatMessage(msgList[i]);
                         if(msgList[i].Sender == sessionStorage['username']){
                             msgList[i].Sender = 'Me';
                         }
@@ -127,10 +138,10 @@ ResponseHandler.Handle = function (msg) {
                     Messages.OnHistoryReceived(roomName, msgList);
                     break;
                 case "private":
-                    var userName = req.args[0] == sessionStorage['username']? req.args[1]: req.args[0];
-                    var msgList = req.args[2];
+                    var userName = req.Args[0] == sessionStorage['username']? req.Args[1]: req.Args[0];
+                    var msgList = req.Args[1];
                     for(var i=0; i<msgList.length; i++){
-                        msgList[i] = new ChatMessage([msgList[i]]);
+                        msgList[i] = new ChatMessage(msgList[i]);
                         if(msgList[i].Sender == sessionStorage['username']){
                             msgList[i].Sender = 'Me';
                         }

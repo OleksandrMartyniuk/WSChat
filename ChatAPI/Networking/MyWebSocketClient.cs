@@ -1,4 +1,5 @@
 ﻿using ChatServer;
+using ChatServer.AuthApi;
 using ChatServer.Roles;
 using Microsoft.Web.WebSockets;
 using System;
@@ -40,6 +41,7 @@ namespace WSChat
         {
             socket.Close();
             Manager.UserDisconnect(Username);
+            AuthPool.BeginRemoveObject(Username);
             LogProvider.AppendRecord(string.Format("[{0}] disconnected", Username));
         }
 
