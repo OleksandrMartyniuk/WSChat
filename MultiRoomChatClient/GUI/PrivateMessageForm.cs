@@ -1,4 +1,5 @@
 ﻿using Core;
+using MultiRoomChatClient.GUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -88,6 +89,12 @@ namespace MultiRoomChatClient
                 RequestManager.RequestPrivateMessageList(this.Recipient, DateTime.Now);
             }
             
+        }
+
+        private void PrivateMessageForm_Paint(object sender, PaintEventArgs e)
+        {
+            this.btn_send.Text = ResourceProvider.GetValue("chat.buttons.send");
+            this.btn_updHistory.Text = ResourceProvider.GetValue("chat.buttons.get-history");
         }
     }
 }

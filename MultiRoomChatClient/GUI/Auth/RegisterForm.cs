@@ -34,37 +34,37 @@ namespace MultiRoomChatClient.GUI.Auth
 
         private void OnWrongEmailUsername()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.record-exists");
         }
 
         private void OnWrongUsername()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.username-exists");
         }
 
         private void OnWrongEmail()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.email-exists");
         }
 
         private void OnSuccess()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.registration-seccess");
         }
 
         private void OnInvalidUsername()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.invalid-login");
         }
 
         private void OnInvalidEmail()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.invalid-email");
         }
 
         private void OnInvalidPassword()
         {
-            throw new NotImplementedException();
+            this.lbl_status.Text = ResourceProvider.GetValue("auth.messages.invalid-password");
         }
 
 
@@ -72,6 +72,17 @@ namespace MultiRoomChatClient.GUI.Auth
         {
             this.Close();
             loginForm.Show();
+        }
+
+        private void RegisterForm_Paint(object sender, PaintEventArgs e)
+        {
+            this.Text = ResourceProvider.GetValue("auth.titles.registration");
+            this.lbl_email.Text = ResourceProvider.GetValue("auth.labels.email");
+            this.lbl_login.Text = ResourceProvider.GetValue("auth.labels.login");
+            this.lbl_password.Text = ResourceProvider.GetValue("auth.labels.password");
+            this.lbl_title.Text = this.Text;
+            this.btn_login.Text = ResourceProvider.GetValue("auth.buttons.login");
+            this.btn_register.Text = ResourceProvider.GetValue("auth.buttons.register");
         }
     }
 }

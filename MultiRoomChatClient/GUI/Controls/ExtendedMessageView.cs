@@ -35,6 +35,9 @@ namespace MultiRoomChatClient.GUI.Controls
             listbox_main.TopIndex = Math.Max(listbox_main.Items.Count - visibleItems + 1, 0);
         }
 
-
+        private void ExtendedMessageView_Paint(object sender, PaintEventArgs e)
+        {
+            this.lnk_getMsgs.Text = ResourceProvider.GetValue("chat.buttons.get-history");
+        }
     }
 }

@@ -110,6 +110,7 @@
             this.Controls.Add(this.input_email);
             this.Name = "PasswordRecovery";
             this.Text = "PasswordRecovery";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.PasswordRecovery_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

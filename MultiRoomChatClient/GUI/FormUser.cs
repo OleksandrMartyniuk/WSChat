@@ -1,4 +1,5 @@
 ﻿using Core;
+using MultiRoomChatClient.GUI;
 using MultiRoomChatClient.GUI.Controls;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,10 @@ namespace MultiRoomChatClient
         public SuperDuperChat()
         {
             InitializeComponent();
-            this.Text += "   Name: " + Client.Username.ToString();
+        }
+
+        private void SuperDuperChat_Load(object sender, EventArgs e)
+        {
             Manager = new RoomManager();
             Manager.RoomDataUpdated += () => Invoke(new Action(onRoomDataUpdated));
             ResponseHandler.Banned += (msg) => Invoke(new Action<string>(Ban), msg);
@@ -236,5 +240,23 @@ namespace MultiRoomChatClient
                 RequestManager.RequestMessageList(active, room.Messages[0].TimeStamp);
             }
         }
+
+        private void SuperDuperChat_Paint(object sender, PaintEventArgs e)
+        {
+            this.Text = ResourceProvider.GetValue("chat.titles.main") + " " + Client.Username;
+            this.btn_createRoom.Text = ResourceProvider.GetValue("chat.buttons.create-room");
+            this.btn_leaveRoom.Text = ResourceProvider.GetValue("chat.buttons.leave-room");
+            this.btn_send.Text = ResourceProvider.GetValue("chat.buttons.send");
+            this.link_languageSelect.Text = ResourceProvider.lang;
+        }
+
+        private void link_languageSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LocaleDialog d = new LocaleDialog();
+            d.ShowDialog();
+            Invalidate();
+        }
+
+       
     }
 }

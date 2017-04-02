@@ -154,6 +154,7 @@
             this.Controls.Add(this.lbl_login);
             this.Name = "RegisterForm";
             this.Text = "Register";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.RegisterForm_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiRoomChatClient.GUI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,16 @@ namespace MultiRoomChatClient
                 }));
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
+
+        private void AdminForm_Paint(object sender, PaintEventArgs e)
+        {
+            this.Text = ResourceProvider.GetValue("chat.titles.main") +
+                "[" + ResourceProvider.GetValue("chat.titles.admin") + "]";
+            this.btn_ban.Text = ResourceProvider.GetValue("chat.buttons.ban");
+            this.btn_banForever.Text = ResourceProvider.GetValue("chat.buttons.ban-permanent");
+            this.btn_unban.Text = ResourceProvider.GetValue("chat.buttons.unban");
+        }
+
         private void btn_banForever_Click(object sender, EventArgs e)
         {
             string userName = tb_selectedUser.Text.ToString();

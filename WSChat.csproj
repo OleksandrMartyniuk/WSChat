@@ -86,6 +86,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="WebClient\locale\en_EN.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WebClient\Scripts\auth\facebook.js" />
     <Content Include="WebClient\Scripts\Controller\onLoadScript.js" />
     <Content Include="WebClient\Scripts\Controller\RequestManager.js" />
@@ -115,6 +118,7 @@
     </Content>
     <Content Include="WebClient\Scripts\auth\authorization.js" />
     <Content Include="WSHandler.ashx" />
+    <Content Include="WebClient\locale\en_default.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthApi\AuthPool.cs" />

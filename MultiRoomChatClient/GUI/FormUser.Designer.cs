@@ -39,6 +39,7 @@ namespace MultiRoomChatClient
             this.btn_leaveRoom = new System.Windows.Forms.Button();
             this.tabbedMsgList = new MultiRoomChatClient.TabbedMessageList();
             this.btn_HistoryUpdate = new System.Windows.Forms.Button();
+            this.link_languageSelect = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // tree_Room
@@ -95,11 +96,18 @@ namespace MultiRoomChatClient
             this.btn_HistoryUpdate.UseVisualStyleBackColor = true;
             this.btn_HistoryUpdate.Click += new System.EventHandler(this.UploadHistory_Click);
             // 
+            // link_languageSelect
+            // 
+            resources.ApplyResources(this.link_languageSelect, "link_languageSelect");
+            this.link_languageSelect.Name = "link_languageSelect";
+            this.link_languageSelect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_languageSelect_LinkClicked);
+            // 
             // SuperDuperChat
             // 
             this.AcceptButton = this.btn_send;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.link_languageSelect);
             this.Controls.Add(this.btn_HistoryUpdate);
             this.Controls.Add(this.tabbedMsgList);
             this.Controls.Add(this.btn_leaveRoom);
@@ -112,6 +120,8 @@ namespace MultiRoomChatClient
             this.MaximizeBox = false;
             this.Name = "SuperDuperChat";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SuperDuperChat_FormClosed);
+            this.Load += new System.EventHandler(this.SuperDuperChat_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.SuperDuperChat_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,6 +137,7 @@ namespace MultiRoomChatClient
         public TabbedMessageList tabbedMsgList;
         private System.Windows.Forms.Button btn_send;
         private System.Windows.Forms.Button btn_HistoryUpdate;
+        private LinkLabel link_languageSelect;
     }
 }
 

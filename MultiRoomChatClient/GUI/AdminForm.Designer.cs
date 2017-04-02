@@ -31,7 +31,7 @@
             this.btn_unban = new System.Windows.Forms.Button();
             this.btn_banForever = new System.Windows.Forms.Button();
             this.dateTime = new System.Windows.Forms.DateTimePicker();
-            this.Ban_Till = new System.Windows.Forms.Button();
+            this.btn_ban = new System.Windows.Forms.Button();
             this.tb_selectedUser = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -69,13 +69,13 @@
             // 
             // Ban_Till
             // 
-            this.Ban_Till.Location = new System.Drawing.Point(506, 97);
-            this.Ban_Till.Name = "Ban_Till";
-            this.Ban_Till.Size = new System.Drawing.Size(105, 23);
-            this.Ban_Till.TabIndex = 10;
-            this.Ban_Till.Text = "Ban Till";
-            this.Ban_Till.UseVisualStyleBackColor = true;
-            this.Ban_Till.Click += new System.EventHandler(this.Ban_Till_Click);
+            this.btn_ban.Location = new System.Drawing.Point(506, 97);
+            this.btn_ban.Name = "Ban_Till";
+            this.btn_ban.Size = new System.Drawing.Size(105, 23);
+            this.btn_ban.TabIndex = 10;
+            this.btn_ban.Text = "Ban Till";
+            this.btn_ban.UseVisualStyleBackColor = true;
+            this.btn_ban.Click += new System.EventHandler(this.Ban_Till_Click);
             // 
             // tb_selectedUser
             // 
@@ -87,11 +87,12 @@
             // 
             // AdminForm
             // 
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.AdminForm_Paint);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 314);
             this.Controls.Add(this.tb_selectedUser);
-            this.Controls.Add(this.Ban_Till);
+            this.Controls.Add(this.btn_ban);
             this.Controls.Add(this.dateTime);
             this.Controls.Add(this.btn_banForever);
             this.Controls.Add(this.btn_unban);
@@ -101,7 +102,7 @@
             this.Controls.SetChildIndex(this.btn_unban, 0);
             this.Controls.SetChildIndex(this.btn_banForever, 0);
             this.Controls.SetChildIndex(this.dateTime, 0);
-            this.Controls.SetChildIndex(this.Ban_Till, 0);
+            this.Controls.SetChildIndex(this.btn_ban, 0);
             this.Controls.SetChildIndex(this.tb_selectedUser, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -113,7 +114,7 @@
         private System.Windows.Forms.Button btn_unban;
         private System.Windows.Forms.Button btn_banForever;
         private System.Windows.Forms.DateTimePicker dateTime;
-        private System.Windows.Forms.Button Ban_Till;
+        private System.Windows.Forms.Button btn_ban;
         private System.Windows.Forms.TextBox tb_selectedUser;
         
     }

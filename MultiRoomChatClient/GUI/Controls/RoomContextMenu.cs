@@ -21,9 +21,9 @@ namespace MultiRoomChatClient.GUI.Controls
             this.parent = parent;
             bool admin = parent.GetType() == typeof(AdminForm);
 
-            ToolStripMenuItem btn_enter = new ToolStripMenuItem("Enter room");
+            ToolStripMenuItem btn_enter = new ToolStripMenuItem(ResourceProvider.GetValue("chat.buttons.enter-room"));
             btn_enter.Click += (sender, args) => parent.tabbedMsgList.AddRoom(room);
-            ToolStripMenuItem btn_close = new ToolStripMenuItem("Close room");
+            ToolStripMenuItem btn_close = new ToolStripMenuItem(ResourceProvider.GetValue("chat.buttons.close-room"));
             btn_close.Click += (sender, args) => RequestManager.CloseRoom(room.Name);
 
             Items.Add(btn_enter);

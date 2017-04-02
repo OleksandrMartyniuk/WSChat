@@ -63,6 +63,7 @@
             this.Controls.Add(this.listbox_main);
             this.Name = "ExtendedMessageView";
             this.Size = new System.Drawing.Size(425, 235);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ExtendedMessageView_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -83,6 +83,7 @@
             this.Name = "PrivateMessageForm";
             this.Text = "PrivateMessageForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PrivateMessageForm_FormClosed);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.PrivateMessageForm_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,0 +1,76 @@
+﻿{
+  "locale": "en_EN",
+  "lang":  "English",
+  "auth": {
+    "buttons": {
+      "forgot": "Forgot your password?",
+      "login": "Log in",
+      "recover": "Send",
+      "register": "Register"
+    },
+    "hints": {
+      "login": "Enter your login",
+      "password": "Enter your password",
+      "email": "Enter yout email"
+    },
+    "labels": {
+      "login": "Login",
+      "password": "Password",
+      "email": "email"
+    },
+    "messages": {
+      "invalid-login": "Login should contain at least 3 alphanumerical",
+      "invalid-password": "Password should contain at least 3 alphanumerical",
+      "invalid-email": "Invalid email",
+      "username-not-found": "Username doesn't exist",
+      "wrong-password": "Wrong password",
+      "login-success": "Welcome, ",
+      "username-exists": "this user aready exists",
+      "email-exists": "this email already exists",
+      "record-exists": "This account already exists, try password recovery",
+      "registration-success": "Your registration complete",
+      "default-message": "Enter your email so we can send you your password",
+      "email-not-found": "This email is not registered",
+      "password-sent": "Password sent to your email successfully"
+    },
+    "titles": {
+      "login": "Login",
+      "passRecovery": "Password recovery",
+      "registration": "Registration"
+    }
+  },
+  "chat": {
+    "titles": {
+      "main": "Super Dooper Chat",
+      "banned": "banned",
+      "admin": "admin"
+    },
+    "labels": {
+      "roomlist": "Rooms",
+      "message": "Message",
+      "createRoom": "Create room"
+    },
+    "hints": {
+      "message": "Enter your message",
+      "create-room": "Enter room name"
+    },
+    "buttons": {
+      "logout": "Log out",
+      "send": "Send",
+      "get-history": "load messages",
+      "create-room": "Create room",
+      "close room": "Close room",
+      "enter-room": "Enter room",
+      "leave-room": "Leave room",
+      "ban": "Ban",
+      "ban-permanent": "Permanent ban",
+      "unban": "unban"
+    },
+    "messages": {
+      "disconected": "Connection lost",
+      "banned": "You got banned till ",
+      "banned-permanent": "You got banned forever",
+      "unban":  "You got unbanned!"
+    }
+  }
+}

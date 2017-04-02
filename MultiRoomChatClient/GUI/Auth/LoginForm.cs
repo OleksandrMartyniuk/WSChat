@@ -1,6 +1,7 @@
 ﻿using Core;
 using MultiRoomChatClient.API;
 using MultiRoomChatClient.API.Networking;
+using MultiRoomChatClient.GUI;
 using MultiRoomChatClient.GUI.Auth;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace MultiRoomChatClient
             authClient.login_WrongUsername += OnWrongUsername;
 
 
-            ResponseHandler.loginSuccessfull += (login) => this.Invoke(new Action<string>(On_LoginUser), login); //this.Invoke(()=> On_LoginUser());
+            ResponseHandler.loginSuccessfull += (login) => this.Invoke(new Action<string>(On_LoginUser), login);
             ResponseHandler.loggedAsAdmin += (login) => this.Invoke(new Action<string>(On_LoginAdmin), login);
             ResponseHandler.loggedBanned += (login) => this.Invoke(new Action<string>(On_LoginBanned), login);
             ResponseHandler.loginFail += (msg) => this.Invoke(new Action<string>(On_LoginError), msg);
@@ -39,25 +40,25 @@ namespace MultiRoomChatClient
         private void OnWrongUsername()
         {
             input_login.BackColor = Color.Coral;
-            lbl_status.Text = "Login " + input_login.Text + " doesn't exist";
+            lbl_status.Text = ResourceProvider.GetValue("auth.messages.username-not-found");
         }
 
         private void OnWrongPassword()
         {
             input_password.BackColor = Color.Coral;
-            lbl_status.Text = "Wrong password";
+            lbl_status.Text = ResourceProvider.GetValue("auth.messages.wrong-password");
         }
 
         private void OnInvalidUsername()
         {
             input_login.BackColor = Color.Coral;
-            lbl_status.Text = "Login should be at least 3 letters or numbers";
+            lbl_status.Text = ResourceProvider.GetValue("auth.messages.invalid-login");
         }
 
         private void OnInvalidPassword()
         {
             input_password.BackColor = Color.Coral;
-            lbl_status.Text = "Password should be at least 3 letters or numbers";
+            lbl_status.Text = ResourceProvider.GetValue("auth.messages.invalid-password");
         }
 
         private void OnLoginSuccessfull(string key)
@@ -181,6 +182,26 @@ namespace MultiRoomChatClient
             {
                 //RequestManager.LoginFacebook(name);
             }
+        }
+
+
+        private void link_languageSelect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LocaleDialog d = new LocaleDialog();
+            d.ShowDialog();
+            Invalidate();
+        }
+
+        private void LoginForm_Paint(object sender, PaintEventArgs e)
+        {
+            this.Text = ResourceProvider.GetValue("auth.titles.login");
+            this.lbl_login.Text = ResourceProvider.GetValue("auth.labels.login");
+            this.lbl_password.Text = ResourceProvider.GetValue("auth.labels.password");
+            this.btn_login.Text = ResourceProvider.GetValue("auth.buttons.login");
+            this.link_forgot.Text = ResourceProvider.GetValue("auth.buttons.forgot");
+            this.link_Register.Text = ResourceProvider.GetValue("auth.buttons.register");
+
+            link_languageSelect.Text = ResourceProvider.lang;
         }
     }
 }

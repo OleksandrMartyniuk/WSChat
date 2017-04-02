@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<locale lang="en_EN" name="English">
+  <auth id="1">
+    <titles id="0">
+      <login id="0"></login>
+      <registration id="1"></registration>
+      <forgot id="2"></forgot>
+    </titles>
+    <labels id="1">
+      <login id="0"></login>
+      <password id="1"></password>
+      <email id="2"></email>
+    </labels>
+    <hints id="2">
+      <login id="0"></login>
+      <password id="1"></password>
+      <email id="2"></email>
+    </hints>
+    <buttons id="3">
+      <login id="0"></login>
+      <register id="1"></register>
+      <forgot id="2"></forgot>
+      <recover id="3"></recover>
+      <send id="4"></send>
+    </buttons>
+    <messages id="4">
+       <validation id="0">
+        <invalid_login id="0"></invalid_login>
+        <invalid_password id="1"></invalid_password>
+        <invalid_email id="2"></invalid_email>
+      </validation>
+      <login id="1">
+        <username-not-found id="0"></username-not-found>
+        <wrong-password id="1"></wrong-password>
+        <success id="2"></success>
+      </login>
+    <registration id="2">
+      <user-exists id="0"></user-exists>
+      <email-exists id="1"></email-exists>
+      <record-exists id="2"></record-exists>
+      <success id="3"></success>
+    </registration>
+    <password-recovery id="3">
+      <default id="0"></default>
+      <email-not-found id="1"></email-not-found>
+      <password-sent id="2"></password-sent>
+    </password-recovery>
+    </messages>
+  </auth>
+  <chat id="2">
+    <titles id="0">
+      <user id="0"></user>
+      <banned id="1"></banned>
+      <admin id="2"></admin>
+    </titles>
+    <labels id="1">
+      <roomList id="0"></roomList>
+      <message id="1"></message>
+      <create_room id="2"></create_room>
+    </labels>
+    <hints id="2">
+      <message id="0"></message>
+      <create_room id="1"></create_room>
+    </hints>
+    <buttons id="3">
+      <login id="0"></login>
+      <register id="1"></register>
+      <forgot id="2"></forgot>
+      <recover id="3"></recover>
+      <send id="4"></send>
+      <upload-history id="5"></upload-history>
+      <room_create id="6"></room_create>
+      <room_enter id="7"></room_enter>
+      <room_leave id="8"></room_leave>
+      <room_close id="9"></room_close>
+      <admin_ban id="10"></admin_ban>
+      <admin_permanent-ban id="11"></admin_permanent-ban>
+      <admin_unban id="12"></admin_unban>
+    </buttons>
+    <messages id="4">
+      <disconnected id="0"></disconnected>
+      <ban_permanent id="1"></ban_permanent>
+      <ban_date id="2"></ban_date>
+      <unban id="3"></unban>
+    </messages>
+  </chat>
+</locale> 

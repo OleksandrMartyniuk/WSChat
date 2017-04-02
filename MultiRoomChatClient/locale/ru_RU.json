@@ -1,0 +1,84 @@
+﻿{
+  "locale": "ru_RU",
+  "lang": "Русский",
+  "common": {
+    "ok": "ОК",
+    "cancel": "Отмена"
+  },
+  "locale-dialog": {
+    "title": "Настройки языка",
+    "label": "Пожалуйста, выберите язык из списка"
+  },
+  "auth": {
+    "buttons": {
+      "forgot": "Забыли пароль?",
+      "login": "Войти",
+      "recover": "Отправить",
+      "register": "Регистрация"
+    },
+    "hints": {
+      "login": "Введите логин",
+      "password": "Введите пароль",
+      "email": "Введите email"
+    },
+    "labels": {
+      "login": "Логин",
+      "password": "Пароль",
+      "email": "email"
+    },
+    "messages": {
+      "invalid-login": "Логин должен содержать не менее 3 числовых или буквенных символов",
+      "invalid-password": "Пароль должен содержать не менее 3 числовых или буквенных символов",
+      "invalid-email": "Некорректный email",
+      "username-not-found": "Пользователя с таким именем не существует",
+      "wrong-password": "Неверный пароль",
+      "login-success": "Добро пожаловать, ",
+      "username-exists": "такой пользователь уже существует",
+      "email-exists": "такой email уже зарегистрирован",
+      "record-exists": "Учетная запись существует, попробуйте восстановление пароля",
+      "registration-success": "Регистрация успешно завершена",
+      "default-message": "Введите ваш email чобы мы могли выслать Вам пароль",
+      "email-not-found": "Этот email не зарегистрирован",
+      "password-sent": "Пароль успешно отправлен Вам на почту"
+    },
+    "titles": {
+      "login": "Вход",
+      "passRecovery": "Восстановление пароля",
+      "registration": "Регистрация"
+    }
+  },
+  "chat": {
+    "titles": {
+      "main": "Super Dooper Chat",
+      "banned": "забанен",
+      "admin": "администратор"
+    },
+    "labels": {
+      "roomlist": "Комнаты",
+      "message": "Сообщение",
+      "createRoom": "Создать комнату"
+    },
+    "hints": {
+      "message": "Введите сообщение",
+      "create-room": "Введите название комнаты"
+    },
+    "buttons": {
+      "logout": "Выйти",
+      "send": "Отправить",
+      "get-history": "загрузить сообщения",
+      "create-room": "Создать комнату",
+      "close-room": "Закрыть комнату",
+      "enter-room": "Войти в комнату",
+      "leave-room": "Покинуть комнату",
+      "ban": "Забанить",
+      "ban-permanent": "Забанить навсегда",
+      "unban": "Разбанить"
+    },
+    "messages": {
+      "disconected": "Соединение прервано",
+      "banned": "Вас забанили до ",
+      "banned-permanent": "Вас забанили навсегда",
+      "unban":  "Вас разбанили!"
+    }
+  }
+}
